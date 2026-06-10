@@ -248,6 +248,69 @@ section[id] {
 }
 
 /* ──────────────────────────────────────────
+   KNICKS SEASON BANNER
+   ────────────────────────────────────────── */
+.knicks-banner {
+  background: linear-gradient(
+    135deg,
+    #003da5 0%,
+    #1a1a2e 40%,
+    #1a1a2e 60%,
+    #f58426 100%
+  );
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  z-index: 101;
+}
+
+.knicks-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+}
+
+.knicks-ball { font-size: 18px; flex-shrink: 0; }
+
+.knicks-text {
+  font-size: 13px;
+  font-family: var(--font-label);
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+.knicks-text strong { font-weight: 700; }
+
+.knicks-colors {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+}
+
+.knicks-dismiss {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.knicks-dismiss:hover { color: white; }
+
+@media (max-width: 600px) {
+  .knicks-colors { display: none; }
+  .knicks-text { font-size: 12px; }
+}
+
+/* ──────────────────────────────────────────
    PAGE INTRO
    ────────────────────────────────────────── */
 .page-intro {

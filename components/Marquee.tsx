@@ -1,10 +1,11 @@
 const items = [
   'Fresh Bagels Daily',
   '★ Olive Cream Cheese',
-  '🏀 The Brunson',
+  '🏀 The Brunson BEC',
   'Bacon Egg & Cheese',
   'Everything Bagel',
-  'Knicks Everything Bagel',
+  '💙🧡 Knicks Everything Bagel',
+  'Game Day Fuel',
   'Open 6 AM',
   'Medford, New York',
   'Made Fresh',

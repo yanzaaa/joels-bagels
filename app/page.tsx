@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import KnicksBanner from "@/components/KnicksBanner";
 import PageIntro from "@/components/PageIntro";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
@@ -21,6 +22,7 @@ export default function Home() {
       <PageIntro />
       <Nav />
       <main>
+        <KnicksBanner />
         <Hero />
         <SectionDivider />
         <Marquee />
