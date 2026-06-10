@@ -583,6 +583,42 @@ section[id] {
   border-color: rgba(196, 149, 90, 0.4);
 }
 
+.sig-photo-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.signature-card:hover .sig-photo-bg { transform: scale(1.06); }
+
+.sig-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 20, 16, 0.78);
+  z-index: 1;
+  transition: background 0.3s;
+}
+
+.signature-card:hover .sig-overlay { background: rgba(28, 20, 16, 0.68); }
+
+.sig-content {
+  position: relative;
+  z-index: 2;
+}
+
+.sig-emoji {
+  font-size: 52px;
+  display: block;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.signature-card:hover .sig-emoji { transform: scale(1.12) rotate(-4deg); }
+
 .signature-num {
   position: absolute;
   bottom: -36px;
@@ -1702,6 +1738,71 @@ section[id] {
   border-radius: 50%;
   opacity: 0.06;
   transform: rotate(var(--r));
+}
+
+/* Hero food photo panel — real-photo-ready right column */
+.hero-photo-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 42%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-food-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.85) saturate(1.1);
+}
+
+.hero-photo-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--dark) 0%,
+    rgba(28, 20, 16, 0.5) 35%,
+    transparent 65%
+  );
+}
+
+.hero-photo-badge {
+  position: absolute;
+  bottom: 80px;
+  right: 24px;
+  background: rgba(28, 20, 16, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 149, 90, 0.3);
+  border-radius: 999px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-family: var(--font-label);
+  color: var(--sesame);
+  letter-spacing: 0.04em;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: badge-pulse 2s ease infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+@media (max-width: 900px) {
+  .hero-photo-panel { display: none; }
 }
 
 /* ──────────────────────────────────────────

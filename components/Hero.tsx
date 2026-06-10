@@ -189,7 +189,6 @@ export default function Hero() {
 
       <SteamRising />
       <HeroSeeds />
-      <div className="hero-bagel-art" aria-hidden="true" />
 
       <div className="hero-content">
         <motion.p
@@ -229,7 +228,7 @@ export default function Hero() {
           transition={{ delay: 0.7, duration: 0.6, ease: EASE }}
         >
           A family recipe. Two generations. Medford&apos;s favorite morning stop
-          since the day we opened.
+          — now with the Knicks Everything Bagel.
         </motion.p>
 
         <motion.div
@@ -259,6 +258,20 @@ export default function Hero() {
         >
           <OpenStatusBadge />
         </motion.div>
+      </div>
+
+      <div className="hero-photo-panel" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/photos/food1.jpg"
+          alt="Fresh food at Joel's Bagels Medford NY"
+          className="hero-food-photo"
+        />
+        <div className="hero-photo-fade" />
+        <div className="hero-photo-badge">
+          <span className="badge-dot" />
+          <span>Made fresh this morning</span>
+        </div>
       </div>
 
       <StatsBar />
