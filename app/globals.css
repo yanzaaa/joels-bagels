@@ -1765,8 +1765,8 @@ section[id] {
 /* ──────────────────────────────────────────
    FAQ
    ────────────────────────────────────────── */
+/* Inner wrapper — vertical padding comes from the parent .section */
 .faq-section {
-  padding: var(--section-py) 0;
   max-width: min(800px, 90vw);
   margin: 0 auto;
 }
