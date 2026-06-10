@@ -1563,7 +1563,7 @@ section[id] {
   gap: 16px;
   width: var(--container);
   max-width: var(--container);
-  margin: 0 auto;
+  margin: 28px auto;
 }
 
 .divider-line {
