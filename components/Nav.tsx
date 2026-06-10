@@ -46,6 +46,16 @@ function ScrollProgress() {
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  // Whether the shop is open right now — drives the Order Now pulse.
+  // Computed after mount so server/client markup match (no hydration flash).
+  const [shopOpen, setShopOpen] = useState(false)
+
+  useEffect(() => {
+    const h = new Date().getHours()
+    const day = new Date().getDay()
+    // Mon–Sat: 6 AM–3 PM, Sun: 7 AM–2 PM (matches Hero/Location/layout)
+    setShopOpen(day === 0 ? h >= 7 && h < 14 : h >= 6 && h < 15)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -80,7 +90,7 @@ export default function Nav() {
               href={DOORDASH_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-cta"
+              className={`nav-cta ${shopOpen ? 'nav-order-open' : ''}`}
             >
               Order Now
             </a>

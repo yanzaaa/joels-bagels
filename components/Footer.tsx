@@ -6,7 +6,8 @@ export default function Footer() {
           <div>
             <div className="footer-brand-name">Joel&apos;s Bagels</div>
             <p className="footer-tagline">
-              Long Island&apos;s favorite since day one.
+              Ecuadorian-owned. Family-run. Made fresh every morning since day
+              one.
             </p>
             <p className="footer-address">
               1699 Route 112 · Medford NY 11763
@@ -53,6 +54,9 @@ export default function Footer() {
             <div className="footer-heading">Open Daily</div>
             <p>Mon – Sat: 6 AM – 3 PM</p>
             <p>Sun: 7 AM – 2 PM</p>
+            <p className="footer-knicks-note">
+              🏀 Home of the Knicks Everything Bagel
+            </p>
           </div>
         </div>
 
@@ -60,6 +64,9 @@ export default function Footer() {
           <span>© 2026 Joel&apos;s Bagels · Medford, NY</span>
           <span>Made with ♥ on Long Island</span>
         </div>
+        <p className="footer-heritage">
+          🇪🇨 Proudly Ecuadorian-owned · Medford, New York
+        </p>
       </div>
     </footer>
   )

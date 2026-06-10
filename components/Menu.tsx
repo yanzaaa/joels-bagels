@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
 
 type MenuItemData = {
   name: string
@@ -41,6 +42,12 @@ const menuData: Record<string, MenuCategory> = {
       { name: 'Egg', price: 1.75 },
       { name: 'Bialy', price: 2.0, note: 'Old school' },
       { name: 'Everything Asiago', price: 2.25, popular: true },
+      {
+        name: 'Knicks Everything Bagel',
+        price: 2.25,
+        badge: 'Game Day',
+        note: 'Orange & blue, baked for the season',
+      },
     ],
     bulk: 'Dozen from $15 · Half dozen $8.50',
   },
@@ -71,6 +78,13 @@ const menuData: Record<string, MenuCategory> = {
       { name: 'Bacon Egg & Cheese', price: 6.5, popular: true },
       { name: 'Sausage Egg & Cheese', price: 6.5 },
       { name: 'Taylor Ham Egg & Cheese', price: 7.0, note: 'Long Island classic' },
+      {
+        name: 'The Brunson',
+        price: 9.5,
+        popular: true,
+        badge: 'Game Day',
+        note: 'Knicks bagel · BEC · hash brown · chipotle',
+      },
       { name: 'Veggie Egg & Cheese', price: 6.0 },
       { name: 'Lox & Cream Cheese', price: 9.0 },
       { name: 'Nova Lox Platter', price: 12.0 },
@@ -121,10 +135,37 @@ const menuData: Record<string, MenuCategory> = {
   },
 }
 
-function MenuItem({ item, index }: { item: MenuItemData; index: number }) {
+interface CartItem {
+  name: string
+  price: number
+  qty: number
+  category: string
+}
+
+function MenuItem({
+  item,
+  index,
+  category,
+  onAdd,
+  justAdded,
+}: {
+  item: MenuItemData
+  index: number
+  category: string
+  onAdd: (item: MenuItemData, category: string) => void
+  justAdded: string | null
+}) {
+  const added = justAdded === item.name
+  const clickable = Boolean(item.price)
+
   return (
     <motion.div
-      className={`menu-item ${item.popular ? 'popular' : ''}`}
+      className={`menu-item ${item.popular ? 'popular' : ''} ${
+        clickable ? 'clickable' : ''
+      } ${added ? 'just-added' : ''}`}
+      onClick={() => clickable && onAdd(item, category)}
+      role={clickable ? 'button' : undefined}
+      aria-label={clickable ? `Add ${item.name} to order` : undefined}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
@@ -140,10 +181,106 @@ function MenuItem({ item, index }: { item: MenuItemData; index: number }) {
         <span className="menu-item-name">{item.name}</span>
         {item.note && <span className="menu-item-note">{item.note}</span>}
       </div>
-      <span className="menu-item-price">
-        {item.price ? `$${item.price.toFixed(2)}` : item.label || '—'}
-      </span>
+      <div className="menu-item-right">
+        <span className="menu-item-price">
+          {item.price ? `$${item.price.toFixed(2)}` : item.label || '—'}
+        </span>
+        {clickable && (
+          <span className={`menu-add-btn ${added ? 'added' : ''}`} aria-hidden="true">
+            {added ? '✓' : '+'}
+          </span>
+        )}
+      </div>
     </motion.div>
+  )
+}
+
+function CartDrawer({
+  cart,
+  cartTotal,
+  onClose,
+  onRemove,
+  onClear,
+}: {
+  cart: CartItem[]
+  cartTotal: number
+  onClose: () => void
+  onRemove: (name: string) => void
+  onClear: () => void
+}) {
+  return (
+    <>
+      <motion.div
+        className="cart-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      />
+      <motion.div
+        className="cart-drawer"
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+      >
+        <div className="cart-header">
+          <h3>Your Order</h3>
+          <button onClick={onClose} aria-label="Close cart">
+            ✕
+          </button>
+        </div>
+
+        <div className="cart-items">
+          {cart.map((item) => (
+            <div key={item.name} className="cart-item">
+              <div className="cart-item-info">
+                <span className="cart-item-name">{item.name}</span>
+                <span className="cart-item-cat">{item.category}</span>
+              </div>
+              <div className="cart-item-controls">
+                <span className="cart-item-qty">×{item.qty}</span>
+                <span className="cart-item-price">
+                  ${(item.price * item.qty).toFixed(2)}
+                </span>
+                <button
+                  className="cart-item-remove"
+                  onClick={() => onRemove(item.name)}
+                  aria-label={`Remove ${item.name}`}
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="cart-footer">
+          <div className="cart-total">
+            <span>Estimated Total</span>
+            <strong>${cartTotal.toFixed(2)}</strong>
+          </div>
+
+          <p className="cart-note">
+            Final price confirmed at checkout. Prices may vary on DoorDash.
+          </p>
+
+          <a
+            href={DOORDASH_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cart-checkout-btn"
+            onClick={onClose}
+          >
+            Order on DoorDash →
+          </a>
+
+          <button className="cart-clear" onClick={onClear}>
+            Clear order
+          </button>
+        </div>
+      </motion.div>
+    </>
   )
 }
 
@@ -153,6 +290,37 @@ export default function Menu() {
   const [pillStyle, setPillStyle] = useState<{ left: number; width: number } | null>(
     null
   )
+
+  // Demo cart — items collect here, checkout hands off to DoorDash
+  const [cart, setCart] = useState<CartItem[]>([])
+  const [cartOpen, setCartOpen] = useState(false)
+  const [justAdded, setJustAdded] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!justAdded) return
+    const id = setTimeout(() => setJustAdded(null), 1000)
+    return () => clearTimeout(id)
+  }, [justAdded])
+
+  const addToCart = (item: MenuItemData, category: string) => {
+    setCart((prev) => {
+      const existing = prev.find((c) => c.name === item.name)
+      if (existing) {
+        return prev.map((c) =>
+          c.name === item.name ? { ...c, qty: c.qty + 1 } : c
+        )
+      }
+      return [...prev, { name: item.name, price: item.price || 0, qty: 1, category }]
+    })
+    setJustAdded(item.name)
+  }
+
+  const removeFromCart = (name: string) => {
+    setCart((prev) => prev.filter((c) => c.name !== name))
+  }
+
+  const cartTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0)
 
   useEffect(() => {
     const measure = () => {
@@ -179,7 +347,8 @@ export default function Menu() {
           <p className="eyebrow">The Menu</p>
           <h2 className="section-headline">Fresh Out of the Oven</h2>
           <p className="menu-tagline">
-            Everything made daily. Nothing sits overnight.
+            Everything made daily. Nothing sits overnight. Tap an item to start
+            your order.
           </p>
         </motion.div>
 
@@ -220,7 +389,14 @@ export default function Menu() {
             <p className="menu-category-tagline">{category.tagline}</p>
             <div className="menu-grid">
               {category.items.map((item, i) => (
-                <MenuItem key={item.name} item={item} index={i} />
+                <MenuItem
+                  key={item.name}
+                  item={item}
+                  index={i}
+                  category={category.label}
+                  onAdd={addToCart}
+                  justAdded={justAdded}
+                />
               ))}
             </div>
             {(category.bulk || category.note) && (
@@ -229,6 +405,41 @@ export default function Menu() {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <AnimatePresence>
+        {cartCount > 0 && !cartOpen && (
+          <motion.button
+            className="cart-float"
+            onClick={() => setCartOpen(true)}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+          >
+            <span className="cart-float-icon" aria-hidden="true">
+              🛍
+            </span>
+            <span className="cart-float-text">
+              {cartCount} item{cartCount > 1 ? 's' : ''}
+            </span>
+            <span className="cart-float-price">${cartTotal.toFixed(2)}</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {cartOpen && (
+          <CartDrawer
+            cart={cart}
+            cartTotal={cartTotal}
+            onClose={() => setCartOpen(false)}
+            onRemove={removeFromCart}
+            onClear={() => {
+              setCart([])
+              setCartOpen(false)
+            }}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

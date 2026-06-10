@@ -1,14 +1,17 @@
 const items = [
   'Fresh Bagels Daily',
   '★ Olive Cream Cheese',
+  '🏀 The Brunson BEC',
   'Bacon Egg & Cheese',
   'Everything Bagel',
+  '💙🧡 Knicks Everything Bagel',
+  'Game Day Fuel',
   'Open 6 AM',
   'Medford, New York',
   'Made Fresh',
   '★ 4.5 on Google',
   'All-Day Breakfast',
-  'Family Run',
+  'Family Run · Two Generations',
 ]
 
 export default function Marquee() {
