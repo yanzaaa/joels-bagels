@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 const EASE = [0.16, 1, 0.3, 1] as const
 
 const badges = [
-  '🇪🇨 Ecuadorian Owned',
   '👨‍👩‍👧 Family Run',
   '📍 Medford, NY',
   '☀️ Open Since Day One',
@@ -58,6 +57,22 @@ export default function About() {
               — Charles Palmer, regular customer
             </span>
           </p>
+        </div>
+
+        <div className="ecuador-pride-card">
+          <div className="ecuador-flag-strip" />
+          <div className="ecuador-pride-content">
+            <span className="ecuador-flag-emoji" aria-hidden="true">
+              🇪🇨
+            </span>
+            <div className="ecuador-pride-text">
+              <strong>Ecuadorian Owned</strong>
+              <span>
+                Family recipe. Long Island roots. Two generations of pride in
+                every bagel.
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="about-badges">

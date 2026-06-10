@@ -31,6 +31,18 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   background: var(--dark);
+  background-image:
+    radial-gradient(
+      ellipse at 15% 0%,
+      rgba(139, 94, 60, 0.09) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 85% 100%,
+      rgba(232, 64, 12, 0.05) 0%,
+      transparent 50%
+    );
+  background-attachment: fixed;
   color: var(--cream);
   overflow-x: hidden;
 }
@@ -180,6 +192,16 @@ section[id] {
 .nav-cta:hover {
   background: var(--poppy-dark);
   transform: scale(1.02);
+}
+
+/* Pulses while the shop is actually open */
+.nav-order-open {
+  animation: order-pulse 3s ease infinite;
+}
+
+@keyframes order-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 64, 12, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(232, 64, 12, 0); }
 }
 
 .nav-hamburger {
@@ -747,6 +769,15 @@ section[id] {
 /* ──────────────────────────────────────────
    MENU
    ────────────────────────────────────────── */
+#menu {
+  background: #190f0b;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.012) 1px,
+    transparent 1px
+  );
+  background-size: 100% 28px;
+}
+
 .menu-header {
   text-align: center;
   margin-bottom: 48px;
@@ -1952,11 +1983,67 @@ section[id] {
 .about-card {
   background: rgba(139, 94, 60, 0.08);
   border: 1px solid rgba(196, 149, 90, 0.15);
+  border-left: 4px solid;
+  border-image: linear-gradient(
+      to bottom,
+      #ffd700 0%,
+      #ffd700 33%,
+      #003893 33%,
+      #003893 66%,
+      #ef3340 66%,
+      #ef3340 100%
+    )
+    1;
   border-radius: 20px;
   padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+/* Ecuadorian pride card in the story column */
+.ecuador-pride-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  margin-top: 24px;
+}
+
+.ecuador-flag-strip {
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #ffd700 0%,
+    #ffd700 33%,
+    #003893 33%,
+    #003893 66%,
+    #ef3340 66%,
+    #ef3340 100%
+  );
+}
+
+.ecuador-pride-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 215, 0, 0.04);
+}
+
+.ecuador-flag-emoji { font-size: 32px; flex-shrink: 0; }
+
+.ecuador-pride-text strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.ecuador-pride-text span {
+  font-size: 13px;
+  color: rgba(196, 149, 90, 0.75);
+  line-height: 1.5;
 }
 
 .about-card-inner {
@@ -2136,10 +2223,14 @@ section[id] {
   bottom: 24px;
   right: 24px;
   z-index: 1000;
-  background: var(--poppy);
+  background: linear-gradient(
+    135deg,
+    var(--poppy) 0%,
+    var(--poppy-dark) 100%
+  );
   color: white;
   border: none;
-  border-radius: 999px;
+  border-radius: 16px;
   padding: 16px 24px;
   display: flex;
   align-items: center;
@@ -2148,8 +2239,10 @@ section[id] {
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(232, 64, 12, 0.4);
-  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow:
+    0 8px 32px rgba(232, 64, 12, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .cart-float:hover {
