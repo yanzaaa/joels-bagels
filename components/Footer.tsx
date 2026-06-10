@@ -54,6 +54,9 @@ export default function Footer() {
             <div className="footer-heading">Open Daily</div>
             <p>Mon – Sat: 6 AM – 3 PM</p>
             <p>Sun: 7 AM – 2 PM</p>
+            <p className="footer-knicks-note">
+              🏀 Home of the Knicks Everything Bagel
+            </p>
           </div>
         </div>
 
