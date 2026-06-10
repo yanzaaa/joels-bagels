@@ -9,7 +9,7 @@ export default function Footer() {
               Long Island&apos;s favorite since day one.
             </p>
             <p className="footer-address">
-              1699 Medford Ave · Medford NY 11763
+              1699 Route 112 · Medford NY 11763
             </p>
           </div>
 
@@ -51,8 +51,8 @@ export default function Footer() {
 
           <div className="footer-hours">
             <div className="footer-heading">Open Daily</div>
-            <p>Mon – Fri: 6 AM – 3 PM</p>
-            <p>Sat – Sun: 6 AM – 2 PM</p>
+            <p>Mon – Sat: 6 AM – 3 PM</p>
+            <p>Sun: 7 AM – 2 PM</p>
           </div>
         </div>
 

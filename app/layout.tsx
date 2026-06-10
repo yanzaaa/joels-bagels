@@ -57,7 +57,7 @@ const schema = {
   name: "Joel's Bagels",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "1699 Medford Ave",
+    streetAddress: "1699 Route 112",
     addressLocality: "Medford",
     addressRegion: "NY",
     postalCode: "11763",
@@ -70,14 +70,21 @@ const schema = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
       opens: "06:00",
       closes: "15:00",
     },
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday"],
-      opens: "06:00",
+      dayOfWeek: ["Sunday"],
+      opens: "07:00",
       closes: "14:00",
     },
   ],
@@ -97,8 +104,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${playfair.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}
+      suppressHydrationWarning
     >
-      <body>
+      {/* suppressHydrationWarning: browser extensions inject attributes on
+          html/body that differ from the server-rendered markup */}
+      <body suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

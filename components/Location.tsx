@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const EASE = [0.16, 1, 0.3, 1] as const
 
 const MAPS_URL =
-  'https://www.google.com/maps/search/?api=1&query=Joel%27s+Bagels+1699+Medford+Ave+Medford+NY+11763'
+  'https://www.google.com/maps/search/?api=1&query=Joel%27s+Bagels+1699+Route+112+Medford+NY+11763'
 
 const hours = [
   { day: 'Monday', open: '6:00 AM', close: '3:00 PM' },
@@ -13,8 +13,8 @@ const hours = [
   { day: 'Wednesday', open: '6:00 AM', close: '3:00 PM' },
   { day: 'Thursday', open: '6:00 AM', close: '3:00 PM' },
   { day: 'Friday', open: '6:00 AM', close: '3:00 PM' },
-  { day: 'Saturday', open: '6:00 AM', close: '2:00 PM' },
-  { day: 'Sunday', open: '6:00 AM', close: '2:00 PM' },
+  { day: 'Saturday', open: '6:00 AM', close: '3:00 PM' },
+  { day: 'Sunday', open: '7:00 AM', close: '2:00 PM' },
 ]
 
 function HoursTable() {
@@ -53,7 +53,7 @@ export default function Location() {
           transition={{ duration: 0.6, ease: EASE }}
         >
           <p className="eyebrow">Find Us</p>
-          <h2 className="location-address">1699 Medford Ave.</h2>
+          <h2 className="location-address">1699 Route 112</h2>
           <p className="location-city">Medford, New York 11763</p>
           <a href="tel:+16313079206" className="location-phone">
             (631) 307-9206
@@ -79,7 +79,7 @@ export default function Location() {
           transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
         >
           <iframe
-            src="https://www.google.com/maps?q=1699+Medford+Ave+Medford+NY+11763&output=embed"
+            src="https://www.google.com/maps?q=1699+Route+112+Medford+NY+11763&output=embed"
             width="100%"
             height="400"
             style={{
@@ -90,7 +90,7 @@ export default function Location() {
             }}
             loading="lazy"
             allowFullScreen
-            title="Map to Joel's Bagels, 1699 Medford Ave, Medford NY"
+            title="Map to Joel's Bagels, 1699 Route 112, Medford NY"
           />
         </motion.div>
       </div>

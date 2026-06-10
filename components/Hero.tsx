@@ -55,18 +55,22 @@ function OpenStatusBadge() {
     )
   }
 
+  // Hours: Mon–Sat 6 AM – 3 PM, Sun 7 AM – 2 PM
   const hour = now.getHours()
-  const day = now.getDay()
-  const isWeekend = day === 0 || day === 6
-  const closeHour = isWeekend ? 14 : 15
-  const isOpen = hour >= 6 && hour < closeHour
+  const isSunday = now.getDay() === 0
+  const openHour = isSunday ? 7 : 6
+  const closeHour = isSunday ? 14 : 15
+  const isOpen = hour >= openHour && hour < closeHour
+  // Next opening is Sunday (7 AM) if it's Sunday before open, or Saturday after close
+  const opensSunday =
+    (isSunday && hour < 7) || (now.getDay() === 6 && hour >= 15)
 
   return (
     <div className={`status-badge ${isOpen ? 'open' : 'closed'}`}>
       <span className="status-dot" />
       {isOpen
-        ? `Open now · Closes ${isWeekend ? '2' : '3'} PM`
-        : 'Opens 6 AM · Fresh bagels daily'}
+        ? `Open now · Closes ${isSunday ? '2' : '3'} PM`
+        : `Opens ${opensSunday ? '7' : '6'} AM · Fresh bagels daily`}
     </div>
   )
 }

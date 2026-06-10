@@ -70,6 +70,11 @@ img { max-width: 100%; display: block; }
   position: relative;
 }
 
+/* Anchor targets land below the fixed nav */
+section[id] {
+  scroll-margin-top: 76px;
+}
+
 .eyebrow {
   font-family: var(--font-label);
   font-size: 11px;
@@ -1027,18 +1032,6 @@ img { max-width: 100%; display: block; }
   color: rgba(245, 236, 215, 0.8);
 }
 
-.review-lang-tag {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 11px;
-  font-family: var(--font-label);
-  color: rgba(196, 149, 90, 0.9);
-  background: rgba(196, 149, 90, 0.1);
-  border: 1px solid rgba(196, 149, 90, 0.25);
-  padding: 3px 10px;
-  border-radius: 100px;
-}
-
 /* ──────────────────────────────────────────
    CATERING (light section)
    ────────────────────────────────────────── */
@@ -1365,6 +1358,57 @@ img { max-width: 100%; display: block; }
 
 .instagram-tile:hover .instagram-tile-overlay { opacity: 1; }
 
+.instagram-likes {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  background: rgba(28, 20, 16, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 4px 9px;
+  border-radius: 100px;
+}
+
+.instagram-overlay-caption {
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(245, 236, 215, 0.75);
+  padding: 0 14px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.instagram-follow-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(245, 236, 215, 0.04);
+  border: 1px dashed rgba(196, 149, 90, 0.4);
+  color: var(--sesame);
+  font-size: 12px;
+  transition: all 0.25s;
+}
+
+.instagram-follow-tile strong {
+  font-family: var(--font-label);
+  font-size: 13px;
+  color: var(--cream);
+}
+
+.instagram-follow-tile:hover {
+  background: rgba(196, 149, 90, 0.1);
+  border-color: var(--sesame);
+}
+
 .instagram-cta-row { text-align: center; }
 
 /* ──────────────────────────────────────────
@@ -1448,6 +1492,52 @@ img { max-width: 100%; display: block; }
   gap: 8px;
   font-size: 12px;
   color: rgba(245, 236, 215, 0.35);
+}
+
+/* ──────────────────────────────────────────
+   MOBILE STICKY ORDER BAR
+   ────────────────────────────────────────── */
+.mobile-order-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: none;
+  gap: 10px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(28, 20, 16, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(196, 149, 90, 0.2);
+}
+
+@media (max-width: 768px) {
+  .mobile-order-bar { display: flex; }
+}
+
+.mobile-order-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.mobile-order-btn.primary {
+  flex: 1;
+  background: var(--poppy);
+  color: white;
+}
+
+.mobile-order-btn.secondary {
+  flex: 0 0 96px;
+  border: 1px solid rgba(245, 236, 215, 0.3);
+  color: var(--cream);
 }
 
 /* Reduced motion */

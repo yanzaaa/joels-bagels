@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 const EASE = [0.16, 1, 0.3, 1] as const
 
 const MAPS_URL =
-  'https://www.google.com/maps/search/?api=1&query=Joel%27s+Bagels+1699+Medford+Ave+Medford+NY+11763'
+  'https://www.google.com/maps/search/?api=1&query=Joel%27s+Bagels+1699+Route+112+Medford+NY+11763'
 
 type Review = {
   name: string
@@ -12,52 +12,44 @@ type Review = {
   ago: string
   text: string
   initials: string
-  lang?: string
 }
 
+// Real Google reviews for Joel's Bagels
 const reviews: Review[] = [
   {
-    name: 'Mike R.',
-    stars: 5,
-    ago: '2 weeks ago',
-    text: 'Best bagels on Long Island. Been coming here for 10 years. The olive cream cheese is something special — nothing like it anywhere else on the island.',
-    initials: 'MR',
-  },
-  {
-    name: 'Sarah T.',
+    name: 'shaw iqbal',
     stars: 5,
     ago: '1 month ago',
-    text: 'Everything bagel with bacon egg and cheese. Perfect every single morning. Staff knows my order by heart at this point. Genuinely the best breakfast spot in Medford.',
-    initials: 'ST',
+    text: 'We are from FL and were looking for great NY bagel shop. This place was great and service was excellent. Food is very affordable and fresh. I would highly recommend.',
+    initials: 'SI',
   },
   {
-    name: 'Danny P.',
+    name: 'jaime dellipizzi',
     stars: 5,
-    ago: '3 weeks ago',
-    text: 'Freshest bagels in all of Suffolk County. The bialy is underrated, and the lox platter is worth every penny. Joel runs a tight ship.',
-    initials: 'DP',
+    ago: '4 months ago',
+    text: "The owner is a lovely man who greets you with a warm smile every time — he's actually the reason I keep returning! He makes you feel like you are the most important person once you set foot in his establishment. The bagels are fresh and delicious, the egg sandwiches are divine!",
+    initials: 'JD',
   },
   {
-    name: 'Lisa M.',
-    stars: 4,
-    ago: '1 month ago',
-    text: 'Gets really busy on weekend mornings which honestly tells you everything you need to know. Worth every minute of the wait. Consistent quality every time.',
-    initials: 'LM',
-  },
-  {
-    name: 'Tom K.',
+    name: 'Charles Palmer',
     stars: 5,
-    ago: '2 months ago',
-    text: "The lox and cream cheese is genuinely the best I've had. Real New York bagel shop energy. Not a chain, not fancy — just perfect bagels made with care.",
+    ago: '5 months ago',
+    text: 'Always a pleasure. Good food, fair prices, and a great bunch of people who worked there. Joel always makes you feel like family.',
+    initials: 'CP',
+  },
+  {
+    name: 'Tracy K',
+    stars: 5,
+    ago: '5 months ago',
+    text: "Always so welcoming and truly appreciate your business! I love Joel's bagels! No better deli or bagel store out there!",
     initials: 'TK',
   },
   {
-    name: 'Ana G.',
+    name: 'Steven Figueiredo',
     stars: 5,
-    ago: '3 weeks ago',
-    text: 'Fui con mi familia y el servicio fue increíble. Los bagels son fresquísimos y el personal es muy amable. Mi favorito es el bagel con queso crema de oliva.',
-    initials: 'AG',
-    lang: 'es',
+    ago: '6 months ago',
+    text: 'Best spot around. Everyone at my job orders from here and even on my days off I drive a town over to get the best bagels and sandwiches around! Kelly is amazing!',
+    initials: 'SF',
   },
 ]
 
@@ -115,9 +107,6 @@ export default function Reviews() {
               </div>
               <Stars count={review.stars} />
               <p className="review-text">{review.text}</p>
-              {review.lang === 'es' && (
-                <span className="review-lang-tag">🇵🇷 en español</span>
-              )}
             </motion.div>
           ))}
         </div>

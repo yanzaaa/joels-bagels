@@ -10,6 +10,7 @@ import Catering from "@/components/Catering";
 import Location from "@/components/Location";
 import Instagram from "@/components/Instagram";
 import Footer from "@/components/Footer";
+import MobileOrderBar from "@/components/MobileOrderBar";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <Instagram />
       </main>
       <Footer />
+      <MobileOrderBar />
     </>
   );
 }
