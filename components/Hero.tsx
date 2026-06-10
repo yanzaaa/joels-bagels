@@ -121,22 +121,22 @@ function StatsBar() {
     >
       <div className="stat">
         <Counter to={4.5} decimals={1} />
-        <span className="stat-label">★ Google Rating</span>
+        <span className="stat-label">★ Google</span>
       </div>
       <div className="stat-divider" />
       <div className="stat">
         <Counter to={280} suffix="+" />
-        <span className="stat-label">Reviews</span>
+        <span className="stat-label">5-Star Reviews</span>
       </div>
       <div className="stat-divider" />
       <div className="stat">
         <span className="stat-num">6 AM</span>
-        <span className="stat-label">Daily</span>
+        <span className="stat-label">Open Daily</span>
       </div>
       <div className="stat-divider" />
       <div className="stat">
         <Counter to={20} suffix="+" />
-        <span className="stat-label">Cream Cheeses</span>
+        <span className="stat-label">Spreads</span>
       </div>
     </motion.div>
   )
@@ -146,6 +146,21 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-bg" />
+
+      <div className="hero-photo-panel" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/photos/food1.jpg"
+          alt=""
+          className="hero-photo-img"
+        />
+        <div className="hero-photo-vignette" />
+        <div className="hero-photo-badge">
+          <span className="hero-badge-dot" />
+          Made fresh this morning
+        </div>
+      </div>
+
       <div className="hero-vignette" />
 
       <SteamRising />
@@ -187,7 +202,8 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.6, ease: EASE }}
         >
-          Fresh-baked every morning. The olive cream cheese is legendary.
+          Medford’s counter since 6 AM. Ecuadorian family recipe. Best bagel on
+          Long Island — and the Knicks Everything Bagel is back.
         </motion.p>
 
         <motion.div

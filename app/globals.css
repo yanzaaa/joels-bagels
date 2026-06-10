@@ -154,6 +154,7 @@ section[id] {
 }
 
 .nav-link {
+  position: relative;
   color: rgba(245, 236, 215, 0.7);
   font-family: var(--font-body);
   font-weight: 500;
@@ -162,7 +163,19 @@ section[id] {
   transition: color 0.2s;
 }
 
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--sesame);
+  transition: width 0.2s ease;
+}
+
 .nav-link:hover { color: var(--cream); }
+.nav-link:hover::after { width: 100%; }
 
 .nav-cta {
   background: var(--poppy);
@@ -302,6 +315,73 @@ section[id] {
   pointer-events: none;
 }
 
+/* Real food photo, blended into the right edge of the hero */
+.hero-photo-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 46%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 88%;
+  filter: brightness(0.9) saturate(1.12);
+}
+
+/* Fade the left ~half of the photo fully into the hero background so the big
+   headline reads on solid dark and only the appetizing right edge shows. */
+.hero-photo-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--dark) 0%,
+    var(--dark) 42%,
+    rgba(28, 20, 16, 0.55) 64%,
+    transparent 92%
+  );
+}
+
+.hero-photo-badge {
+  position: absolute;
+  bottom: 120px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(28, 20, 16, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 149, 90, 0.3);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--sesame);
+  white-space: nowrap;
+}
+
+.hero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  animation: status-pulse 2s ease infinite;
+}
+
+@media (max-width: 900px) {
+  .hero-photo-panel { display: none; }
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -361,16 +441,22 @@ section[id] {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 15px;
+  letter-spacing: 0.02em;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.2s;
-  box-shadow: 0 0 0 0 rgba(232, 64, 12, 0.4);
+  transition: all 0.2s var(--ease-out-expo);
+  box-shadow: 0 4px 16px rgba(232, 64, 12, 0.35);
 }
 
 .btn-primary:hover {
   background: var(--poppy-dark);
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(232, 64, 12, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(232, 64, 12, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 12px rgba(232, 64, 12, 0.35);
 }
 
 .btn-secondary {
@@ -521,10 +607,10 @@ section[id] {
    ────────────────────────────────────────── */
 .marquee-wrap {
   overflow: hidden;
-  background: var(--bagel);
+  background: linear-gradient(135deg, #2a1508 0%, #3d1f0a 50%, #2a1508 100%);
   padding: 14px 0;
-  border-top: 1px solid rgba(196, 149, 90, 0.3);
-  border-bottom: 1px solid rgba(196, 149, 90, 0.3);
+  border-top: 1px solid rgba(196, 149, 90, 0.2);
+  border-bottom: 1px solid rgba(196, 149, 90, 0.2);
 }
 
 .marquee-track {
@@ -557,6 +643,8 @@ section[id] {
 /* ──────────────────────────────────────────
    SIGNATURES
    ────────────────────────────────────────── */
+.signatures-section { background: #190e09; }
+
 .signatures-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -570,35 +658,43 @@ section[id] {
 
 .signature-card {
   position: relative;
-  background: #1C1410;
-  border: 1px solid rgba(196, 149, 90, 0.12);
+  background: linear-gradient(145deg, #2d190c 0%, #1c1008 100%);
+  border: none;
   border-radius: 12px;
   padding: 40px;
   overflow: hidden;
-  transition: all 0.3s var(--ease-out-expo);
+  box-shadow:
+    0 1px 0 rgba(196, 149, 90, 0.12),
+    0 24px 48px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: transform 0.3s var(--ease-out-expo),
+    box-shadow 0.3s var(--ease-out-expo);
 }
 
 .signature-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(196, 149, 90, 0.4);
+  transform: translateY(-4px);
+  box-shadow:
+    0 1px 0 rgba(196, 149, 90, 0.18),
+    0 32px 64px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .signature-num {
   position: absolute;
-  bottom: -36px;
+  bottom: -30px;
   right: 8px;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 160px;
+  font-size: 140px;
   line-height: 1;
-  color: #C4955A;
-  opacity: 0.05;
+  color: var(--cream);
+  opacity: 0.035;
   transition: opacity 0.3s var(--ease-out-expo);
   pointer-events: none;
   user-select: none;
 }
 
-.signature-card:hover .signature-num { opacity: 0.1; }
+.signature-card:hover .signature-num { opacity: 0.06; }
 
 .signature-tag {
   display: inline-block;
@@ -740,7 +836,7 @@ section[id] {
   justify-content: space-between;
   padding: 14px 16px;
   background: rgba(245, 236, 215, 0.03);
-  border: 1px solid rgba(196, 149, 90, 0.1);
+  border: 1px solid rgba(196, 149, 90, 0.05);
   border-radius: 8px;
   transition: all 0.2s;
   gap: 12px;
@@ -748,11 +844,11 @@ section[id] {
 
 .menu-item:hover {
   background: rgba(245, 236, 215, 0.06);
-  border-color: rgba(196, 149, 90, 0.3);
+  border-color: rgba(196, 149, 90, 0.18);
   transform: translateX(2px);
 }
 
-.menu-item.popular { border-color: rgba(232, 64, 12, 0.2); }
+.menu-item.popular { border-color: rgba(232, 64, 12, 0.18); }
 
 .menu-item-name {
   font-size: 14px;
@@ -811,6 +907,16 @@ section[id] {
 /* ──────────────────────────────────────────
    ORDER CTA
    ────────────────────────────────────────── */
+#order {
+  background: linear-gradient(
+    135deg,
+    #2a1008 0%,
+    #1c1410 40%,
+    #1c1410 60%,
+    #2a1008 100%
+  );
+}
+
 .order-section {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -976,14 +1082,18 @@ section[id] {
 }
 
 .review-card {
-  background: rgba(245, 236, 215, 0.03);
-  border: 1px solid rgba(196, 149, 90, 0.1);
+  background: rgba(245, 236, 215, 0.025);
+  border: 1px solid rgba(196, 149, 90, 0.06);
   border-radius: 12px;
   padding: 24px;
-  transition: border-color 0.3s;
+  box-shadow: inset 0 1px 0 rgba(196, 149, 90, 0.08);
+  transition: border-color 0.3s, transform 0.3s var(--ease-out-expo);
 }
 
-.review-card:hover { border-color: rgba(196, 149, 90, 0.3); }
+.review-card:hover {
+  border-color: rgba(196, 149, 90, 0.16);
+  transform: translateY(-2px);
+}
 
 .review-head {
   display: flex;
@@ -1023,7 +1133,11 @@ section[id] {
   font-size: 14px;
   letter-spacing: 2px;
   margin-bottom: 10px;
+  filter: brightness(0.82);
+  transition: filter 0.4s ease;
 }
+
+.review-card:hover .review-stars { filter: brightness(1.15); }
 
 .review-text {
   font-family: var(--font-body);

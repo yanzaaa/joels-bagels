@@ -7,21 +7,21 @@ const signatures = [
   {
     num: '01',
     name: 'Olive Cream Cheese',
-    desc: 'The one people drive across Long Island for. Made in-house daily.',
+    desc: 'People drive from three towns over. Made in-house every morning with Kalamatas — the same way since week one.',
     tag: 'Fan Favorite',
     tagColor: 'olive',
   },
   {
     num: '02',
     name: 'Everything BEC',
-    desc: 'Bacon, egg, and cheese on an everything bagel. 6 AM never tasted this good.',
+    desc: 'Bacon, egg & cheese on a still-hot everything bagel. $6.50. The line on Saturday mornings tells you everything.',
     tag: 'Most Ordered',
     tagColor: 'poppy',
   },
   {
     num: '03',
     name: 'Lox & Cream Cheese',
-    desc: 'New York in every bite. Cold-smoked salmon, capers, the works.',
+    desc: 'Cold-smoked salmon, plain cream cheese, toasted everything. Under $8 — a lox sandwich this good runs $22 in the city.',
     tag: 'Classic',
     tagColor: 'sesame',
   },
@@ -29,7 +29,7 @@ const signatures = [
 
 export default function Signatures() {
   return (
-    <section className="section">
+    <section className="section signatures-section">
       <div className="container">
         <motion.div
           style={{ textAlign: 'center' }}

@@ -6,7 +6,8 @@ export default function Footer() {
           <div>
             <div className="footer-brand-name">Joel&apos;s Bagels</div>
             <p className="footer-tagline">
-              Long Island&apos;s favorite since day one.
+              Medford&apos;s bagel shop since day one. Ecuadorian family recipe.
+              Long Island&apos;s favorite morning.
             </p>
             <p className="footer-address">
               1699 Route 112 · Medford NY 11763

@@ -7,14 +7,12 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 const INSTAGRAM_URL = 'https://www.instagram.com/joelsbagelscafe'
 
-// Real posts from @joelsbagelscafe. NOTE: Instagram CDN URLs are signed and
-// expire (the `oe=` param) — each tile falls back to a brand gradient if its
-// image stops loading. For a permanent fix, self-host the photos in /public
-// or connect the Instagram Basic Display API.
+// Real posts from @joelsbagelscafe, self-hosted in /public/instagram so the
+// images are permanent (Instagram CDN URLs are signed and expire). Each tile
+// still falls back to a brand gradient if its image ever fails to load.
 const instagramPosts = [
   {
-    imageUrl:
-      'https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/720434859_1681782769637480_4282884551121188447_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=108&_nc_oc=Q6cZ2gGxUUpX_lkpbGcpXkQrAMV2IgZCak7Gii60LDdePKoaIPCb3cxDZnvfa8FJQU_iKsM&_nc_ohc=gFgh44Her4MQ7kNvwF9x0Af&_nc_gid=38-g4JiMVdTaEgNhrbfH1Q&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af81AYpiqrh0H3juPVKfJDc6go9DJD7E-vBK3zlU7HhCaA&oe=6A2EE316&_nc_sid=10d13b',
+    imageUrl: '/instagram/post1.jpg',
     caption:
       'The Chicken BLT — freshly breaded, crispy bacon, pressed to perfection.',
     url: 'https://www.instagram.com/p/DZYXfGAA0Wd/',
@@ -22,8 +20,7 @@ const instagramPosts = [
     fallback: 'linear-gradient(135deg, #8B5E3C 0%, #C4955A 100%)',
   },
   {
-    imageUrl:
-      'https://scontent-mia3-3.cdninstagram.com/v/t51.71878-15/715291936_2043423512952381_2017747551536953886_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-mia3-3.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gG_pgL04GFtCiMzJpa3RvehbYQ9LRtIexsY82CZ5mJSdqPS9JERNVrZUzPn9lnkW8A&_nc_ohc=tE7DPTdMvJkQ7kNvwELizzr&_nc_gid=LL1PsIjht69eqDkIxY4yAg&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af8_8j3b5fd_UugNSsc4amhLLPU9St5aRd2jsta3cVLIUA&oe=6A2EF4D1&_nc_sid=10d13b',
+    imageUrl: '/instagram/post2.jpg',
     caption:
       'The Brunson — custom Knicks Everything Bagel, bacon, egg & cheese, hash brown, chipotle.',
     url: 'https://www.instagram.com/p/DZLhV1zA9MR/',
@@ -31,24 +28,21 @@ const instagramPosts = [
     fallback: 'linear-gradient(135deg, #4A5C3F 0%, #6B8C5A 100%)',
   },
   {
-    imageUrl:
-      'https://scontent-atl3-3.cdninstagram.com/v/t51.71878-15/714383614_1500694505115321_1692487310196340089_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-atl3-3.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gFIOc2m_xccix1LpAFNs9TvyxC4kPYUwpjUkxpO1Jg68mvjG8khS6kuROHCwTaZjCs&_nc_ohc=o8e8jZRKAd0Q7kNvwERSft4&_nc_gid=Kj4JmzSRNqlb100SVvRxTQ&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af-33F7dvc_JIGsIxfVpVk8RzfQ9y-jHUsQPaKaTAKdLKQ&oe=6A2EE392&_nc_sid=10d13b',
+    imageUrl: '/instagram/post3.jpg',
     caption: 'Game 1 Fuel — The Hungry Knick on a custom Knicks bagel.',
     url: 'https://www.instagram.com/p/DZGj_L3g_wv/',
     likes: 200,
     fallback: 'linear-gradient(135deg, #1C1410 0%, #8B5E3C 100%)',
   },
   {
-    imageUrl:
-      'https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/710537153_981238321427042_9155665389898219393_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_cat=102&_nc_oc=Q6cZ2gGroq66OL5nvWFyi8goVl4rBymaTbiYNbAbwFf8I-6Tk6y32akGabCc5oaMe8Z3JfU&_nc_ohc=Wo79zJEWtLsQ7kNvwEEz-YJ&_nc_gid=H8QM9RJ9PsLMz6n2gXrvMw&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af-L97ft0t_QPRvDOKGZDsb9inYnq-nTPVYcesh9q89b2A&oe=6A2EF5C0&_nc_sid=10d13b',
+    imageUrl: '/instagram/post4.jpg',
     caption: 'Knicks Bagels are officially here. What are YOU putting on yours?',
     url: 'https://www.instagram.com/p/DZDc9DGTa2c/',
     likes: 150,
     fallback: 'linear-gradient(135deg, #C4955A 0%, #E8C49A 100%)',
   },
   {
-    imageUrl:
-      'https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/711695768_17903669145432709_250627872071877428_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=101&_nc_oc=Q6cZ2gF0q97KddHVIfXExKI5zKXS6HHf4MDwctU2ROea_ilh7aXFemKjEySebnScrX_MqJo&_nc_ohc=MUW3jjTAPUsQ7kNvwHOsS8v&_nc_gid=NEc6yAWhTCjL7lfUhKxtJw&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af9hyUCWtj7SU2KECRR9NOc9bqV5TrY5EHQE3Yi7GaowgQ&oe=6A2F0456&_nc_sid=10d13b',
+    imageUrl: '/instagram/post5.jpg',
     caption:
       "Welcome to Joel's Bagels — fresh bagels, breakfast, lunch, coffee daily.",
     url: 'https://www.instagram.com/p/DY-lIXpz1gI/',
