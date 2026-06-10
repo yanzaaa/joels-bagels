@@ -36,6 +36,43 @@ function SteamRising() {
   )
 }
 
+// Sesame seeds scattered across the right half of the hero. Positions are
+// fixed (not Math.random) so server and client render identical markup.
+const SEEDS = [
+  { left: '54%', top: '14%', r: '24deg' },
+  { left: '62%', top: '28%', r: '-40deg' },
+  { left: '70%', top: '10%', r: '65deg' },
+  { left: '77%', top: '36%', r: '12deg' },
+  { left: '84%', top: '18%', r: '-72deg' },
+  { left: '91%', top: '44%', r: '33deg' },
+  { left: '58%', top: '52%', r: '-18deg' },
+  { left: '66%', top: '66%', r: '80deg' },
+  { left: '74%', top: '58%', r: '-55deg' },
+  { left: '82%', top: '74%', r: '8deg' },
+  { left: '89%', top: '62%', r: '-30deg' },
+  { left: '95%', top: '80%', r: '47deg' },
+]
+
+function HeroSeeds() {
+  return (
+    <div className="hero-seeds" aria-hidden="true">
+      {SEEDS.map((seed, i) => (
+        <span
+          key={i}
+          className="hero-seed"
+          style={
+            {
+              left: seed.left,
+              top: seed.top,
+              '--r': seed.r,
+            } as React.CSSProperties
+          }
+        />
+      ))}
+    </div>
+  )
+}
+
 function OpenStatusBadge() {
   // Time-dependent UI is rendered after mount to avoid a hydration mismatch.
   const [now, setNow] = useState<Date | null>(null)
@@ -55,7 +92,9 @@ function OpenStatusBadge() {
     )
   }
 
-  // Hours: Mon–Sat 6 AM – 3 PM, Sun 7 AM – 2 PM
+  // Hours: Mon–Sat 6 AM – 3 PM, Sun 7 AM – 2 PM.
+  // NOTE for future editors: Sunday opens at 7 AM, NOT 6 AM — keep the
+  // openHour/closeHour branches below in sync with Location.tsx and layout.tsx.
   const hour = now.getHours()
   const isSunday = now.getDay() === 0
   const openHour = isSunday ? 7 : 6
@@ -149,6 +188,8 @@ export default function Hero() {
       <div className="hero-vignette" />
 
       <SteamRising />
+      <HeroSeeds />
+      <div className="hero-bagel-art" aria-hidden="true" />
 
       <div className="hero-content">
         <motion.p
@@ -187,7 +228,8 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.6, ease: EASE }}
         >
-          Fresh-baked every morning. The olive cream cheese is legendary.
+          A family recipe. Two generations. Medford&apos;s favorite morning stop
+          since the day we opened.
         </motion.p>
 
         <motion.div
