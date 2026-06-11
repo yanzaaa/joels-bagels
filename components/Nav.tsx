@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useCart } from '@/lib/cart'
 
 const links = [
   { label: 'Menu', href: '#menu' },
@@ -41,6 +42,57 @@ function ScrollProgress() {
   }, [])
 
   return <div ref={barRef} className="scroll-progress" />
+}
+
+function BagIcon() {
+  return (
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 7h12l1.2 13.2a1 1 0 0 1-1 1.1H5.8a1 1 0 0 1-1-1.1L6 7Z" />
+      <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+    </svg>
+  )
+}
+
+function CartButton() {
+  const count = useCart((s) =>
+    s.items.reduce((sum, i) => sum + i.quantity, 0)
+  )
+  const openCart = useCart((s) => s.openCart)
+
+  return (
+    <button
+      className="nav-cart-btn"
+      onClick={openCart}
+      aria-label={`Open your order${count > 0 ? ` (${count} items)` : ''}`}
+    >
+      <BagIcon />
+      <AnimatePresence>
+        {count > 0 && (
+          // Keyed on count so each add re-mounts the badge with a spring pop
+          <motion.span
+            key={count}
+            className="nav-cart-badge"
+            initial={{ scale: 0.4 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 16 }}
+          >
+            {count}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </button>
+  )
 }
 
 export default function Nav() {
@@ -86,16 +138,19 @@ export default function Nav() {
             </a>
           </nav>
 
-          <button
-            className={`nav-hamburger ${open ? 'open' : ''}`}
-            onClick={() => setOpen(!open)}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="nav-right">
+            <CartButton />
+            <button
+              className={`nav-hamburger ${open ? 'open' : ''}`}
+              onClick={() => setOpen(!open)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
       </header>
 

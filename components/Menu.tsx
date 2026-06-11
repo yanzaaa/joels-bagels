@@ -1,8 +1,21 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useCart } from '@/lib/cart'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+/* Cart line items need unambiguous names — "Plain" could be a bagel or a
+   cream cheese, so single-word items carry their category into the cart. */
+function cartName(categoryKey: string, name: string): string {
+  if (categoryKey === 'bagels' && name !== 'Bialy') return `${name} Bagel`
+  if (categoryKey === 'cream_cheese') return `${name} Cream Cheese`
+  return name
+}
+
+function slugify(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+}
 
 type MenuItemData = {
   name: string
@@ -121,7 +134,35 @@ const menuData: Record<string, MenuCategory> = {
   },
 }
 
-function MenuItem({ item, index }: { item: MenuItemData; index: number }) {
+function PlusIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M8 3v10M3 8h10" />
+    </svg>
+  )
+}
+
+function MenuItem({
+  item,
+  index,
+  categoryKey,
+}: {
+  item: MenuItemData
+  index: number
+  categoryKey: string
+}) {
+  const addItem = useCart((s) => s.addItem)
+  const name = cartName(categoryKey, item.name)
+
   return (
     <motion.div
       className={`menu-item ${item.popular ? 'popular' : ''}`}
@@ -140,9 +181,29 @@ function MenuItem({ item, index }: { item: MenuItemData; index: number }) {
         <span className="menu-item-name">{item.name}</span>
         {item.note && <span className="menu-item-note">{item.note}</span>}
       </div>
-      <span className="menu-item-price">
-        {item.price ? `$${item.price.toFixed(2)}` : item.label || '—'}
-      </span>
+      <div className="menu-item-right">
+        <span className="menu-item-price">
+          {item.price ? `$${item.price.toFixed(2)}` : item.label || '—'}
+        </span>
+        {/* Call-for-pricing items (price: null) can't be added to an order */}
+        {item.price !== null && (
+          <motion.button
+            className="menu-add-btn"
+            aria-label={`Add ${name} to order`}
+            whileTap={{ scale: 0.82 }}
+            transition={{ type: 'spring', stiffness: 600, damping: 18 }}
+            onClick={() =>
+              addItem({
+                id: `${categoryKey}-${slugify(item.name)}`,
+                name,
+                price: item.price as number,
+              })
+            }
+          >
+            <PlusIcon />
+          </motion.button>
+        )}
+      </div>
     </motion.div>
   )
 }
@@ -220,7 +281,12 @@ export default function Menu() {
             <p className="menu-category-tagline">{category.tagline}</p>
             <div className="menu-grid">
               {category.items.map((item, i) => (
-                <MenuItem key={item.name} item={item} index={i} />
+                <MenuItem
+                  key={item.name}
+                  item={item}
+                  index={i}
+                  categoryKey={active}
+                />
               ))}
             </div>
             {(category.bulk || category.note) && (

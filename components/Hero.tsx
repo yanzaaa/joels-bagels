@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReveal } from '@/hooks/useReveal'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -143,6 +143,12 @@ function StatsBar() {
 }
 
 export default function Hero() {
+  // Content drifts up and fades as you scroll away; the photo panel holds
+  // still, which reads as depth without a second scroll listener.
+  const { scrollY } = useScroll()
+  const contentY = useTransform(scrollY, [0, 600], [0, -80])
+  const contentOpacity = useTransform(scrollY, [0, 420], [1, 0])
+
   return (
     <section className="hero">
       <div className="hero-bg" />
@@ -150,47 +156,55 @@ export default function Hero() {
       <div className="hero-photo-panel" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/photos/food1.jpg"
+          src="/instagram/post4.jpg"
           alt=""
           className="hero-photo-img"
         />
         <div className="hero-photo-vignette" />
-        <div className="hero-photo-badge">
+        <motion.div
+          className="hero-photo-badge"
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.6, ease: EASE }}
+        >
           <span className="hero-badge-dot" />
           Made fresh this morning
-        </div>
+        </motion.div>
       </div>
 
       <div className="hero-vignette" />
 
       <SteamRising />
 
-      <div className="hero-content">
+      <motion.div
+        className="hero-content"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
         <motion.p
           className="hero-eyebrow"
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
+          transition={{ delay: 0.1, duration: 0.6, ease: EASE }}
         >
-          Medford, New York · Est. Daily 6AM
+          Medford, New York · Open Every Day · 6 AM
         </motion.p>
 
         <h1 className="hero-headline">
           {['Long Island’s', 'Favorite'].map((line, i) => (
             <motion.span
               key={line}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.12, duration: 0.8, ease: EASE }}
+              initial={{ opacity: 0, y: 60, filter: 'blur(12px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 0.2 + i * 0.1, duration: 0.8, ease: EASE }}
             >
               {line}
             </motion.span>
           ))}
           <motion.span
             className="accent"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.54, duration: 0.8, ease: EASE }}
+            initial={{ opacity: 0, y: 60, filter: 'blur(12px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ delay: 0.4, duration: 0.8, ease: EASE }}
           >
             Bagel.
           </motion.span>
@@ -200,10 +214,10 @@ export default function Hero() {
           className="hero-sub"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.6, ease: EASE }}
+          transition={{ delay: 0.7, duration: 0.8, ease: EASE }}
         >
-          Medford’s counter since 6 AM. Ecuadorian family recipe. Best bagel on
-          Long Island — and the Knicks Everything Bagel is back.
+          A family recipe. Two generations. The best bagel on Long Island —
+          and the Knicks Everything Bagel is back for the season.
         </motion.p>
 
         <motion.div
@@ -233,7 +247,21 @@ export default function Hero() {
         >
           <OpenStatusBadge />
         </motion.div>
-      </div>
+      </motion.div>
+
+      <motion.div
+        className="scroll-hint"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.6 }}
+      >
+        <motion.div
+          className="scroll-dot"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+        />
+      </motion.div>
 
       <StatsBar />
     </section>

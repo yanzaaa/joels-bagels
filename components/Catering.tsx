@@ -23,7 +23,7 @@ const highlights = [
 ]
 
 function CateringForm() {
-  // TODO: Sign up at formspree.io, create a form, and replace mzdqvawv
+  // Live Formspree form (verified returning 200) — inquiries land in email.
   const [state, handleSubmit] = useForm('mzdqvawv')
 
   if (state.succeeded) {

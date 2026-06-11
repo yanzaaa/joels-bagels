@@ -1,3 +1,5 @@
+import FooterSignup from '@/components/FooterSignup'
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -12,6 +14,7 @@ export default function Footer() {
             <p className="footer-address">
               1699 Route 112 · Medford NY 11763
             </p>
+            <FooterSignup />
           </div>
 
           <div>

@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import PageIntro from "@/components/PageIntro";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
+import Process from "@/components/Process";
 import Signatures from "@/components/Signatures";
 import Menu from "@/components/Menu";
 import OrderCTA from "@/components/OrderCTA";
@@ -11,6 +12,7 @@ import Location from "@/components/Location";
 import Instagram from "@/components/Instagram";
 import Footer from "@/components/Footer";
 import MobileOrderBar from "@/components/MobileOrderBar";
+import CartDrawer from "@/components/CartDrawer";
 
 export default function Home() {
   return (
@@ -20,6 +22,7 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
+        <Process />
         <Signatures />
         <Menu />
         <OrderCTA />
@@ -30,6 +33,7 @@ export default function Home() {
       </main>
       <Footer />
       <MobileOrderBar />
+      <CartDrawer />
     </>
   );
 }

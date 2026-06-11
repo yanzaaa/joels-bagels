@@ -1,14 +1,14 @@
 const items = [
-  'Fresh Bagels Daily',
-  '★ Olive Cream Cheese',
-  'Bacon Egg & Cheese',
-  'Everything Bagel',
-  'Open 6 AM',
-  'Medford, New York',
-  'Made Fresh',
-  '★ 4.5 on Google',
-  'All-Day Breakfast',
-  'Family Run',
+  '🥯 Fresh Bagels Daily',
+  '🏀 Knicks Everything Bagel',
+  '🧀 Olive Cream Cheese',
+  '⏰ Open Daily · 6 AM',
+  '🇪🇨 Ecuadorian Family Recipe',
+  '🥚 Best BEC on Long Island',
+  '📍 1699 Route 112 · Medford',
+  '⭐ 4.5 Stars · 280 Reviews',
+  '🚗 Order on DoorDash',
+  '💙🧡 Home of the Knicks Bagel',
 ]
 
 export default function Marquee() {

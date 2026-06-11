@@ -17,6 +17,7 @@ const instagramPosts = [
       'The Chicken BLT — freshly breaded, crispy bacon, pressed to perfection.',
     url: 'https://www.instagram.com/p/DZYXfGAA0Wd/',
     likes: 63,
+    isVideo: true,
     fallback: 'linear-gradient(135deg, #8B5E3C 0%, #C4955A 100%)',
   },
   {
@@ -25,6 +26,7 @@ const instagramPosts = [
       'The Brunson — custom Knicks Everything Bagel, bacon, egg & cheese, hash brown, chipotle.',
     url: 'https://www.instagram.com/p/DZLhV1zA9MR/',
     likes: 113,
+    isVideo: true,
     fallback: 'linear-gradient(135deg, #4A5C3F 0%, #6B8C5A 100%)',
   },
   {
@@ -32,6 +34,7 @@ const instagramPosts = [
     caption: 'Game 1 Fuel — The Hungry Knick on a custom Knicks bagel.',
     url: 'https://www.instagram.com/p/DZGj_L3g_wv/',
     likes: 200,
+    isVideo: true,
     fallback: 'linear-gradient(135deg, #1C1410 0%, #8B5E3C 100%)',
   },
   {
@@ -39,6 +42,7 @@ const instagramPosts = [
     caption: 'Knicks Bagels are officially here. What are YOU putting on yours?',
     url: 'https://www.instagram.com/p/DZDc9DGTa2c/',
     likes: 150,
+    isVideo: true,
     fallback: 'linear-gradient(135deg, #C4955A 0%, #E8C49A 100%)',
   },
   {
@@ -47,9 +51,26 @@ const instagramPosts = [
       "Welcome to Joel's Bagels — fresh bagels, breakfast, lunch, coffee daily.",
     url: 'https://www.instagram.com/p/DY-lIXpz1gI/',
     likes: 211,
+    isVideo: false,
     fallback: 'linear-gradient(135deg, #8B5E3C 0%, #1C1410 100%)',
   },
 ]
+
+function PlayBadge() {
+  return (
+    <span className="instagram-play" aria-label="Video post">
+      <svg
+        width="11"
+        height="11"
+        viewBox="0 0 12 12"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M3 1.5 10.5 6 3 10.5z" />
+      </svg>
+    </span>
+  )
+}
 
 function InstagramIcon() {
   return (
@@ -101,6 +122,7 @@ function InstagramTile({
           onError={() => setFailed(true)}
         />
       )}
+      {post.isVideo && <PlayBadge />}
       <span className="instagram-likes" aria-label={`${post.likes} likes`}>
         ♥ {post.likes}
       </span>
