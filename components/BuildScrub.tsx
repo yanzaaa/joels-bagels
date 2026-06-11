@@ -175,6 +175,14 @@ export default function BuildScrub() {
   const paperOpacity = useTransform(scrollYProgress, [0.02, 0.1], [0, 1])
   const stampScale = useTransform(scrollYProgress, [0.86, 0.94], [0, 1])
 
+  // Act two: the layered blueprint resolves into the real thing — the
+  // assembly fades back while an actual flat-top shot scales in. Appetite
+  // comes from the real photo; the layers earn their keep as the diagram.
+  const layersOpacity = useTransform(scrollYProgress, [0.62, 0.72], [1, 0])
+  const resultOpacity = useTransform(scrollYProgress, [0.66, 0.78], [0, 1])
+  const resultScale = useTransform(scrollYProgress, [0.66, 0.82], [0.82, 1])
+  const resultY = useTransform(scrollYProgress, [0.66, 0.82], [44, 0])
+
   // Camera push: the whole stack tips toward you and settles as it builds,
   // with per-layer translateZ giving real parallax between ingredients.
   const stageRotX = useTransform(scrollYProgress, [0, 0.85], [16, 4])
@@ -222,9 +230,28 @@ export default function BuildScrub() {
             Joel&apos;s · Order №112 · Saturday 8:04 AM
           </motion.span>
 
-          {LAYERS.map((cfg, i) => (
-            <Layer key={cfg.src} progress={scrollYProgress} cfg={cfg} index={i} />
-          ))}
+          <motion.div style={{ opacity: layersOpacity }}>
+            {LAYERS.map((cfg, i) => (
+              <Layer key={cfg.src} progress={scrollYProgress} cfg={cfg} index={i} />
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="build-result"
+            style={{ opacity: resultOpacity, scale: resultScale, y: resultY }}
+          >
+            <span className="build-steam s1" aria-hidden="true" />
+            <span className="build-steam s2" aria-hidden="true" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/photos/sausage-egg.jpg"
+              alt="The Saturday Order, hot off the flat-top"
+              loading="lazy"
+            />
+            <span className="build-result-caption">
+              Hot off the flat-top — every Saturday since day one
+            </span>
+          </motion.div>
 
           <motion.a
             className="build-stamp"

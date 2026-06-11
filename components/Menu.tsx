@@ -210,6 +210,8 @@ function MenuItem({
         <span className="menu-item-name">{item.name}</span>
         {item.note && <span className="menu-item-note">{item.note}</span>}
       </div>
+      {/* Dotted price leader — classic printed-menu typography */}
+      <span className="menu-dots" aria-hidden="true" />
       <div className="menu-item-right">
         <span className="menu-item-price">
           {item.price ? `$${item.price.toFixed(2)}` : item.label || '—'}

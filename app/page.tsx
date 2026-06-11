@@ -68,13 +68,13 @@ export default function Home() {
           <Reviews />
         </div>
 
-        {/* Scene 10 — local intel, right before you plan the trip */}
-        <BusyNow />
-
-        {/* Scene 11 — the clean order sheet */}
+        {/* Scene 10 — the clean order sheet */}
         <div className="paper-act order-sheet">
           <Catering />
         </div>
+
+        {/* Scene 11 — local intel, right before you plan the trip */}
+        <BusyNow />
 
         {/* Scene 12 — Route 112 at dusk */}
         <div className="route-night">
