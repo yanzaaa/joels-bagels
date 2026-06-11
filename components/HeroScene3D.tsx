@@ -22,8 +22,8 @@ const CARDS: {
   rotation: [number, number, number]
 }[] = [
   {
-    url: '/photos/hero-bagel.jpg',
-    scale: [2.5, 1.55],
+    url: '/photos/melt.jpg',
+    scale: [2.3, 1.75],
     position: [0.35, 0.55, 0],
     rotation: [0, -0.16, -0.04],
   },
@@ -34,9 +34,9 @@ const CARDS: {
     rotation: [0, 0.18, 0.06],
   },
   {
-    url: '/photos/melt.jpg',
-    scale: [1.15, 0.88],
-    position: [1.5, -1.15, 0.4],
+    url: '/photos/deli-club.jpg',
+    scale: [1.1, 1.1],
+    position: [1.55, -1.15, 0.4],
     rotation: [0, -0.12, 0.07],
   },
   {

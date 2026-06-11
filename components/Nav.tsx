@@ -128,12 +128,9 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
-            <a
-              href={DOORDASH_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-cta"
-            >
+            {/* Routes into the order section (pickup/delivery card → DoorDash)
+                so the path reads: browse → order → checkout */}
+            <a href="#order" className="nav-cta">
               Order Now
             </a>
           </nav>
@@ -177,15 +174,14 @@ export default function Nav() {
               </motion.a>
             ))}
             <motion.a
-              href={DOORDASH_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#order"
+              onClick={() => setOpen(false)}
               className="nav-drawer-cta"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Order on DoorDash →
+              Order Now →
             </motion.a>
           </motion.div>
         )}

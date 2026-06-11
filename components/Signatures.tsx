@@ -69,6 +69,7 @@ const signatures = [
 ]
 
 const stickers = ['$2.50', '$6.50', '$9.00']
+const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
 
 export default function Signatures() {
   return (
@@ -102,6 +103,14 @@ export default function Signatures() {
               </span>
               <h3 className="signature-name">{item.name}</h3>
               <p className="signature-desc">{item.desc}</p>
+              <a
+                className="sig-order"
+                href={DOORDASH_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Order this on DoorDash →
+              </a>
               <span className="signature-num" aria-hidden="true">
                 {item.num}
               </span>

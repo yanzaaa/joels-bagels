@@ -99,7 +99,14 @@ function Layer({
   return (
     <motion.div
       className="build-layer"
-      style={{ y, opacity, rotate, width: cfg.width, zIndex: index + 1 }}
+      style={{
+        y,
+        opacity,
+        rotate,
+        z: index * 24,
+        width: cfg.width,
+        zIndex: index + 1,
+      }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={cfg.src} alt="" loading="lazy" />
@@ -168,6 +175,13 @@ export default function BuildScrub() {
   const paperOpacity = useTransform(scrollYProgress, [0.02, 0.1], [0, 1])
   const stampScale = useTransform(scrollYProgress, [0.86, 0.94], [0, 1])
 
+  // Camera push: the whole stack tips toward you and settles as it builds,
+  // with per-layer translateZ giving real parallax between ingredients.
+  const stageRotX = useTransform(scrollYProgress, [0, 0.85], [16, 4])
+  const stageScale = useTransform(scrollYProgress, [0, 0.3], [0.92, 1])
+  const shadowScaleX = useTransform(scrollYProgress, [0.1, 0.84], [0.5, 1])
+  const shadowOpacity = useTransform(scrollYProgress, [0.06, 0.2], [0, 0.55])
+
   return (
     <section className="build-section" ref={ref} aria-label="The Everything BEC, built layer by layer">
       <div className="build-sticky">
@@ -186,7 +200,19 @@ export default function BuildScrub() {
           ))}
         </div>
 
-        <div className="build-stack">
+        <motion.div
+          className="build-stack"
+          style={{
+            rotateX: stageRotX,
+            scale: stageScale,
+            transformPerspective: 1100,
+          }}
+        >
+          <motion.span
+            className="build-shadow"
+            aria-hidden="true"
+            style={{ scaleX: shadowScaleX, opacity: shadowOpacity }}
+          />
           <motion.span
             className="build-paper"
             aria-hidden="true"
@@ -212,7 +238,7 @@ export default function BuildScrub() {
             <br />
             order it →
           </motion.a>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

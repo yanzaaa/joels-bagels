@@ -177,14 +177,14 @@ export default function Hero() {
         >
           <div className="hc-photo">
             <Image
-              src="/photos/hero-bagel.jpg"
+              src="/photos/melt.jpg"
               alt=""
               fill
               priority
               sizes="(max-width: 900px) 0px, 36vw"
             />
           </div>
-          <span className="hc-label">Sesame, schmeared — this morning</span>
+          <span className="hc-label">Still warm — this morning</span>
         </motion.div>
 
         <motion.div

@@ -720,17 +720,90 @@ section[id] {
 /* ──────────────────────────────────────────
    MARQUEE
    ────────────────────────────────────────── */
-/* Sticker-tape band: poppy, slightly rotated, hard dark edges — the kind of
-   thing a designer glues on, not a template strip. */
-.marquee-wrap {
+/* Electric ticker: navy glass scoreboard strip with a slow light sweep.
+   The one controlled Knicks-energy moment between hero and prep table. */
+.ticker {
+  position: relative;
   overflow: hidden;
+  background: linear-gradient(180deg, #101e33 0%, #0b1626 100%);
+  padding: 12px 0;
+  border-top: 1px solid rgba(120, 170, 255, 0.18);
+  border-bottom: 1px solid rgba(120, 170, 255, 0.12);
+  box-shadow: inset 0 0 40px rgba(20, 60, 130, 0.25);
+}
+
+.ticker-glow {
+  position: absolute;
+  inset: -40% -10%;
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgba(130, 180, 255, 0.1) 50%,
+    transparent 58%
+  );
+  animation: ticker-sweep 7s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ticker-sweep {
+  from { transform: translateX(-55%); }
+  to { transform: translateX(55%); }
+}
+
+.ticker .marquee-track:hover { animation-play-state: paused; }
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  padding: 4px 26px;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(214, 228, 248, 0.82);
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.ticker-item:hover {
+  color: #fff;
+  text-shadow: 0 0 14px rgba(140, 190, 255, 0.8);
+}
+
+.ticker-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(130, 180, 255, 0.55);
+  box-shadow: 0 0 8px rgba(130, 180, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.ticker-knicks {
+  color: var(--knicks-orange);
+}
+
+.ticker-knicks .ticker-dot {
+  background: var(--knicks-orange);
+  box-shadow: 0 0 9px rgba(245, 132, 38, 0.9);
+}
+
+.ticker-cta {
+  color: #ffb38a;
+}
+
+.ticker-cta:hover {
+  color: #fff;
+  text-shadow: 0 0 14px rgba(245, 132, 38, 0.9);
+}
+
+.ticker-cta .ticker-dot {
   background: var(--poppy);
-  padding: 13px 0;
-  border-top: 3px solid var(--dark);
-  border-bottom: 3px solid var(--dark);
-  transform: rotate(-1.2deg) scale(1.02);
-  margin: 10px 0;
-  box-shadow: 0 14px 40px rgba(232, 64, 12, 0.22);
+  box-shadow: 0 0 9px rgba(232, 64, 12, 0.9);
 }
 
 .marquee-track {
@@ -2321,54 +2394,44 @@ section[id] {
   }
 }
 
-.cursor-dot {
+.cursor-bagel {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
-  background: var(--poppy);
-  border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
   will-change: transform;
-  transition:
-    width 0.2s var(--ease-out-expo),
-    height 0.2s var(--ease-out-expo),
-    background 0.2s,
-    opacity 0.2s;
+  transition: opacity 0.2s;
 }
 
-.cursor-dot.cursor-hover {
-  width: 14px;
-  height: 14px;
-  background: var(--cream);
-  mix-blend-mode: difference;
+.cursor-bagel svg {
+  display: block;
+  filter: drop-shadow(0 3px 5px rgba(40, 24, 10, 0.35));
+  animation: bagel-bob 3.2s ease-in-out infinite;
+  transition: transform 0.18s var(--ease-spring);
 }
 
-.cursor-trail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(232, 64, 12, 0.4);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  will-change: transform;
-  transition: opacity 0.2s, border-color 0.2s;
+@keyframes bagel-bob {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(7deg); }
 }
 
-.cursor-dot.cursor-off,
-.cursor-trail.cursor-off { opacity: 0; }
+.cursor-bagel.bagel-happy svg {
+  transform: rotate(-14deg) scale(1.18);
+  animation-play-state: paused;
+}
 
-html:not([data-cursor='on']) .cursor-dot,
-html:not([data-cursor='on']) .cursor-trail { display: none; }
+.cursor-bagel.bagel-squish svg {
+  transform: scale(0.8) rotate(4deg);
+  animation-play-state: paused;
+}
+
+.cursor-bagel.cursor-off { opacity: 0; }
+
+html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 @media (pointer: coarse) {
-  .cursor-dot,
-  .cursor-trail { display: none; }
+  .cursor-bagel { display: none; }
 }
 
 /* ──────────────────────────────────────────
@@ -3006,12 +3069,15 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
    dark drama, warm bakery morning, dark evening — instead of one long
    dark-mode template. */
 .paper-act {
-  background: #efe5d0 url('/photos/paper.jpg');
-  background-size: 720px;
+  /* Flour-light morning table: warm cone of first light, no kraft texture —
+     the kraft tile now lives only in the cork blend */
+  background:
+    radial-gradient(ellipse 64% 50% at 28% 0%, rgba(255, 215, 150, 0.55), transparent 62%),
+    linear-gradient(180deg, #f8f0dd 0%, #f1e7d0 100%);
   color: var(--charcoal);
   box-shadow:
-    inset 0 24px 48px -24px rgba(28, 20, 16, 0.55),
-    inset 0 -24px 48px -24px rgba(28, 20, 16, 0.55);
+    inset 0 24px 48px -24px rgba(28, 20, 16, 0.35),
+    inset 0 -24px 48px -24px rgba(28, 20, 16, 0.35);
 }
 
 .paper-act .section-headline { color: #241710; }
@@ -3700,6 +3766,48 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
 }
 
 .build-stack .build-stamp { z-index: 8; }
+
+.build-stack { transform-style: preserve-3d; }
+
+.build-shadow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -34px;
+  height: 48px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.6), transparent 70%);
+  filter: blur(9px);
+  z-index: 0;
+  transform-origin: center;
+}
+
+/* Signature cards: direct order path */
+.sig-order {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--poppy-dark);
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(199, 51, 9, 0.35);
+  padding-bottom: 2px;
+  transition: color 0.18s, border-color 0.18s;
+}
+
+.sig-order:hover {
+  color: var(--poppy);
+  border-color: var(--poppy);
+}
+
+/* Catering flyer cards lift on hover */
+.paper-act .catering-card {
+  transition: transform 0.28s var(--ease-out-expo), box-shadow 0.28s;
+}
+
+.paper-act .catering-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px rgba(60, 38, 20, 0.22);
+}
 
 /* ──────────────────────────────────────────
    HERO — CREAM MORNING STAGE (ink-on-light)
