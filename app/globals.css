@@ -96,11 +96,13 @@ html.lenis { height: auto; }
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: rgba(40, 28, 18, 0.08); }
 ::-webkit-scrollbar-thumb {
-  background: var(--poppy);
+  background: rgba(110, 84, 58, 0.55);
   border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
 /* Noise texture overlay */
@@ -162,7 +164,7 @@ section[id] {
   left: 0;
   height: 2px;
   z-index: 9998;
-  background: var(--poppy);
+  background: linear-gradient(90deg, #1c3252, #4a6c9b);
   width: 0%;
 }
 
@@ -3972,6 +3974,163 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
     translate: 0 0;
     gap: 8px;
   }
+}
+
+/* ──────────────────────────────────────────
+   LIGHT PASS — the site sheds black/orange
+   ──────────────────────────────────────────
+   Dark survives in exactly two sanctioned rooms: the lamplit counter
+   (Story) and Route 112 at dusk (Location). Everything else runs light. */
+
+/* Menu: glass deli case — soft sage light, white cards */
+.paper-act.menu-light {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(214, 228, 205, 0.7), transparent 62%),
+    linear-gradient(180deg, #eef0e6 0%, #e6e9db 100%);
+  box-shadow: none;
+}
+
+.paper-act.menu-light .menu-item {
+  background: #ffffff;
+  border-color: rgba(95, 115, 86, 0.16);
+  box-shadow: 0 6px 18px rgba(70, 86, 62, 0.08);
+}
+
+.paper-act.menu-light .menu-item:hover {
+  border-color: rgba(95, 115, 86, 0.36);
+  box-shadow: 0 10px 24px rgba(70, 86, 62, 0.14);
+}
+
+.paper-act.menu-light .menu-tabs {
+  background: #ffffff;
+  border-color: rgba(95, 115, 86, 0.2);
+  box-shadow: 0 8px 22px rgba(70, 86, 62, 0.1);
+}
+
+.paper-act.menu-light .menu-category-tagline { color: #5d7252; }
+
+/* Photo wall: bright gallery wall instead of black void */
+.photo-world {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 214, 150, 0.4), transparent 60%),
+    linear-gradient(180deg, #ece1c8 0%, #e4d7ba 100%);
+}
+
+.photo-world .section-headline { color: #241710; }
+.photo-world .eyebrow { color: var(--poppy-dark); }
+
+.photo-world .filmstrip-frame {
+  box-shadow: 0 14px 32px rgba(80, 56, 30, 0.28);
+}
+
+.photo-world .instagram-follow-tile {
+  border-color: rgba(40, 28, 18, 0.25);
+  color: #241710;
+}
+
+.photo-world .btn-secondary {
+  border-color: rgba(40, 28, 18, 0.32);
+  color: #241710;
+}
+
+.photo-world .btn-secondary:hover {
+  background: rgba(40, 28, 18, 0.06);
+  border-color: rgba(40, 28, 18, 0.55);
+}
+
+/* Saturday Order: bright stainless counter, not a void */
+.build-section {
+  background:
+    linear-gradient(180deg, #dfe2e6 0%, #cdd1d7 55%, #c3c8cf 100%);
+}
+
+.build-section::before {
+  background: repeating-linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0.5) 0 2px,
+    transparent 2px 7px
+  );
+  opacity: 0.5;
+}
+
+.build-section .section-headline { color: #1d2126; }
+.build-section .eyebrow { color: var(--poppy-dark); }
+.build-ghost { -webkit-text-stroke-color: rgba(30, 34, 40, 0.08); }
+
+.build-layer img {
+  filter: drop-shadow(0 20px 22px rgba(20, 24, 30, 0.35)) saturate(1.16)
+    sepia(0.05) brightness(1.02);
+}
+
+.build-shadow {
+  background: radial-gradient(ellipse, rgba(20, 24, 30, 0.45), transparent 70%);
+}
+
+/* Order handoff: clean and app-like, not a giant dark block */
+.order-light {
+  background: linear-gradient(180deg, #f8f2e4 0%, #f1e9d6 100%);
+}
+
+.order-light .order-left h2 { color: #241710; }
+.order-light .order-left h2 span { color: var(--bagel); }
+.order-light .order-left p { color: rgba(40, 28, 18, 0.7); }
+.order-light .eyebrow { color: var(--poppy-dark); }
+.order-light .order-available { color: rgba(110, 76, 48, 0.95); }
+.order-light .instagram-link { color: var(--poppy-dark); }
+
+/* Crowd intel: light local board */
+.busy-section {
+  background: linear-gradient(180deg, #e9e6dd 0%, #e1ddd1 100%);
+}
+
+.busy-section .section-headline { color: #241710; }
+.busy-section .eyebrow { color: var(--poppy-dark); }
+
+.busy-card {
+  background: #ffffff;
+  border-color: rgba(60, 48, 36, 0.1);
+  box-shadow: 0 18px 44px rgba(70, 58, 40, 0.12);
+}
+
+.busy-day { color: rgba(60, 48, 36, 0.55); }
+.busy-day:hover { color: #241710; }
+.busy-hour { color: rgba(60, 48, 36, 0.45); }
+.busy-status { color: rgba(40, 28, 18, 0.75); }
+.busy-tip { color: rgba(110, 76, 48, 0.95); }
+
+/* Footer: clean cream utility, no dark void */
+.footer {
+  background: #efe7d3;
+  border-top: 1px solid rgba(110, 84, 58, 0.22);
+}
+
+.footer-brand-name { color: #241710; }
+.footer-tagline { color: var(--bagel); }
+.footer-address { color: rgba(40, 28, 18, 0.55); }
+.footer-heading { color: rgba(110, 76, 48, 0.95); }
+.footer-links a { color: rgba(40, 28, 18, 0.7); }
+.footer-links a:hover { color: var(--poppy-dark); }
+.footer-hours p { color: rgba(40, 28, 18, 0.7); }
+.footer-bottom {
+  border-top-color: rgba(110, 84, 58, 0.18);
+  color: rgba(40, 28, 18, 0.45);
+}
+
+.footer-signup-label { color: rgba(40, 28, 18, 0.65); }
+
+.footer-signup input {
+  background: #ffffff;
+  border-color: rgba(110, 84, 58, 0.3);
+  color: #241710;
+}
+
+.footer-signup input::placeholder { color: rgba(40, 28, 18, 0.35); }
+
+.footer-signup-msg.ok { color: #1d7a43; }
+
+/* Header polish: stronger glass, hairline shadow */
+.nav {
+  box-shadow: 0 6px 24px rgba(10, 6, 4, 0.18);
 }
 
 /* Reduced motion */

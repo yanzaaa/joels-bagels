@@ -44,8 +44,8 @@ export default function Home() {
           <Signatures />
         </div>
 
-        {/* Scene 5 — the green deli chalkboard */}
-        <div className="menu-board">
+        {/* Scene 5 — the glass deli case (light sage) */}
+        <div className="paper-act menu-light">
           <Menu />
         </div>
 
@@ -58,8 +58,8 @@ export default function Home() {
         {/* Scene 7 — the Saturday Order build */}
         <BuildScrub />
 
-        {/* Scene 8 — game-day blue: order ahead */}
-        <div className="order-knicks">
+        {/* Scene 8 — clean DoorDash handoff */}
+        <div className="order-light" id="order-zone">
           <OrderCTA />
         </div>
 
