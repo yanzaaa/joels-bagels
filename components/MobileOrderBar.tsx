@@ -22,12 +22,7 @@ export default function MobileOrderBar() {
           exit={{ y: 80 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
-          <a
-            href="https://www.doordash.com/store/1144158"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mobile-order-btn primary"
-          >
+          <a href="#menu" className="mobile-order-btn primary">
             Order Now →
           </a>
           <a href="tel:+16313079206" className="mobile-order-btn secondary">

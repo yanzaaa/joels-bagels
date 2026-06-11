@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCart } from '@/lib/cart'
 
@@ -274,6 +275,21 @@ export default function Menu() {
             Everything made daily. Nothing sits overnight.
           </p>
         </motion.div>
+
+        {/* The case itself — this morning's racks behind glass */}
+        <div className="menu-case" aria-hidden="true">
+          <Image
+            src="/photos/bagel-racks.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 900px) 92vw, 860px"
+            style={{ objectFit: 'cover', objectPosition: '50% 42%' }}
+          />
+          <span className="menu-case-glass" />
+          <span className="menu-case-label">
+            Today&apos;s case · first batch 4:30 AM
+          </span>
+        </div>
 
         <div className="menu-tabs-outer">
           <div className="menu-tabs" role="tablist">

@@ -1365,9 +1365,9 @@ section[id] {
    CATERING (light section)
    ────────────────────────────────────────── */
 .catering-section {
-  /* Deli-paper band: generated kraft texture with sesame specks (Higgsfield) */
-  background: #efe5d0 url('/photos/paper.jpg');
-  background-size: 720px;
+  /* The wrapper (.order-sheet) owns the background — the section's old
+     kraft tile was painting over every light re-theme */
+  background: transparent;
   color: var(--dark);
 }
 
@@ -3683,9 +3683,9 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 .order-knicks .eyebrow { color: var(--knicks-orange); }
 
-/* Reviews: the corkboard by the register */
+/* Reviews: light cork by the register — tan, not orange-brown */
 .reviews-cork {
-  background: #9c7148 url('/photos/paper.jpg');
+  background: #cdb591 url('/photos/paper.jpg');
   background-size: 460px;
   background-blend-mode: multiply;
 }
@@ -4056,24 +4056,25 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   border-color: rgba(40, 28, 18, 0.55);
 }
 
-/* Saturday Order: bright stainless counter, not a void */
+/* Saturday Order: warm counter stone — belongs to the same morning world */
 .build-section {
   background:
-    linear-gradient(180deg, #dfe2e6 0%, #cdd1d7 55%, #c3c8cf 100%);
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255, 215, 150, 0.35), transparent 60%),
+    linear-gradient(180deg, #ece5d6 0%, #ded5c2 60%, #d6ccb7 100%);
 }
 
 .build-section::before {
   background: repeating-linear-gradient(
     105deg,
-    rgba(255, 255, 255, 0.5) 0 2px,
-    transparent 2px 7px
+    rgba(255, 255, 255, 0.45) 0 2px,
+    transparent 2px 8px
   );
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
-.build-section .section-headline { color: #1d2126; }
+.build-section .section-headline { color: #241710; }
 .build-section .eyebrow { color: var(--poppy-dark); }
-.build-ghost { -webkit-text-stroke-color: rgba(30, 34, 40, 0.08); }
+.build-ghost { -webkit-text-stroke-color: rgba(60, 42, 24, 0.09); }
 
 .build-layer img {
   filter: drop-shadow(0 20px 22px rgba(20, 24, 30, 0.35)) saturate(1.16)
@@ -4172,6 +4173,46 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 .paper-act.menu-light .menu-tab-pill {
   box-shadow: 0 6px 16px rgba(139, 94, 60, 0.35);
+}
+
+/* The glass case strip above the board */
+.menu-case {
+  position: relative;
+  height: 190px;
+  max-width: 860px;
+  margin: 0 auto 42px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 26px 56px rgba(70, 86, 62, 0.28);
+}
+
+.menu-case-glass {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    transparent 28%,
+    transparent 58%,
+    rgba(255, 255, 255, 0.16) 72%,
+    transparent 84%
+  );
+}
+
+.menu-case-label {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  background: rgba(255, 252, 245, 0.94);
+  color: #241710;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .menu-item-right { align-items: baseline; }

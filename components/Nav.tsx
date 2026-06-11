@@ -5,7 +5,6 @@ import { useCart } from '@/lib/cart'
 
 const links = [
   { label: 'Menu', href: '#menu' },
-  { label: 'Order', href: '#order' },
   { label: 'Catering', href: '#catering' },
   { label: 'Find Us', href: '#find-us' },
 ]
@@ -128,9 +127,8 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
-            {/* Routes into the order section (pickup/delivery card → DoorDash)
-                so the path reads: browse → order → checkout */}
-            <a href="#order" className="nav-cta">
+            {/* The order path IS the menu: browse → + items → cart → DoorDash */}
+            <a href="#menu" className="nav-cta">
               Order Now
             </a>
           </nav>
@@ -174,7 +172,7 @@ export default function Nav() {
               </motion.a>
             ))}
             <motion.a
-              href="#order"
+              href="#menu"
               onClick={() => setOpen(false)}
               className="nav-drawer-cta"
               initial={{ opacity: 0, y: 12 }}

@@ -7,7 +7,6 @@ import Story from "@/components/Story";
 import Signatures from "@/components/Signatures";
 import Menu from "@/components/Menu";
 import FilmStrip from "@/components/FilmStrip";
-import OrderCTA from "@/components/OrderCTA";
 import Reviews from "@/components/Reviews";
 import BusyNow from "@/components/BusyNow";
 import Catering from "@/components/Catering";
@@ -58,12 +57,7 @@ export default function Home() {
         {/* Scene 7 — the Saturday Order build */}
         <BuildScrub />
 
-        {/* Scene 8 — clean DoorDash handoff */}
-        <div className="order-light" id="order-zone">
-          <OrderCTA />
-        </div>
-
-        {/* Scene 9 — corkboard by the register */}
+        {/* Scene 8 — corkboard by the register */}
         <div className="reviews-cork">
           <Reviews />
         </div>
