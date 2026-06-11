@@ -175,9 +175,13 @@ section[id] {
   left: 0;
   right: 0;
   z-index: 100;
+  /* Solid editorial bar — the hero below is cream, so the nav can't rely
+     on a dark hero for contrast anymore */
+  background: rgba(20, 13, 9, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(196, 149, 90, 0.12);
   transition: all 300ms ease;
-  background: transparent;
-  border-bottom: 1px solid transparent;
 }
 
 .nav.scrolled {
@@ -351,20 +355,19 @@ section[id] {
   padding: 120px 0 140px;
 }
 
+/* Morning Bagel Stage: warm cream light, ink type, food-first. The dark
+   espresso default is gone — this is the first thing anyone sees. */
 .hero-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 42% 52% at 76% 44%,
-      rgba(244, 160, 70, 0.14) 0%,
-      transparent 62%),
-    radial-gradient(ellipse at 60% 40%,
-      rgba(139, 94, 60, 0.25) 0%,
-      transparent 60%),
-    radial-gradient(ellipse at 20% 80%,
-      rgba(232, 64, 12, 0.08) 0%,
-      transparent 50%),
-    var(--dark);
+    radial-gradient(ellipse 52% 62% at 74% 32%,
+      rgba(255, 206, 130, 0.4) 0%,
+      transparent 64%),
+    radial-gradient(ellipse 70% 60% at 12% 92%,
+      rgba(196, 149, 90, 0.22) 0%,
+      transparent 58%),
+    linear-gradient(180deg, #f6ecd8 0%, #f0e4cc 100%);
 }
 
 /* Environmental layer: oversized outline word drifting behind the headline */
@@ -3679,13 +3682,188 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
 
 .build-paper {
   position: absolute;
-  inset: -16px -20px;
+  left: -14%;
+  right: -14%;
+  top: 30%;
+  bottom: -7%;
   z-index: 0;
   background: #f2e9d4 url('/photos/paper.jpg');
   background-size: 520px;
-  border-radius: 34px;
-  rotate: 1.2deg;
+  border-radius: 22px;
+  rotate: 1.4deg;
   box-shadow: 0 34px 90px rgba(0, 0, 0, 0.55);
+}
+
+.build-stack .build-ticket {
+  top: -40px;
+  z-index: 7;
+}
+
+.build-stack .build-stamp { z-index: 8; }
+
+/* ──────────────────────────────────────────
+   HERO — CREAM MORNING STAGE (ink-on-light)
+   ────────────────────────────────────────── */
+.hero { background: #f2e7d2; }
+
+.hero-vignette { display: none; }
+
+.hero .hero-eyebrow { color: var(--poppy-dark); }
+
+.hero .hero-headline { color: #20140d; }
+
+.hero .hero-headline .accent { color: var(--bagel); }
+
+.hero .hero-sub { color: rgba(40, 28, 18, 0.74); }
+
+.hero .btn-secondary {
+  border-color: rgba(40, 28, 18, 0.32);
+  color: #241710;
+}
+
+.hero .btn-secondary:hover {
+  background: rgba(40, 28, 18, 0.06);
+  border-color: rgba(40, 28, 18, 0.55);
+}
+
+.hero .status-badge {
+  background: rgba(255, 252, 245, 0.72);
+  border-color: rgba(139, 94, 60, 0.32);
+  color: rgba(60, 42, 28, 0.85);
+}
+
+.hero .status-badge.open { color: #1d7a43; }
+
+.hero .hero-ghost {
+  -webkit-text-stroke-color: rgba(139, 94, 60, 0.2);
+}
+
+.hero .scroll-hint { border-color: rgba(139, 94, 60, 0.45); }
+
+.hero .stats-bar {
+  background: rgba(255, 252, 245, 0.66);
+  border-top: 1px solid rgba(139, 94, 60, 0.24);
+  backdrop-filter: blur(12px);
+}
+
+.hero .stat-num { color: #241710; }
+.hero .stat-label { color: rgba(110, 76, 48, 0.95); }
+.hero .stat-divider { background: rgba(139, 94, 60, 0.3); }
+
+/* No dim photo backdrop on the cream stage — mobile gets clean light */
+.hero-photo-panel { display: none !important; }
+
+/* ──────────────────────────────────────────
+   WORLD RE-SKINS — paper only where it earns it
+   ────────────────────────────────────────── */
+/* Signatures: clean white product gallery (texture-free) */
+.paper-act.product-gallery {
+  background: linear-gradient(180deg, #faf5e9 0%, #f1eada 100%);
+  box-shadow: none;
+}
+
+.paper-act.product-gallery .signature-card {
+  background: #ffffff;
+  box-shadow: 0 26px 60px rgba(60, 38, 20, 0.15);
+}
+
+/* Catering: plain order-sheet white (texture-free) */
+.paper-act.order-sheet {
+  background: #f0ebdd;
+  box-shadow: none;
+}
+
+/* Saturday Order: brushed steel pass, not void black */
+.build-section {
+  background: linear-gradient(180deg, #2f3237 0%, #1e2025 58%, #17181c 100%);
+}
+
+.build-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0.028) 0 2px,
+    transparent 2px 7px
+  );
+  pointer-events: none;
+}
+
+.build-ghost { -webkit-text-stroke-color: rgba(255, 255, 255, 0.055); }
+
+/* ──────────────────────────────────────────
+   BUILD v2 — the layered assembly
+   ────────────────────────────────────────── */
+.build-stack {
+  position: relative;
+  width: min(440px, 64vw);
+  height: min(480px, 70vw);
+  margin-top: 8px;
+}
+
+.build-layer {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  translate: -50% 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.build-layer img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.4));
+}
+
+.build-spec {
+  position: absolute;
+  left: max(3vw, calc(50% - 560px));
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+
+.build-spec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  color: #241710;
+  border: 2px solid #241710;
+  padding: 9px 16px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(15px, 1.6vw, 20px);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+.build-spec-chip em {
+  font-family: var(--font-label);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--poppy-dark);
+}
+
+@media (max-width: 900px) {
+  .build-spec {
+    left: 4vw;
+    top: auto;
+    bottom: 10vh;
+    translate: 0 0;
+    gap: 8px;
+  }
 }
 
 /* Reduced motion */

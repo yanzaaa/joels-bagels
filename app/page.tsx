@@ -39,8 +39,8 @@ export default function Home() {
           <Story />
         </div>
 
-        {/* Scene 4 — physical product cards on paper */}
-        <div className="paper-act">
+        {/* Scene 4 — white product gallery */}
+        <div className="paper-act product-gallery">
           <Signatures />
         </div>
 
@@ -71,8 +71,8 @@ export default function Home() {
         {/* Scene 10 — local intel, right before you plan the trip */}
         <BusyNow />
 
-        {/* Scene 11 — the catering clipboard */}
-        <div className="paper-act">
+        {/* Scene 11 — the clean order sheet */}
+        <div className="paper-act order-sheet">
           <Catering />
         </div>
 

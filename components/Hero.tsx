@@ -14,36 +14,6 @@ const HeroScene3D = dynamic(() => import('@/components/HeroScene3D'), {
 const EASE = [0.16, 1, 0.3, 1] as const
 const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
 
-function SteamRising() {
-  const steams = Array.from({ length: 6 }, (_, i) => i)
-
-  return (
-    <div className="steam-container">
-      {steams.map((i) => (
-        <motion.div
-          key={i}
-          className="steam"
-          style={{
-            left: `${15 + i * 13}%`,
-            bottom: '0',
-          }}
-          animate={{
-            y: [0, -120, -200],
-            opacity: [0, 0.15, 0],
-            scaleX: [0.8, 1.2, 1.6],
-          }}
-          transition={{
-            duration: 4 + i * 0.7,
-            repeat: Infinity,
-            delay: i * 0.9,
-            ease: 'easeOut',
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
 function OpenStatusBadge() {
   // Time-dependent UI is rendered after mount to avoid a hydration mismatch.
   const [now, setNow] = useState<Date | null>(null)
@@ -176,13 +146,6 @@ export default function Hero() {
         Bagels.
       </div>
 
-      {/* Mobile-only dim backdrop (desktop shows the collage instead) */}
-      <div className="hero-photo-panel" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/photos/hero-bagel.jpg" alt="" className="hero-photo-img" />
-        <div className="hero-photo-vignette" />
-      </div>
-
       {/* True 3D photo stage on capable desktops */}
       {scene3D && <HeroScene3D />}
 
@@ -244,10 +207,6 @@ export default function Hero() {
         </motion.div>
 
       </div>
-
-      <div className="hero-vignette" />
-
-      <SteamRising />
 
       <motion.div
         className="hero-content"

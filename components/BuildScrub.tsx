@@ -1,24 +1,144 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import Image from 'next/image'
 import {
   motion,
   useMotionValue,
   useTransform,
-  useMotionTemplate,
+  type MotionValue,
 } from 'framer-motion'
 
 const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
 
-/* Scroll-scrubbed assembly: pinned full-screen stage, the BEC photo unmasks
-   and scales while the three words slap on like deli stickers, then the
-   price stamp lands. Progress is computed per-frame from the section's own
-   bounding rect — framer's useScroll(target) cached stale offsets for this
-   260vh section, freezing the chips mid-fade. */
+/* The Saturday Order, as a true scroll-scrubbed assembly: five real
+   ingredient layers (generated + matted, swappable for studio shots later)
+   drop onto the stack one by one while spec chips stamp in beside them.
+   Progress is computed per-frame from the section's bounding rect — see
+   the stale-offset note below. */
+
+type LayerCfg = {
+  src: string
+  width: string
+  yFrom: number
+  yTo: number
+  range: [number, number]
+  num: string
+  label: string
+  note: string
+}
+
+const LAYERS: LayerCfg[] = [
+  {
+    src: '/photos/bec/bottom.webp',
+    width: '100%',
+    yFrom: 340,
+    yTo: 0,
+    range: [0.1, 0.24],
+    num: '01',
+    label: 'Everything bagel',
+    note: 'toasted',
+  },
+  {
+    src: '/photos/bec/egg.webp',
+    width: '72%',
+    yFrom: -380,
+    yTo: -34,
+    range: [0.26, 0.4],
+    num: '02',
+    label: 'Two eggs',
+    note: 'folded',
+  },
+  {
+    src: '/photos/bec/cheese.webp',
+    width: '64%',
+    yFrom: -400,
+    yTo: -60,
+    range: [0.42, 0.54],
+    num: '03',
+    label: 'American',
+    note: 'melted',
+  },
+  {
+    src: '/photos/bec/bacon.webp',
+    width: '76%',
+    yFrom: -420,
+    yTo: -88,
+    range: [0.56, 0.68],
+    num: '04',
+    label: 'Bacon',
+    note: 'crisp',
+  },
+  {
+    src: '/photos/bec/top.webp',
+    width: '94%',
+    yFrom: -460,
+    yTo: -150,
+    range: [0.7, 0.84],
+    num: '05',
+    label: 'The crown',
+    note: 'hot from the oven',
+  },
+]
+
+function Layer({
+  progress,
+  cfg,
+  index,
+}: {
+  progress: MotionValue<number>
+  cfg: LayerCfg
+  index: number
+}) {
+  const y = useTransform(progress, cfg.range, [cfg.yFrom, cfg.yTo])
+  const opacity = useTransform(
+    progress,
+    [cfg.range[0], cfg.range[0] + 0.05],
+    [0, 1]
+  )
+  const rotate = useTransform(progress, cfg.range, [index % 2 ? -8 : 8, 0])
+
+  return (
+    <motion.div
+      className="build-layer"
+      style={{ y, opacity, rotate, width: cfg.width, zIndex: index + 1 }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={cfg.src} alt="" loading="lazy" />
+    </motion.div>
+  )
+}
+
+function SpecChip({
+  progress,
+  cfg,
+}: {
+  progress: MotionValue<number>
+  cfg: LayerCfg
+}) {
+  const opacity = useTransform(
+    progress,
+    [cfg.range[0] + 0.02, cfg.range[0] + 0.08],
+    [0, 1]
+  )
+  const x = useTransform(
+    progress,
+    [cfg.range[0] + 0.02, cfg.range[0] + 0.08],
+    [-26, 0]
+  )
+
+  return (
+    <motion.span className="build-spec-chip" style={{ opacity, x }}>
+      <em>{cfg.num}</em>
+      {cfg.label} <em>· {cfg.note}</em>
+    </motion.span>
+  )
+}
+
 export default function BuildScrub() {
   const ref = useRef<HTMLDivElement>(null)
   const scrollYProgress = useMotionValue(0)
 
+  // framer's useScroll(target) caches stale offsets on this 260vh section,
+  // freezing the scrub — so progress comes from the live bounding rect.
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -44,22 +164,12 @@ export default function BuildScrub() {
     }
   }, [scrollYProgress])
 
-  const clip = useTransform(scrollYProgress, [0, 0.32], [22, 0])
-  const clipPath = useMotionTemplate`inset(${clip}% round 28px)`
-  const photoScale = useTransform(scrollYProgress, [0, 0.32], [0.78, 1])
-
-  const c1o = useTransform(scrollYProgress, [0.36, 0.44], [0, 1])
-  const c1y = useTransform(scrollYProgress, [0.36, 0.44], [44, 0])
-  const c2o = useTransform(scrollYProgress, [0.48, 0.56], [0, 1])
-  const c2y = useTransform(scrollYProgress, [0.48, 0.56], [44, 0])
-  const c3o = useTransform(scrollYProgress, [0.6, 0.68], [0, 1])
-  const c3y = useTransform(scrollYProgress, [0.6, 0.68], [44, 0])
-
-  const stampScale = useTransform(scrollYProgress, [0.74, 0.84], [0, 1])
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.18], [0, 1])
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
+  const paperOpacity = useTransform(scrollYProgress, [0.02, 0.1], [0, 1])
+  const stampScale = useTransform(scrollYProgress, [0.86, 0.94], [0, 1])
 
   return (
-    <section className="build-section" ref={ref} aria-label="The Everything BEC, built">
+    <section className="build-section" ref={ref} aria-label="The Everything BEC, built layer by layer">
       <div className="build-sticky">
         <div className="build-ghost" aria-hidden="true">
           Saturday
@@ -70,32 +180,25 @@ export default function BuildScrub() {
           <h2 className="section-headline">The Saturday Order.</h2>
         </motion.div>
 
-        <div className="build-photo-wrap">
-          <span className="build-paper" aria-hidden="true" />
+        <div className="build-spec" aria-hidden="true">
+          {LAYERS.map((cfg) => (
+            <SpecChip key={cfg.num} progress={scrollYProgress} cfg={cfg} />
+          ))}
+        </div>
+
+        <div className="build-stack">
+          <motion.span
+            className="build-paper"
+            aria-hidden="true"
+            style={{ opacity: paperOpacity }}
+          />
           <motion.span className="build-ticket" style={{ opacity: headerOpacity }}>
             Joel&apos;s · Order №112 · Saturday 8:04 AM
           </motion.span>
-          <motion.div
-            className="build-photo"
-            style={{ clipPath, scale: photoScale }}
-          >
-            <Image
-              src="/photos/bec-hand.jpg"
-              alt="The Everything BEC, held up to the light"
-              fill
-              sizes="(max-width: 900px) 86vw, 760px"
-            />
-          </motion.div>
 
-          <motion.span className="build-chip build-chip-1" style={{ opacity: c1o, y: c1y }}>
-            Bacon.
-          </motion.span>
-          <motion.span className="build-chip build-chip-2" style={{ opacity: c2o, y: c2y }}>
-            Egg.
-          </motion.span>
-          <motion.span className="build-chip build-chip-3" style={{ opacity: c3o, y: c3y }}>
-            Cheese.
-          </motion.span>
+          {LAYERS.map((cfg, i) => (
+            <Layer key={cfg.src} progress={scrollYProgress} cfg={cfg} index={i} />
+          ))}
 
           <motion.a
             className="build-stamp"
