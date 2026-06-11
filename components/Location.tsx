@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -78,10 +79,19 @@ export default function Location() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
         >
+          <div className="location-photo" style={{ marginBottom: 16 }}>
+            <Image
+              src="/photos/storefront.jpg"
+              alt="Joel's Bagels storefront on Route 112 in Medford"
+              fill
+              sizes="(max-width: 900px) 90vw, 40vw"
+              style={{ objectPosition: '50% 35%' }}
+            />
+          </div>
           <iframe
             src="https://www.google.com/maps?q=1699+Route+112+Medford+NY+11763&output=embed"
             width="100%"
-            height="400"
+            height="300"
             style={{
               border: 0,
               borderRadius: 12,

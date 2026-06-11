@@ -154,9 +154,12 @@ export default function Hero() {
       <div className="hero-bg" />
 
       <div className="hero-photo-panel" aria-hidden="true">
+        {/* Clean Google Maps shot — no burned-in captions, so the panel can
+            finally run bright. eslint-disable: decorative full-bleed panel
+            sized by CSS, plain img keeps it out of the LCP preload chain. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/instagram/post4.jpg"
+          src="/photos/hero-bagel.jpg"
           alt=""
           className="hero-photo-img"
         />

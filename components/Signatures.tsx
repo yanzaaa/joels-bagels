@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -10,6 +11,8 @@ const signatures = [
     desc: 'People drive from three towns over. Made in-house every morning with Kalamatas. Same recipe since day one.',
     tag: 'Fan Favorite',
     tagColor: 'olive',
+    photo: '/photos/melt.jpg',
+    alt: 'A toasted bagel split open, spread melting into both halves',
   },
   {
     num: '02',
@@ -17,6 +20,8 @@ const signatures = [
     desc: 'Bacon. Egg. Cheese. Everything bagel, hot from the oven. $6.50. The Saturday morning line tells you everything.',
     tag: 'Most Ordered',
     tagColor: 'poppy',
+    photo: '/photos/bec-hand.jpg',
+    alt: 'Bacon egg and cheese on an everything bagel, held in hand',
   },
   {
     num: '03',
@@ -24,6 +29,8 @@ const signatures = [
     desc: 'Cold-smoked salmon. Plain cream cheese. Toasted everything. Under $8 — this sandwich costs $22 in the city.',
     tag: 'Classic',
     tagColor: 'sesame',
+    photo: '/photos/everything-bagel.jpg',
+    alt: 'A toasted everything bagel on parchment paper',
   },
 ]
 
@@ -52,6 +59,14 @@ export default function Signatures() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: EASE }}
             >
+              <div className="signature-photo">
+                <Image
+                  src={item.photo}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 800px) 90vw, 30vw"
+                />
+              </div>
               <span className={`signature-tag ${item.tagColor}`}>
                 {item.tag}
               </span>

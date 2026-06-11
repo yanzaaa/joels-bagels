@@ -385,22 +385,18 @@ section[id] {
   pointer-events: none;
 }
 
-/* post4.jpg (Knicks bagel cross-section) has IG captions burned in at the
-   top ~14–22% and bottom ~84–94% of the frame. At a 100svh × 46vw panel the
-   visible crop covers ~73% of image height, so centering (50% 50%) keeps both
-   caption bands inside the vertical fade zones below. Don't push this toward
-   the bottom (e.g. 80%+) — that drags the bottom caption into view. */
+/* hero-bagel.jpg (Google Maps, clean — no burned-in captions) is landscape
+   1193×672 with the bagel left-of-center on a black plate, so the tall panel
+   crops the sides; 30% X keeps the bagel in frame. The vignette only needs
+   to blend the left edge into the headline area now. */
 .hero-photo-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 56%;
-  filter: brightness(0.88) saturate(1.18);
+  object-position: 30% 50%;
+  filter: brightness(0.92) saturate(1.12);
 }
 
-/* Fade the left ~half of the photo fully into the hero background so the big
-   headline reads on solid dark, and fade top/bottom edges to swallow the
-   burned-in caption text. */
 .hero-photo-vignette {
   position: absolute;
   inset: 0;
@@ -408,17 +404,16 @@ section[id] {
     linear-gradient(
       to bottom,
       var(--dark) 0%,
-      var(--dark) 14%,
-      transparent 36%,
-      transparent 70%,
-      var(--dark) 95%
+      transparent 18%,
+      transparent 78%,
+      var(--dark) 98%
     ),
     linear-gradient(
       to right,
       var(--dark) 0%,
-      var(--dark) 42%,
-      rgba(28, 20, 16, 0.55) 64%,
-      transparent 92%
+      var(--dark) 30%,
+      rgba(28, 20, 16, 0.45) 55%,
+      transparent 88%
     );
 }
 
@@ -452,21 +447,21 @@ section[id] {
 }
 
 /* On mobile the panel becomes a dim full-bleed backdrop behind the content;
-   the freshness badge would float over text, so it hides. */
+   the freshness badge would float over text, so it hides. The clean photo
+   can run brighter than the old caption-stamped one. */
 @media (max-width: 900px) {
   .hero-photo-panel {
     width: 100%;
-    opacity: 0.22;
+    opacity: 0.3;
   }
   .hero-photo-vignette {
     background:
       linear-gradient(
         to bottom,
         var(--dark) 0%,
-        var(--dark) 18%,
-        transparent 38%,
+        transparent 30%,
         transparent 62%,
-        var(--dark) 92%
+        var(--dark) 94%
       ),
       linear-gradient(to right, var(--dark) 0%, rgba(28, 20, 16, 0.35) 55%, transparent 100%);
   }
@@ -2336,6 +2331,425 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
   .cursor-dot,
   .cursor-trail { display: none; }
 }
+
+/* ──────────────────────────────────────────
+   SIGNATURES — REAL PHOTO CARDS
+   ────────────────────────────────────────── */
+.signature-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.signature-photo img {
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-out-expo);
+}
+
+.signature-card:hover .signature-photo img {
+  transform: scale(1.06);
+}
+
+.signature-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(28, 20, 16, 0.55) 0%,
+    transparent 40%
+  );
+  pointer-events: none;
+}
+
+/* ──────────────────────────────────────────
+   FILM STRIP — THE HUNGER WALL
+   ────────────────────────────────────────── */
+.filmstrip-section {
+  padding: var(--space-7) 0;
+  overflow: hidden;
+  position: relative;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(34, 18, 9, 0.5) 50%, transparent 100%);
+}
+
+.filmstrip-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 5vw;
+}
+
+.filmstrip-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  padding: 24px 0;
+  animation: filmstrip-drift 56s linear infinite;
+  will-change: transform;
+}
+
+.filmstrip-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes filmstrip-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.filmstrip-frame {
+  position: relative;
+  flex-shrink: 0;
+  width: 250px;
+  background: var(--cream);
+  padding: 10px 10px 38px;
+  border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.45s var(--ease-out-expo),
+    box-shadow 0.45s var(--ease-out-expo);
+}
+
+.filmstrip-frame:nth-child(odd) { transform: rotate(-2deg); }
+.filmstrip-frame:nth-child(even) { transform: rotate(1.6deg); }
+
+.filmstrip-frame:hover {
+  transform: rotate(0deg) scale(1.07) translateY(-8px);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.filmstrip-photo {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--dark);
+}
+
+.filmstrip-photo img { object-fit: cover; }
+
+.filmstrip-caption {
+  position: absolute;
+  bottom: 9px;
+  left: 12px;
+  right: 12px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--charcoal);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .filmstrip-frame { width: 200px; }
+}
+
+/* ──────────────────────────────────────────
+   STORY — THE COUNTER
+   ────────────────────────────────────────── */
+.story-section {
+  position: relative;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .story-grid { grid-template-columns: 1fr; }
+}
+
+.story-photos {
+  position: relative;
+  height: 520px;
+}
+
+@media (max-width: 900px) {
+  .story-photos { height: 420px; }
+}
+
+.story-photo {
+  position: absolute;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+}
+
+.story-photo img { object-fit: cover; }
+
+.story-photo-main {
+  top: 0;
+  left: 0;
+  width: 78%;
+  height: 72%;
+}
+
+.story-photo-inset {
+  bottom: 0;
+  right: 0;
+  width: 52%;
+  height: 46%;
+  border: 5px solid var(--dark);
+}
+
+.story-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.45;
+  color: var(--cream);
+  margin: 28px 0 16px;
+}
+
+.story-quote-attr {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 28px;
+}
+
+.story-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(245, 236, 215, 0.65);
+  max-width: 480px;
+  margin-bottom: 18px;
+}
+
+.story-motto {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--sesame);
+  border-left: 2px solid var(--poppy);
+  padding-left: 16px;
+}
+
+/* ──────────────────────────────────────────
+   BUSY NOW — WHEN THE LINE MOVES
+   ────────────────────────────────────────── */
+.busy-section {
+  background:
+    linear-gradient(180deg, rgba(34, 18, 9, 0.55) 0%, transparent 40%),
+    var(--dark);
+}
+
+.busy-card {
+  max-width: 860px;
+  margin: 48px auto 0;
+  padding: clamp(24px, 4vw, 40px);
+  background: rgba(245, 236, 215, 0.025);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.busy-days {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.busy-day {
+  flex: 1;
+  min-width: 44px;
+  padding: 9px 0;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--duration-fast), color var(--duration-fast);
+}
+
+.busy-day:hover { color: var(--cream); }
+
+.busy-day.active {
+  background: var(--poppy-dim);
+  color: var(--poppy);
+}
+
+.busy-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(4px, 1vw, 12px);
+  height: 180px;
+}
+
+.busy-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.busy-bar {
+  width: 100%;
+  max-width: 44px;
+  background: linear-gradient(to top, rgba(196, 149, 90, 0.5), rgba(196, 149, 90, 0.18));
+  border-radius: 5px 5px 2px 2px;
+  transform-origin: bottom;
+  min-height: 3px;
+}
+
+.busy-bar.now {
+  background: linear-gradient(to top, var(--poppy), var(--knicks-orange));
+  box-shadow: 0 0 18px rgba(232, 64, 12, 0.45);
+}
+
+.busy-hour {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--text-4);
+  white-space: nowrap;
+}
+
+.busy-col.now-col .busy-hour {
+  color: var(--poppy);
+  font-weight: 700;
+}
+
+.busy-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.busy-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(245, 236, 215, 0.75);
+}
+
+.busy-status .open-dot {
+  background: var(--poppy);
+  animation: status-pulse 2s ease infinite;
+}
+
+.busy-tip {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-3);
+}
+
+/* ──────────────────────────────────────────
+   REVIEWS — REAL DISTRIBUTION
+   ────────────────────────────────────────── */
+.reviews-summary-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+@media (max-width: 640px) {
+  .reviews-summary-grid { grid-template-columns: 1fr; justify-items: center; }
+}
+
+.review-dist { width: 100%; min-width: 260px; }
+
+.review-dist-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 36px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.review-dist-label {
+  font-family: var(--font-label);
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.review-dist-track {
+  height: 7px;
+  background: rgba(196, 149, 90, 0.12);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.review-dist-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--sesame), var(--poppy));
+  border-radius: var(--radius-full);
+  transform-origin: left;
+}
+
+.review-dist-count {
+  font-family: var(--font-label);
+  font-size: 11px;
+  color: var(--text-4);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: -24px auto 48px;
+  max-width: 640px;
+}
+
+.review-tag {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  color: var(--text-3);
+  background: rgba(245, 236, 215, 0.02);
+}
+
+.review-tag strong { color: var(--sesame); font-weight: 600; }
+
+/* ──────────────────────────────────────────
+   LOCATION — STOREFRONT PHOTO
+   ────────────────────────────────────────── */
+.location-photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  max-height: 420px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.location-photo img { object-fit: cover; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {

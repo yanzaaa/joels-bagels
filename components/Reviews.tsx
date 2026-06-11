@@ -53,6 +53,24 @@ const reviews: Review[] = [
   },
 ]
 
+// Real numbers from the Google Maps listing (scraped 2026-06-11)
+const distribution = [
+  { stars: 5, count: 215 },
+  { stars: 4, count: 23 },
+  { stars: 3, count: 17 },
+  { stars: 2, count: 9 },
+  { stars: 1, count: 16 },
+]
+
+const reviewTags = [
+  { label: 'polite staff', count: 11 },
+  { label: 'deli', count: 10 },
+  { label: 'egg sandwiches', count: 8 },
+  { label: 'bacon egg cheese', count: 6 },
+  { label: 'family owned', count: 3 },
+  { label: 'local place', count: 3 },
+]
+
 function Stars({ count }: { count: number }) {
   return (
     <div className="review-stars" aria-label={`${count} out of 5 stars`}>
@@ -66,27 +84,62 @@ export default function Reviews() {
   return (
     <section className="section">
       <div className="container">
-        <motion.div
-          className="reviews-summary"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: EASE }}
-        >
-          <p className="eyebrow">The Word Around Town</p>
-          <div className="reviews-rating">4.5</div>
-          <div className="reviews-stars" aria-hidden="true">
-            ★★★★<span style={{ opacity: 0.45 }}>★</span>
-          </div>
-          <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="reviews-count"
+        <div className="reviews-summary-grid">
+          <motion.div
+            className="reviews-summary"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, ease: EASE }}
           >
-            280+ reviews on Google
-          </a>
-        </motion.div>
+            <p className="eyebrow">The Word Around Town</p>
+            <div className="reviews-rating">4.5</div>
+            <div className="reviews-stars" aria-hidden="true">
+              ★★★★<span style={{ opacity: 0.45 }}>★</span>
+            </div>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="reviews-count"
+            >
+              280 reviews on Google
+            </a>
+          </motion.div>
+
+          {/* Real distribution from Google Maps (scraped 2026-06-11) */}
+          <div className="review-dist" aria-label="Rating distribution">
+            {distribution.map((row, i) => (
+              <div key={row.stars} className="review-dist-row">
+                <span className="review-dist-label">{row.stars}★</span>
+                <div className="review-dist-track">
+                  <motion.div
+                    className="review-dist-fill"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: row.count / 280 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{
+                      delay: 0.15 + i * 0.07,
+                      duration: 0.8,
+                      ease: EASE,
+                    }}
+                    style={{ width: '100%' }}
+                  />
+                </div>
+                <span className="review-dist-count">{row.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* What 280 reviews actually talk about — real Google review tags */}
+        <div className="review-tags" aria-label="Most mentioned in reviews">
+          {reviewTags.map((tag) => (
+            <span key={tag.label} className="review-tag">
+              {tag.label} <strong>×{tag.count}</strong>
+            </span>
+          ))}
+        </div>
 
         <div className="reviews-grid">
           {reviews.map((review, i) => (

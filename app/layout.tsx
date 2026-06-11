@@ -54,10 +54,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/instagram/post4.jpg",
-        width: 640,
-        height: 1136,
-        alt: "The Knicks Everything Bagel at Joel's Bagels, Medford NY",
+        url: "/photos/hero-bagel.jpg",
+        width: 1193,
+        height: 672,
+        alt: "A fresh sesame bagel with cream cheese at Joel's Bagels, Medford NY",
       },
     ],
   },
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: "Joel's Bagels | Fresh Bagels & Breakfast · Medford, NY",
     description:
       "Long Island's favorite bagel shop. Open daily at 6 AM — home of the Knicks Everything Bagel.",
-    images: ["/instagram/post4.jpg"],
+    images: ["/photos/hero-bagel.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -81,7 +81,11 @@ const schema = {
   // Google surface the listing for "bagel shop" and "breakfast restaurant".
   "@type": ["Bakery", "Restaurant"],
   name: "Joel's Bagels",
-  image: [`${SITE_URL}/instagram/post4.jpg`, `${SITE_URL}/photos/food1.jpg`],
+  image: [
+    `${SITE_URL}/photos/hero-bagel.jpg`,
+    `${SITE_URL}/photos/storefront.jpg`,
+    `${SITE_URL}/photos/bec-hand.jpg`,
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: "1699 Route 112",
@@ -89,6 +93,12 @@ const schema = {
     addressRegion: "NY",
     postalCode: "11763",
     addressCountry: "US",
+  },
+  // Verified coordinates from the Google Maps listing
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 40.7993319,
+    longitude: -73.0049313,
   },
   telephone: "+16313079206",
   url: SITE_URL,

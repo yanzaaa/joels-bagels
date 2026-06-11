@@ -36,6 +36,35 @@ type MenuCategory = {
 }
 
 const menuData: Record<string, MenuCategory> = {
+  specials: {
+    label: 'The Specials',
+    icon: '🏀',
+    tagline: 'Knicks season. Custom blue & orange bagels.',
+    items: [
+      {
+        name: 'The Brunson',
+        price: null,
+        label: 'At the counter',
+        popular: true,
+        badge: 'Knicks Season',
+        note: 'Knicks Everything Bagel · bacon · egg & cheese · hash brown · chipotle',
+      },
+      {
+        name: 'The Hungry Knick',
+        price: null,
+        label: 'At the counter',
+        note: 'Our Hungry Man, served on a custom Knicks bagel',
+      },
+      {
+        name: 'The Chicken BLT',
+        price: null,
+        label: 'After 11 AM',
+        popular: true,
+        note: 'Fresh-breaded cutlet · crispy bacon · ranch · pressed',
+      },
+    ],
+    note: 'Game-day bagels go fast — call ahead on a Knicks morning',
+  },
   bagels: {
     label: 'Bagels',
     icon: '🥯',
@@ -209,7 +238,7 @@ function MenuItem({
 }
 
 export default function Menu() {
-  const [active, setActive] = useState('bagels')
+  const [active, setActive] = useState('specials')
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
   const [pillStyle, setPillStyle] = useState<{ left: number; width: number } | null>(
     null

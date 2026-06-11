@@ -3,10 +3,13 @@ import PageIntro from "@/components/PageIntro";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Process from "@/components/Process";
+import Story from "@/components/Story";
 import Signatures from "@/components/Signatures";
 import Menu from "@/components/Menu";
+import FilmStrip from "@/components/FilmStrip";
 import OrderCTA from "@/components/OrderCTA";
 import Reviews from "@/components/Reviews";
+import BusyNow from "@/components/BusyNow";
 import Catering from "@/components/Catering";
 import Location from "@/components/Location";
 import Instagram from "@/components/Instagram";
@@ -23,10 +26,13 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Process />
+        <Story />
         <Signatures />
         <Menu />
+        <FilmStrip />
         <OrderCTA />
         <Reviews />
+        <BusyNow />
         <Catering />
         <Location />
         <Instagram />
