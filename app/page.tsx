@@ -25,34 +25,60 @@ export default function Home() {
       <PageIntro />
       <Nav />
       <main>
-        {/* Act I — dark drama */}
+        {/* Scene 1 — cinematic 3D morning stage */}
         <Hero />
         <Marquee />
 
-        {/* Act II — the warm bakery morning, on deli paper */}
+        {/* Scene 2 — prep table before sunrise (deli paper) */}
         <div className="paper-act">
           <Process />
+        </div>
+
+        {/* Scene 3 — inside the shop, warm lamplight */}
+        <div className="warm-room">
           <Story />
+        </div>
+
+        {/* Scene 4 — physical product cards on paper */}
+        <div className="paper-act">
           <Signatures />
+        </div>
+
+        {/* Scene 5 — the green deli chalkboard */}
+        <div className="menu-board">
           <Menu />
         </div>
 
-        {/* Act III — the order, the proof, the intel */}
-        <BuildScrub />
-        <OrderCTA />
-        <Reviews />
-        <BusyNow />
-
-        {/* Act IV — paper returns for the practical pages */}
-        <div className="paper-act">
-          <Catering />
-          <Location />
-        </div>
-
-        {/* Act V — the photo wall: strip + feed share one night room */}
+        {/* Scene 6 — centerpiece: the customer photo wall */}
         <div className="photo-world">
           <FilmStrip />
           <Instagram />
+        </div>
+
+        {/* Scene 7 — the Saturday Order build */}
+        <BuildScrub />
+
+        {/* Scene 8 — game-day blue: order ahead */}
+        <div className="order-knicks">
+          <OrderCTA />
+        </div>
+
+        {/* Scene 9 — corkboard by the register */}
+        <div className="reviews-cork">
+          <Reviews />
+        </div>
+
+        {/* Scene 10 — local intel, right before you plan the trip */}
+        <BusyNow />
+
+        {/* Scene 11 — the catering clipboard */}
+        <div className="paper-act">
+          <Catering />
+        </div>
+
+        {/* Scene 12 — Route 112 at dusk */}
+        <div className="route-night">
+          <Location />
         </div>
       </main>
       <Footer />

@@ -71,6 +71,7 @@ export default function BuildScrub() {
         </motion.div>
 
         <div className="build-photo-wrap">
+          <span className="build-paper" aria-hidden="true" />
           <motion.span className="build-ticket" style={{ opacity: headerOpacity }}>
             Joel&apos;s · Order №112 · Saturday 8:04 AM
           </motion.span>

@@ -1,9 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReveal } from '@/hooks/useReveal'
 import Stamp from '@/components/Stamp'
+
+// WebGL stays out of the main bundle until a capable desktop asks for it
+const HeroScene3D = dynamic(() => import('@/components/HeroScene3D'), {
+  ssr: false,
+})
 
 const EASE = [0.16, 1, 0.3, 1] as const
 const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
@@ -153,6 +159,16 @@ export default function Hero() {
   const mainY = useTransform(scrollY, [0, 600], [0, -46])
   const insetY = useTransform(scrollY, [0, 600], [0, 38])
 
+  // True 3D only where it earns its cost: wide screen, fine pointer,
+  // motion-tolerant. Everyone else keeps the 2.5D polaroid collage.
+  const [scene3D, setScene3D] = useState(false)
+  useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)').matches
+    const wide = window.matchMedia('(min-width: 901px)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    setScene3D(fine && wide && !reduced)
+  }, [])
+
   return (
     <section className="hero">
       <div className="hero-bg" />
@@ -167,9 +183,27 @@ export default function Hero() {
         <div className="hero-photo-vignette" />
       </div>
 
+      {/* True 3D photo stage on capable desktops */}
+      {scene3D && <HeroScene3D />}
+
+      {/* Spinning deli stamp rides above either stage */}
+      <motion.div
+        className="hero-stamp"
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.6 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.1, duration: 0.6, ease: EASE }}
+      >
+        <Stamp id="hero" />
+      </motion.div>
+
       {/* Desktop editorial collage — polaroid frames at near-native crops,
-          echoing the film strip, with the spinning deli stamp on top. */}
-      <div className="hero-collage" aria-hidden="true">
+          echoing the film strip. Fallback stage when WebGL isn't mounted. */}
+      <div
+        className="hero-collage"
+        aria-hidden="true"
+        style={scene3D ? { display: 'none' } : undefined}
+      >
         <div className="hero-ring" />
         <motion.div
           className="hc-frame hc-main"
@@ -209,14 +243,6 @@ export default function Hero() {
           <span className="hc-label">The Knicks bagel 💙🧡</span>
         </motion.div>
 
-        <motion.div
-          className="hc-stamp"
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.1, duration: 0.6, ease: EASE }}
-        >
-          <Stamp id="hero" />
-        </motion.div>
       </div>
 
       <div className="hero-vignette" />
