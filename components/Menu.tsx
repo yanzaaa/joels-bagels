@@ -283,7 +283,7 @@ export default function Menu() {
             alt=""
             fill
             sizes="(max-width: 900px) 92vw, 860px"
-            style={{ objectFit: 'cover', objectPosition: '50% 42%' }}
+            style={{ objectFit: 'cover', objectPosition: '50% 82%' }}
           />
           <span className="menu-case-glass" />
           <span className="menu-case-label">
@@ -310,7 +310,6 @@ export default function Menu() {
                 className={`menu-tab ${active === key ? 'active' : ''}`}
                 onClick={() => setActive(key)}
               >
-                <span aria-hidden="true">{cat.icon}</span>
                 {cat.label}
               </button>
             ))}

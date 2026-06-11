@@ -244,12 +244,12 @@ export default function BuildScrub() {
             <span className="build-steam s2" aria-hidden="true" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/photos/sausage-egg.jpg"
-              alt="The Saturday Order, hot off the flat-top"
+              src="/photos/bec/result.webp"
+              alt="The finished Everything BEC — bacon, egg and cheese on an everything bagel"
               loading="lazy"
             />
             <span className="build-result-caption">
-              Hot off the flat-top — every Saturday since day one
+              The Everything BEC — every Saturday since day one
             </span>
           </motion.div>
 

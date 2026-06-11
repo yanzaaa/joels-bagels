@@ -33,8 +33,8 @@ export default function Home() {
           <Process />
         </div>
 
-        {/* Scene 3 — inside the shop, warm lamplight */}
-        <div className="warm-room">
+        {/* Scene 3 — inside the shop, morning daylight */}
+        <div className="paper-act story-room">
           <Story />
         </div>
 

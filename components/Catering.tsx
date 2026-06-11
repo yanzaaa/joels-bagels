@@ -1,22 +1,23 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useForm } from '@formspree/react'
+import { Coffee, PartyPopper, School } from 'lucide-react'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 const highlights = [
   {
-    icon: '☕',
+    Icon: Coffee,
     title: 'Office Mornings',
     desc: 'Bagels, spreads, and coffee for your team. We handle the setup, you take the credit.',
   },
   {
-    icon: '🎉',
+    Icon: PartyPopper,
     title: 'Private Events',
     desc: 'Birthdays, graduations, celebrations. Platters starting at $45.',
   },
   {
-    icon: '🏫',
+    Icon: School,
     title: 'School & Community',
     desc: 'PTA meetings, fundraisers, sports teams. Volume pricing available.',
   },
@@ -124,7 +125,7 @@ export default function Catering() {
               transition={{ duration: 0.5, delay: i * 0.12, ease: EASE }}
             >
               <div className="catering-card-icon" aria-hidden="true">
-                {card.icon}
+                <card.Icon size={26} strokeWidth={1.7} />
               </div>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>

@@ -1633,7 +1633,9 @@ section[id] {
 /* ──────────────────────────────────────────
    INSTAGRAM
    ────────────────────────────────────────── */
-.instagram-section { background: var(--charcoal); }
+/* The wrapper (.photo-world) owns the background — the legacy charcoal
+   fill was the black void behind the feed */
+.instagram-section { background: transparent; }
 
 .instagram-grid {
   display: grid;
@@ -3683,11 +3685,11 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 .order-knicks .eyebrow { color: var(--knicks-orange); }
 
-/* Reviews: light cork by the register — tan, not orange-brown */
+/* Reviews: warm plaster community wall — paper texture fully retired */
 .reviews-cork {
-  background: #cdb591 url('/photos/paper.jpg');
-  background-size: 460px;
-  background-blend-mode: multiply;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255, 226, 170, 0.45), transparent 60%),
+    linear-gradient(180deg, #ecdfc6 0%, #e3d2b2 100%);
 }
 
 .reviews-cork .eyebrow { color: #5e3a1a; }
@@ -3715,27 +3717,19 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 .reviews-cork .review-text { color: rgba(40, 28, 18, 0.78); }
 .reviews-cork .review-ago { color: rgba(40, 28, 18, 0.5); }
 
-/* Location: Route 112 at dusk — cool slate, the only cold room on the site */
+/* Location: Route 112 at dusk — a long fade from daylight into evening
+   blue, then back out into the cream footer. No hard edges, no orange. */
 .route-night {
   position: relative;
-  background:
-    radial-gradient(ellipse 52% 42% at 72% 0%, rgba(245, 132, 38, 0.09), transparent 60%),
-    #141820;
-}
-
-.route-night::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--knicks-orange) 0 36px,
-    transparent 36px 76px
+  background: linear-gradient(
+    180deg,
+    #dde1e8 0%,
+    #97a2b5 14%,
+    #4d596e 34%,
+    #3a455a 62%,
+    #58637a 88%,
+    #efe7d3 100%
   );
-  opacity: 0.45;
 }
 
 .route-night .location-ghost {
@@ -4097,9 +4091,18 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 .order-light .order-available { color: rgba(110, 76, 48, 0.95); }
 .order-light .instagram-link { color: var(--poppy-dark); }
 
-/* Crowd intel: cool light board — pre-echoes the Route 112 slate ending */
+/* Story: daylight inside the shop — photos carry the warmth */
+.paper-act.story-room {
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 0%, rgba(255, 210, 140, 0.5), transparent 62%),
+    linear-gradient(180deg, #f6ecd8 0%, #efe3cb 100%);
+  box-shadow: none;
+}
+
+/* Crowd intel: cool light board — blends in from the order sheet and hands
+   off exactly into the Route 112 dusk gradient */
 .busy-section {
-  background: linear-gradient(180deg, #e7eaef 0%, #dde1e8 100%);
+  background: linear-gradient(180deg, #f0ebdd 0%, #e7eaef 22%, #dde1e8 100%);
 }
 
 .busy-section .section-headline { color: #241710; }
@@ -4175,6 +4178,34 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   box-shadow: 0 6px 16px rgba(139, 94, 60, 0.35);
 }
 
+/* Text-only tabs: refined type instead of emoji icons */
+.menu-tab {
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 11px 22px;
+}
+
+/* Premium press states on the core chrome */
+.nav-cta {
+  border-radius: var(--radius-full);
+  box-shadow: 0 6px 18px rgba(232, 64, 12, 0.28);
+  transition: transform 0.16s var(--ease-out-expo), box-shadow 0.2s, background 0.16s;
+}
+
+.nav-cta:hover { transform: translateY(-1px); }
+.nav-cta:active { transform: translateY(0) scale(0.97); }
+
+.footer-links a {
+  display: inline-block;
+  transition: color 0.18s, transform 0.18s var(--ease-out-expo);
+}
+
+.footer-links a:hover { transform: translateX(3px); }
+
+.paper-act .catering-card-icon { color: var(--bagel); }
+
 /* The glass case strip above the board */
 .menu-case {
   position: relative;
@@ -4234,9 +4265,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 18px;
-  box-shadow: 0 40px 90px rgba(20, 24, 30, 0.45);
-  filter: saturate(1.16) brightness(1.02);
+  filter: drop-shadow(0 34px 44px rgba(60, 42, 24, 0.4)) saturate(1.14)
+    brightness(1.02);
 }
 
 .build-result-caption {
