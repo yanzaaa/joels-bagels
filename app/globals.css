@@ -691,12 +691,17 @@ section[id] {
 /* ──────────────────────────────────────────
    MARQUEE
    ────────────────────────────────────────── */
+/* Sticker-tape band: poppy, slightly rotated, hard dark edges — the kind of
+   thing a designer glues on, not a template strip. */
 .marquee-wrap {
   overflow: hidden;
-  background: linear-gradient(135deg, #2a1508 0%, #3d1f0a 50%, #2a1508 100%);
-  padding: 14px 0;
-  border-top: 1px solid rgba(196, 149, 90, 0.2);
-  border-bottom: 1px solid rgba(196, 149, 90, 0.2);
+  background: var(--poppy);
+  padding: 13px 0;
+  border-top: 3px solid var(--dark);
+  border-bottom: 3px solid var(--dark);
+  transform: rotate(-1.2deg) scale(1.02);
+  margin: 10px 0;
+  box-shadow: 0 14px 40px rgba(232, 64, 12, 0.22);
 }
 
 .marquee-track {
@@ -714,17 +719,19 @@ section[id] {
 
 .marquee-item {
   white-space: nowrap;
-  padding: 0 32px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  color: var(--cream);
+  padding: 0 28px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 56px;
 }
 
-.marquee-dot { color: rgba(245, 236, 215, 0.4); }
+.marquee-dot { color: rgba(255, 255, 255, 0.55); }
 
 /* ──────────────────────────────────────────
    SIGNATURES
@@ -1236,7 +1243,9 @@ section[id] {
    CATERING (light section)
    ────────────────────────────────────────── */
 .catering-section {
-  background: var(--warm-white);
+  /* Deli-paper band: generated kraft texture with sesame specks (Higgsfield) */
+  background: #efe5d0 url('/photos/paper.jpg');
+  background-size: 720px;
   color: var(--dark);
 }
 
@@ -2122,7 +2131,8 @@ section[id] {
   padding: 30px 26px 34px;
   background: rgba(245, 236, 215, 0.025);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  /* visible so the polaroid chip can poke past the card edge */
+  overflow: visible;
 }
 
 .process-step::after {
@@ -2750,6 +2760,214 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
 }
 
 .location-photo img { object-fit: cover; }
+
+/* ──────────────────────────────────────────
+   HERO — EDITORIAL COLLAGE (desktop)
+   ──────────────────────────────────────────
+   Replaces the cropped full-bleed panel: photos sit in polaroid frames at
+   near-native ratios, so nothing gets brutally cropped, and the frames echo
+   the film strip below. The old .hero-photo-panel survives as the mobile
+   dim backdrop only. */
+@media (min-width: 901px) {
+  .hero-photo-panel { display: none; }
+}
+
+.hero-collage {
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-52%);
+  width: clamp(380px, 36vw, 540px);
+  height: 580px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .hero-collage { display: none; }
+}
+
+.hero-ring {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: 470px;
+  height: 470px;
+  margin: -235px 0 0 -235px;
+  border: 1.5px dashed rgba(196, 149, 90, 0.32);
+  border-radius: 50%;
+  animation: ring-spin 70s linear infinite;
+}
+
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+.hc-frame {
+  position: absolute;
+  background: var(--cream);
+  padding: 10px 10px 40px;
+  border-radius: 6px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.hc-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--dark);
+}
+
+.hc-photo img { object-fit: cover; }
+
+.hc-label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--charcoal);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hc-main {
+  top: 2%;
+  right: 0;
+  width: 86%;
+  rotate: -2.5deg;
+}
+
+.hc-main .hc-photo { aspect-ratio: 16 / 10; }
+
+.hc-inset {
+  bottom: 4%;
+  right: 44%;
+  width: 50%;
+  rotate: 3deg;
+}
+
+.hc-inset .hc-photo { aspect-ratio: 1; }
+
+.hc-stamp {
+  position: absolute;
+  top: -30px;
+  right: 4%;
+  z-index: 2;
+}
+
+/* ──────────────────────────────────────────
+   SPINNING DELI STAMP
+   ────────────────────────────────────────── */
+.stamp {
+  position: relative;
+  background: var(--dark);
+  border: 1px solid var(--line-bright);
+  border-radius: 50%;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.stamp svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: stamp-spin 24s linear infinite;
+}
+
+.stamp text {
+  font-family: var(--font-label);
+  font-size: 8.2px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  fill: var(--sesame);
+}
+
+.stamp-core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+@keyframes stamp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ──────────────────────────────────────────
+   SIGNATURE CARDS — 3D TILT + PRICE STICKER
+   ────────────────────────────────────────── */
+.signatures-grid { perspective: 1100px; }
+
+.sig-sticker {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--poppy);
+  color: #fff;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 15px;
+  rotate: -10deg;
+  box-shadow: 0 6px 18px rgba(232, 64, 12, 0.45);
+}
+
+/* ──────────────────────────────────────────
+   PROCESS — STAIRCASE + POLAROID CHIPS
+   ────────────────────────────────────────── */
+@media (min-width: 821px) {
+  .process-grid > *:nth-child(2) { transform: translateY(38px); }
+  .process-grid > *:nth-child(3) { transform: translateY(76px); }
+  .process-grid { padding-bottom: 84px; }
+}
+
+.process-chip {
+  position: absolute;
+  display: block;
+  top: -20px;
+  right: 18px;
+  width: 110px;
+  background: var(--cream);
+  padding: 6px 6px 20px;
+  border-radius: 4px;
+  rotate: 5deg;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.process-grid > *:nth-child(even) .process-chip { rotate: -4deg; }
+
+.pc-photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.pc-photo img { object-fit: cover; }
+
+/* ──────────────────────────────────────────
+   FILM STRIP — COUNTER-DRIFTING SECOND ROW
+   ────────────────────────────────────────── */
+.filmstrip-track.reverse {
+  animation-direction: reverse;
+  animation-duration: 74s;
+  margin-top: 6px;
+}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {

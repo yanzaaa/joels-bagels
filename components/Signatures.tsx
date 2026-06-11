@@ -1,8 +1,42 @@
 'use client'
+import { useRef, type ReactNode } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+/* Pointer-tracked 3D tilt — the card leans toward the cursor and springs
+   back on leave. Touch devices never fire mousemove, so they're unaffected. */
+function TiltCard({ children, className }: { children: ReactNode; className: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const rx = useMotionValue(0)
+  const ry = useMotionValue(0)
+  const srx = useSpring(rx, { stiffness: 260, damping: 22 })
+  const sry = useSpring(ry, { stiffness: 260, damping: 22 })
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      style={{ rotateX: srx, rotateY: sry, transformPerspective: 1100 }}
+      onMouseMove={(e) => {
+        const r = ref.current?.getBoundingClientRect()
+        if (!r) return
+        ry.set(((e.clientX - r.left) / r.width - 0.5) * 9)
+        rx.set(-((e.clientY - r.top) / r.height - 0.5) * 7)
+      }}
+      onMouseLeave={() => {
+        rx.set(0)
+        ry.set(0)
+      }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 const signatures = [
   {
@@ -26,13 +60,15 @@ const signatures = [
   {
     num: '03',
     name: 'Lox & Cream Cheese',
-    desc: 'Cold-smoked salmon. Plain cream cheese. Toasted everything. Under $8 — this sandwich costs $22 in the city.',
+    desc: 'Cold-smoked salmon. Plain cream cheese. Toasted everything. Nine bucks — the same sandwich runs $22 in the city.',
     tag: 'Classic',
     tagColor: 'sesame',
     photo: '/photos/everything-bagel.jpg',
     alt: 'A toasted everything bagel on parchment paper',
   },
 ]
+
+const stickers = ['$2.50', '$6.50', '$9.00']
 
 export default function Signatures() {
   return (
@@ -51,14 +87,7 @@ export default function Signatures() {
 
         <div className="signatures-grid">
           {signatures.map((item, i) => (
-            <motion.div
-              key={item.num}
-              className="signature-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: i * 0.12, ease: EASE }}
-            >
+            <TiltCard key={item.num} className="signature-card">
               <div className="signature-photo">
                 <Image
                   src={item.photo}
@@ -66,6 +95,7 @@ export default function Signatures() {
                   fill
                   sizes="(max-width: 800px) 90vw, 30vw"
                 />
+                <span className="sig-sticker">{stickers[i]}</span>
               </div>
               <span className={`signature-tag ${item.tagColor}`}>
                 {item.tag}
@@ -75,7 +105,7 @@ export default function Signatures() {
               <span className="signature-num" aria-hidden="true">
                 {item.num}
               </span>
-            </motion.div>
+            </TiltCard>
           ))}
         </div>
       </div>

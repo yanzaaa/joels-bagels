@@ -1,7 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReveal } from '@/hooks/useReveal'
+import Stamp from '@/components/Stamp'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
@@ -143,35 +145,74 @@ function StatsBar() {
 }
 
 export default function Hero() {
-  // Content drifts up and fades as you scroll away; the photo panel holds
-  // still, which reads as depth without a second scroll listener.
+  // Content drifts up and fades as you scroll away; the collage photos
+  // counter-drift at different speeds, which reads as depth.
   const { scrollY } = useScroll()
   const contentY = useTransform(scrollY, [0, 600], [0, -80])
   const contentOpacity = useTransform(scrollY, [0, 420], [1, 0])
+  const mainY = useTransform(scrollY, [0, 600], [0, -46])
+  const insetY = useTransform(scrollY, [0, 600], [0, 38])
 
   return (
     <section className="hero">
       <div className="hero-bg" />
 
+      {/* Mobile-only dim backdrop (desktop shows the collage instead) */}
       <div className="hero-photo-panel" aria-hidden="true">
-        {/* Clean Google Maps shot — no burned-in captions, so the panel can
-            finally run bright. eslint-disable: decorative full-bleed panel
-            sized by CSS, plain img keeps it out of the LCP preload chain. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/photos/hero-bagel.jpg"
-          alt=""
-          className="hero-photo-img"
-        />
+        <img src="/photos/hero-bagel.jpg" alt="" className="hero-photo-img" />
         <div className="hero-photo-vignette" />
+      </div>
+
+      {/* Desktop editorial collage — polaroid frames at near-native crops,
+          echoing the film strip, with the spinning deli stamp on top. */}
+      <div className="hero-collage" aria-hidden="true">
+        <div className="hero-ring" />
         <motion.div
-          className="hero-photo-badge"
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6, ease: EASE }}
+          className="hc-frame hc-main"
+          style={{ y: mainY }}
+          initial={{ opacity: 0, y: 60, rotate: -6 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ delay: 0.5, duration: 0.9, ease: EASE }}
         >
-          <span className="hero-badge-dot" />
-          Made fresh this morning
+          <div className="hc-photo">
+            <Image
+              src="/photos/hero-bagel.jpg"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 900px) 0px, 36vw"
+            />
+          </div>
+          <span className="hc-label">Sesame, schmeared — this morning</span>
+        </motion.div>
+
+        <motion.div
+          className="hc-frame hc-inset"
+          style={{ y: insetY }}
+          initial={{ opacity: 0, y: 60, rotate: 8 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ delay: 0.72, duration: 0.9, ease: EASE }}
+        >
+          <div className="hc-photo">
+            <Image
+              src="/instagram/post4.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 900px) 0px, 19vw"
+              style={{ objectPosition: '50% 50%' }}
+            />
+          </div>
+          <span className="hc-label">The Knicks bagel 💙🧡</span>
+        </motion.div>
+
+        <motion.div
+          className="hc-stamp"
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.1, duration: 0.6, ease: EASE }}
+        >
+          <Stamp id="hero" />
         </motion.div>
       </div>
 
