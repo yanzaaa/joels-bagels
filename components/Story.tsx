@@ -36,6 +36,14 @@ export default function Story() {
                 sizes="(max-width: 900px) 52vw, 26vw"
               />
             </motion.div>
+            <span className="story-sticker" aria-hidden="true">
+              Est.
+              <br />
+              Day One
+            </span>
+            <span className="story-receipt" aria-hidden="true">
+              Joel&apos;s Bagels · Medford NY · Reg 2 · 8:04 AM
+            </span>
           </div>
 
           <div>

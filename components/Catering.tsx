@@ -138,7 +138,14 @@ export default function Catering() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          <CateringForm />
+          {/* The clipboard: clip hardware + inspection stamp wrap the form */}
+          <div className="catering-board">
+            <span className="catering-clip" aria-hidden="true" />
+            <span className="catering-stamp" aria-hidden="true">
+              Catering · Joel&apos;s
+            </span>
+            <CateringForm />
+          </div>
         </motion.div>
       </div>
     </section>

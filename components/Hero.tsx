@@ -156,6 +156,9 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-bg" />
+      <div className="hero-ghost" aria-hidden="true">
+        Bagels.
+      </div>
 
       {/* Mobile-only dim backdrop (desktop shows the collage instead) */}
       <div className="hero-photo-panel" aria-hidden="true">

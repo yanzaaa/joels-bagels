@@ -37,8 +37,7 @@ export default function Home() {
           <Menu />
         </div>
 
-        {/* Act III — dark photo + data act */}
-        <FilmStrip />
+        {/* Act III — the order, the proof, the intel */}
         <BuildScrub />
         <OrderCTA />
         <Reviews />
@@ -50,8 +49,11 @@ export default function Home() {
           <Location />
         </div>
 
-        {/* Close dark */}
-        <Instagram />
+        {/* Act V — the photo wall: strip + feed share one night room */}
+        <div className="photo-world">
+          <FilmStrip />
+          <Instagram />
+        </div>
       </main>
       <Footer />
       <MobileOrderBar />

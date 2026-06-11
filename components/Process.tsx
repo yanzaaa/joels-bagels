@@ -28,9 +28,32 @@ const steps = [
   },
 ]
 
+const dustMotes = [
+  { left: '8%', duration: '11s', delay: '0s' },
+  { left: '24%', duration: '14s', delay: '3s' },
+  { left: '41%', duration: '12s', delay: '6s' },
+  { left: '63%', duration: '15s', delay: '1.5s' },
+  { left: '78%', duration: '10s', delay: '4.5s' },
+  { left: '91%', duration: '13s', delay: '7.5s' },
+]
+
 export default function Process() {
   return (
     <section className="section process-section" id="kitchen">
+      {/* Environmental layer: flour motes drifting down the prep table */}
+      <div className="flour-dust" aria-hidden="true">
+        {dustMotes.map((mote, i) => (
+          <span
+            key={i}
+            className="dust"
+            style={{
+              left: mote.left,
+              animationDuration: mote.duration,
+              animationDelay: mote.delay,
+            }}
+          />
+        ))}
+      </div>
       <div className="container">
         <Reveal className="process-header">
           <p className="eyebrow">From Our Kitchen</p>

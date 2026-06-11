@@ -46,6 +46,9 @@ function HoursTable() {
 export default function Location() {
   return (
     <section className="section" id="find-us">
+      <div className="location-ghost" aria-hidden="true">
+        Rt. 112
+      </div>
       <div className="container location-grid">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -59,6 +62,9 @@ export default function Location() {
           <a href="tel:+16313079206" className="location-phone">
             (631) 307-9206
           </a>
+          <div>
+            <span className="route-badge">NY · Route 112 · Medford</span>
+          </div>
           <div className="location-directions">
             <a
               href={MAPS_URL}
@@ -79,14 +85,19 @@ export default function Location() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
         >
-          <div className="location-photo" style={{ marginBottom: 16 }}>
-            <Image
-              src="/photos/storefront.jpg"
-              alt="Joel's Bagels storefront on Route 112 in Medford"
-              fill
-              sizes="(max-width: 900px) 90vw, 40vw"
-              style={{ objectPosition: '50% 35%' }}
-            />
+          <div className="location-polaroid">
+            <div className="location-photo">
+              <Image
+                src="/photos/storefront.jpg"
+                alt="Joel's Bagels storefront on Route 112 in Medford"
+                fill
+                sizes="(max-width: 900px) 90vw, 40vw"
+                style={{ objectPosition: '50% 35%' }}
+              />
+            </div>
+            <span className="location-polaroid-caption">
+              Look for the awning — right on Route 112
+            </span>
           </div>
           <iframe
             src="https://www.google.com/maps?q=1699+Route+112+Medford+NY+11763&output=embed"

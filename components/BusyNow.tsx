@@ -55,7 +55,7 @@ const TIPS: Record<DayKey, string> = {
   Wed: 'Steady from 8 to 11. Easy in, easy out.',
   Thu: 'The 6 AM crowd means business on Thursdays.',
   Fri: 'Friday holds its rush straight through lunch.',
-  Sat: 'Saturday 10 AM is the rush. 6 AM is for the regulars.',
+  Sat: '6 AM is regulars. 10 AM is game-day chaos.',
   Sun: 'Sunday peaks at 10 — beat the church crowd at 8.',
 }
 
@@ -124,7 +124,8 @@ export default function BusyNow() {
                     <motion.div
                       className={`busy-bar ${isNow ? 'now' : ''}`}
                       initial={{ scaleY: 0 }}
-                      animate={{ scaleY: 1 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true, amount: 0.4 }}
                       transition={{
                         delay: i * 0.035,
                         type: 'spring',

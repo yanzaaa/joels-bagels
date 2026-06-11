@@ -355,6 +355,9 @@ section[id] {
   position: absolute;
   inset: 0;
   background:
+    radial-gradient(ellipse 42% 52% at 76% 44%,
+      rgba(244, 160, 70, 0.14) 0%,
+      transparent 62%),
     radial-gradient(ellipse at 60% 40%,
       rgba(139, 94, 60, 0.25) 0%,
       transparent 60%),
@@ -362,6 +365,29 @@ section[id] {
       rgba(232, 64, 12, 0.08) 0%,
       transparent 50%),
     var(--dark);
+}
+
+/* Environmental layer: oversized outline word drifting behind the headline */
+.hero-ghost {
+  position: absolute;
+  left: -2vw;
+  bottom: 6%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(120px, 21vw, 290px);
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(196, 149, 90, 0.12);
+  pointer-events: none;
+  animation: ghost-drift 36s ease-in-out infinite alternate;
+}
+
+@keyframes ghost-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-4vw); }
 }
 
 .hero-vignette {
@@ -3062,35 +3088,36 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
 /* ──────────────────────────────────────────
    HUD — corner telemetry
    ────────────────────────────────────────── */
+/* Bakery-native: a little register receipt, not a sci-fi readout */
 .hud {
   position: fixed;
-  left: 18px;
-  bottom: 18px;
+  left: 16px;
+  bottom: 16px;
   z-index: 95;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  padding: 10px 14px;
-  background: rgba(10, 6, 4, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  gap: 2px;
+  padding: 8px 12px 13px;
+  background: var(--cream);
+  border-radius: 2px 2px 0 0;
+  rotate: -1.4deg;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), 95% 100%, 90% calc(100% - 6px), 85% 100%, 80% calc(100% - 6px), 75% 100%, 70% calc(100% - 6px), 65% 100%, 60% calc(100% - 6px), 55% 100%, 50% calc(100% - 6px), 45% 100%, 40% calc(100% - 6px), 35% 100%, 30% calc(100% - 6px), 25% 100%, 20% calc(100% - 6px), 15% 100%, 10% calc(100% - 6px), 5% 100%, 0 calc(100% - 6px));
   pointer-events: none;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: rgba(40, 28, 18, 0.62);
 }
 
 .hud strong {
-  color: var(--sesame);
-  font-weight: 600;
+  color: var(--poppy-dark);
+  font-weight: 700;
 }
 
-.hud .hud-live { color: #4ade80; }
+.hud .hud-live { color: #2e7d4f; }
 
 @media (max-width: 1100px) {
   .hud { display: none; }
@@ -3177,6 +3204,334 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
   box-shadow: 0 18px 44px rgba(232, 64, 12, 0.45);
   pointer-events: auto;
   text-decoration: none;
+}
+
+/* ──────────────────────────────────────────
+   SCENE: SATURDAY ORDER — ticket + readable stickers
+   ────────────────────────────────────────── */
+.build-ghost {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(90px, 16vw, 230px);
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(245, 236, 215, 0.07);
+  pointer-events: none;
+}
+
+.build-ticket {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 3;
+  background: var(--cream);
+  color: rgba(40, 28, 18, 0.85);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 18px 9px;
+  rotate: -1.2deg;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+/* Chips were too faint over the photo — solid cream, inked border, tape */
+.build-chip {
+  border: 2.5px solid #241710;
+  padding: 12px 28px;
+  font-size: clamp(24px, 3.4vw, 40px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+}
+
+.build-chip::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  translate: -50% 0;
+  width: 58px;
+  height: 17px;
+  background: rgba(245, 236, 215, 0.55);
+  border: 1px dashed rgba(40, 28, 18, 0.28);
+  rotate: -4deg;
+}
+
+/* ──────────────────────────────────────────
+   SCENE: PHOTO WORLD — strip + feed, one night room
+   ────────────────────────────────────────── */
+.photo-world {
+  background:
+    radial-gradient(ellipse 70% 46% at 50% 0%, rgba(232, 64, 12, 0.08), transparent 62%),
+    #120d09;
+}
+
+.photo-world .filmstrip-section {
+  background: transparent;
+  padding-bottom: 20px;
+}
+
+.photo-world .instagram-section { padding-top: 28px; }
+
+/* ──────────────────────────────────────────
+   SCENE: PROCESS — flour dust drifting
+   ────────────────────────────────────────── */
+.flour-dust {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dust {
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(139, 94, 60, 0.4);
+  filter: blur(1px);
+  animation: dust-fall linear infinite;
+}
+
+@keyframes dust-fall {
+  0% { transform: translateY(-8vh) translateX(0); opacity: 0; }
+  12% { opacity: 0.7; }
+  100% { transform: translateY(105vh) translateX(5vw); opacity: 0; }
+}
+
+/* ──────────────────────────────────────────
+   SCENE: STORY — receipt caption + day-one sticker
+   ────────────────────────────────────────── */
+.story-receipt {
+  position: absolute;
+  bottom: -14px;
+  left: 4%;
+  z-index: 2;
+  background: #fffcf5;
+  color: rgba(40, 28, 18, 0.8);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 14px 13px;
+  rotate: 2deg;
+  box-shadow: 0 12px 28px rgba(60, 38, 20, 0.3);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), 95% 100%, 90% calc(100% - 6px), 85% 100%, 80% calc(100% - 6px), 75% 100%, 70% calc(100% - 6px), 65% 100%, 60% calc(100% - 6px), 55% 100%, 50% calc(100% - 6px), 45% 100%, 40% calc(100% - 6px), 35% 100%, 30% calc(100% - 6px), 25% 100%, 20% calc(100% - 6px), 15% 100%, 10% calc(100% - 6px), 5% 100%, 0 calc(100% - 6px));
+}
+
+.story-sticker {
+  position: absolute;
+  top: 47%;
+  right: -10px;
+  z-index: 2;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--poppy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 1.25;
+  rotate: 8deg;
+  box-shadow: 0 12px 30px rgba(232, 64, 12, 0.4);
+}
+
+/* ──────────────────────────────────────────
+   SCENE: REVIEWS — neighborhood bulletin board
+   ────────────────────────────────────────── */
+.review-card { position: relative; }
+
+.reviews-grid .review-card:nth-child(odd) { rotate: -0.8deg; }
+.reviews-grid .review-card:nth-child(even) { rotate: 0.7deg; }
+
+.review-card::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  translate: -50% 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9a6a, var(--poppy-dark) 70%);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────
+   SCENE: CATERING — the clipboard
+   ────────────────────────────────────────── */
+.catering-board {
+  position: relative;
+  max-width: 780px;
+  margin: 24px auto 0;
+  background: #fffcf5;
+  border-radius: 10px;
+  padding: 36px 24px 14px;
+  rotate: -0.5deg;
+  box-shadow: 0 28px 64px rgba(60, 38, 20, 0.28);
+}
+
+.catering-board .catering-form {
+  background: transparent;
+  box-shadow: none;
+  padding: 14px 12px 28px;
+}
+
+.catering-clip {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  translate: -50% 0;
+  width: 132px;
+  height: 32px;
+  background: linear-gradient(180deg, #8a5a32, #6c4526);
+  border-radius: 9px 9px 5px 5px;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.25),
+    0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.catering-clip::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  translate: -50% 0;
+  width: 48px;
+  height: 12px;
+  border-radius: 6px;
+  background: #3a2412;
+}
+
+.catering-stamp {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  rotate: 7deg;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--poppy-dark);
+  border: 2px solid var(--poppy-dark);
+  border-radius: 4px;
+  padding: 5px 10px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.paper-act .catering-card { position: relative; }
+
+.paper-act .catering-card::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  translate: -50% 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9a6a, var(--poppy-dark) 70%);
+  box-shadow: 0 3px 7px rgba(60, 38, 20, 0.4);
+}
+
+.catering-cards .catering-card:nth-child(1) { rotate: -0.7deg; }
+.catering-cards .catering-card:nth-child(3) { rotate: 0.8deg; }
+
+/* ──────────────────────────────────────────
+   SCENE: LOCATION — Route 112
+   ────────────────────────────────────────── */
+.location-ghost {
+  position: absolute;
+  right: -1vw;
+  bottom: 1%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(100px, 16vw, 230px);
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(139, 94, 60, 0.16);
+  pointer-events: none;
+}
+
+.route-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 4px;
+  background: #241710;
+  color: var(--cream);
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(60, 38, 20, 0.3);
+  rotate: -1deg;
+}
+
+.route-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--knicks-orange);
+}
+
+.location-polaroid {
+  position: relative;
+  background: #fffcf5;
+  padding: 10px 10px 36px;
+  border-radius: 4px;
+  rotate: 1.6deg;
+  box-shadow: 0 22px 48px rgba(60, 38, 20, 0.3);
+  margin-bottom: 18px;
+}
+
+.location-polaroid .location-photo {
+  box-shadow: none;
+  border-radius: 2px;
+  max-height: none;
+  aspect-ratio: 16 / 10;
+}
+
+.location-polaroid-caption {
+  position: absolute;
+  bottom: 9px;
+  left: 12px;
+  right: 12px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--charcoal);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Reduced motion */

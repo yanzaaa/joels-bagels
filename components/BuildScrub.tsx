@@ -1,9 +1,9 @@
 'use client'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import {
   motion,
-  useScroll,
+  useMotionValue,
   useTransform,
   useMotionTemplate,
 } from 'framer-motion'
@@ -12,14 +12,37 @@ const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
 
 /* Scroll-scrubbed assembly: pinned full-screen stage, the BEC photo unmasks
    and scales while the three words slap on like deli stickers, then the
-   price stamp lands. Every value is bound to scroll progress — buttery with
-   Lenis, fully reversible. */
+   price stamp lands. Progress is computed per-frame from the section's own
+   bounding rect — framer's useScroll(target) cached stale offsets for this
+   260vh section, freezing the chips mid-fade. */
 export default function BuildScrub() {
   const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end end'],
-  })
+  const scrollYProgress = useMotionValue(0)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    let raf = 0
+    const update = () => {
+      const rect = el.getBoundingClientRect()
+      const total = rect.height - window.innerHeight
+      if (total > 0) {
+        scrollYProgress.set(Math.min(1, Math.max(0, -rect.top / total)))
+      }
+    }
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    update()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [scrollYProgress])
 
   const clip = useTransform(scrollYProgress, [0, 0.32], [22, 0])
   const clipPath = useMotionTemplate`inset(${clip}% round 28px)`
@@ -38,12 +61,19 @@ export default function BuildScrub() {
   return (
     <section className="build-section" ref={ref} aria-label="The Everything BEC, built">
       <div className="build-sticky">
+        <div className="build-ghost" aria-hidden="true">
+          Saturday
+        </div>
+
         <motion.div className="build-header" style={{ opacity: headerOpacity }}>
           <p className="eyebrow">Scroll to Build It</p>
           <h2 className="section-headline">The Saturday Order.</h2>
         </motion.div>
 
         <div className="build-photo-wrap">
+          <motion.span className="build-ticket" style={{ opacity: headerOpacity }}>
+            Joel&apos;s · Order №112 · Saturday 8:04 AM
+          </motion.span>
           <motion.div
             className="build-photo"
             style={{ clipPath, scale: photoScale }}
