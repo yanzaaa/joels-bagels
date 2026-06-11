@@ -16,6 +16,8 @@ import Instagram from "@/components/Instagram";
 import Footer from "@/components/Footer";
 import MobileOrderBar from "@/components/MobileOrderBar";
 import CartDrawer from "@/components/CartDrawer";
+import BuildScrub from "@/components/BuildScrub";
+import Hud from "@/components/Hud";
 
 export default function Home() {
   return (
@@ -23,23 +25,38 @@ export default function Home() {
       <PageIntro />
       <Nav />
       <main>
+        {/* Act I — dark drama */}
         <Hero />
         <Marquee />
-        <Process />
-        <Story />
-        <Signatures />
-        <Menu />
+
+        {/* Act II — the warm bakery morning, on deli paper */}
+        <div className="paper-act">
+          <Process />
+          <Story />
+          <Signatures />
+          <Menu />
+        </div>
+
+        {/* Act III — dark photo + data act */}
         <FilmStrip />
+        <BuildScrub />
         <OrderCTA />
         <Reviews />
         <BusyNow />
-        <Catering />
-        <Location />
+
+        {/* Act IV — paper returns for the practical pages */}
+        <div className="paper-act">
+          <Catering />
+          <Location />
+        </div>
+
+        {/* Close dark */}
         <Instagram />
       </main>
       <Footer />
       <MobileOrderBar />
       <CartDrawer />
+      <Hud />
     </>
   );
 }

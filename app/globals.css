@@ -2969,6 +2969,216 @@ html:not([data-cursor='on']) .cursor-trail { display: none; }
   margin-top: 6px;
 }
 
+/* ──────────────────────────────────────────
+   PAPER ACT — the warm daytime band
+   ──────────────────────────────────────────
+   Wraps Process → Menu (and Catering → Location) in the kraft deli-paper
+   world: dark type on sesame-flecked cream. The page reads as three acts —
+   dark drama, warm bakery morning, dark evening — instead of one long
+   dark-mode template. */
+.paper-act {
+  background: #efe5d0 url('/photos/paper.jpg');
+  background-size: 720px;
+  color: var(--charcoal);
+  box-shadow:
+    inset 0 24px 48px -24px rgba(28, 20, 16, 0.55),
+    inset 0 -24px 48px -24px rgba(28, 20, 16, 0.55);
+}
+
+.paper-act .section-headline { color: #241710; }
+.paper-act .eyebrow { color: var(--poppy-dark); }
+
+/* Process on paper */
+.paper-act .process-section { background: transparent; }
+.paper-act .process-step { background: rgba(255, 252, 245, 0.72); }
+.paper-act .process-step::after { border-color: rgba(139, 94, 60, 0.18); }
+.paper-act .process-step h3 { color: #241710; }
+.paper-act .process-step p { color: rgba(40, 28, 18, 0.72); }
+.paper-act .process-step-num {
+  -webkit-text-stroke-color: rgba(139, 94, 60, 0.45);
+}
+
+/* Story on paper — scrapbook page */
+.paper-act .story-quote { color: #241710; }
+.paper-act .story-quote-attr { color: rgba(139, 94, 60, 0.9); }
+.paper-act .story-body { color: rgba(40, 28, 18, 0.72); }
+.paper-act .story-motto { color: var(--poppy-dark); }
+.paper-act .story-photo { box-shadow: 0 18px 40px rgba(60, 38, 20, 0.35); }
+.paper-act .story-photo-inset { border-color: #efe5d0; }
+
+/* Signatures on paper */
+.paper-act .signature-card {
+  background: rgba(255, 252, 245, 0.82);
+  box-shadow: 0 16px 40px rgba(60, 38, 20, 0.18);
+}
+.paper-act .signature-name { color: #241710; }
+.paper-act .signature-desc { color: rgba(40, 28, 18, 0.7); }
+.paper-act .signature-num {
+  color: rgba(139, 94, 60, 0.14);
+  -webkit-text-stroke: 0;
+}
+
+/* Menu on paper — the deli board */
+.paper-act .menu-tagline { color: rgba(40, 28, 18, 0.65); }
+.paper-act .menu-tabs {
+  background: rgba(255, 252, 245, 0.85);
+  border-color: rgba(139, 94, 60, 0.25);
+}
+.paper-act .menu-tab { color: rgba(40, 28, 18, 0.6); }
+.paper-act .menu-tab.active { color: #fff; }
+.paper-act .menu-category-tagline { color: var(--bagel); }
+.paper-act .menu-item {
+  background: rgba(255, 252, 245, 0.8);
+  border-color: rgba(139, 94, 60, 0.14);
+}
+.paper-act .menu-item:hover {
+  background: #fffcf5;
+  border-color: rgba(139, 94, 60, 0.32);
+}
+.paper-act .menu-item-name { color: #241710; }
+.paper-act .menu-item-note { color: rgba(139, 94, 60, 0.95); }
+.paper-act .menu-item-price { color: var(--poppy-dark); }
+.paper-act .menu-footnote { color: rgba(139, 94, 60, 0.95); }
+
+/* Location on paper */
+.paper-act .location-address { color: #241710; }
+.paper-act .location-city { color: rgba(40, 28, 18, 0.65); }
+.paper-act .location-phone { color: var(--poppy-dark); }
+.paper-act .hours-table td { color: rgba(40, 28, 18, 0.75); }
+.paper-act .hours-table tr.today td { color: var(--poppy-dark); }
+
+/* Decorative photos shouldn't take the poppy selection wash (a select-all
+   makes them look broken-red in screenshots) */
+.hc-frame, .hc-frame *,
+.filmstrip-frame, .filmstrip-frame *,
+.process-chip, .process-chip *,
+.signature-photo img,
+.story-photo img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ──────────────────────────────────────────
+   HUD — corner telemetry
+   ────────────────────────────────────────── */
+.hud {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 14px;
+  background: rgba(10, 6, 4, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.hud strong {
+  color: var(--sesame);
+  font-weight: 600;
+}
+
+.hud .hud-live { color: #4ade80; }
+
+@media (max-width: 1100px) {
+  .hud { display: none; }
+}
+
+/* ──────────────────────────────────────────
+   BUILD SCRUB — scroll-driven BEC assembly
+   ────────────────────────────────────────── */
+.build-section {
+  position: relative;
+  height: 260vh;
+  background: var(--void);
+}
+
+.build-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.build-header {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.build-photo-wrap {
+  position: relative;
+  width: min(760px, 86vw);
+}
+
+.build-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  will-change: clip-path, transform;
+}
+
+.build-photo img { object-fit: cover; }
+
+.build-chip {
+  position: absolute;
+  z-index: 2;
+  padding: 10px 22px;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(20px, 3vw, 34px);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.build-chip-1 { top: 6%; left: -4%; rotate: -5deg; }
+.build-chip-2 { top: 40%; right: -5%; rotate: 3deg; }
+.build-chip-3 { bottom: 14%; left: 4%; rotate: -2deg; }
+
+.build-stamp {
+  position: absolute;
+  bottom: -26px;
+  right: 6%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 118px;
+  height: 118px;
+  background: var(--poppy);
+  color: #fff;
+  border-radius: 50%;
+  rotate: -12deg;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 19px;
+  line-height: 1.15;
+  box-shadow: 0 18px 44px rgba(232, 64, 12, 0.45);
+  pointer-events: auto;
+  text-decoration: none;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
