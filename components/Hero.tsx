@@ -248,8 +248,8 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8, ease: EASE }}
         >
-          A family recipe. Two generations. The best bagel on Long Island —
-          and the Knicks Everything Bagel is back for the season.
+          A homemade family recipe, made fresh every single morning. The best
+          bagel on Long Island — and the Knicks Everything Bagel is back.
         </motion.p>
 
         <motion.div

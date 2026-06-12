@@ -279,11 +279,11 @@ export default function Menu() {
         {/* The case itself — this morning's racks behind glass */}
         <div className="menu-case" aria-hidden="true">
           <Image
-            src="/photos/bagel-racks.jpg"
+            src="/photos/menu-case.jpg"
             alt=""
             fill
             sizes="(max-width: 900px) 92vw, 860px"
-            style={{ objectFit: 'cover', objectPosition: '50% 82%' }}
+            style={{ objectFit: 'cover', objectPosition: '50% 56%' }}
           />
           <span className="menu-case-glass" />
           <span className="menu-case-label">

@@ -858,7 +858,9 @@ section[id] {
 /* ──────────────────────────────────────────
    SIGNATURES
    ────────────────────────────────────────── */
-.signatures-section { background: #190e09; }
+/* The wrapper (.product-gallery) owns the background — this legacy fill
+   was the last black section on the site */
+.signatures-section { background: transparent; }
 
 .signatures-grid {
   display: grid;
@@ -3091,15 +3093,12 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
    dark drama, warm bakery morning, dark evening — instead of one long
    dark-mode template. */
 .paper-act {
-  /* Flour-light morning table: warm cone of first light, no kraft texture —
-     the kraft tile now lives only in the cork blend */
+  /* Flour-light morning table. No inset shadows — they read as dark seam
+     lines at every section boundary. Gradient ends stitch into neighbors. */
   background:
     radial-gradient(ellipse 64% 50% at 28% 0%, rgba(255, 215, 150, 0.55), transparent 62%),
-    linear-gradient(180deg, #f8f0dd 0%, #f1e7d0 100%);
+    linear-gradient(180deg, #f8f0dd 0%, #f1e7d0 84%, #f6ecd8 100%);
   color: var(--charcoal);
-  box-shadow:
-    inset 0 24px 48px -24px rgba(28, 20, 16, 0.35),
-    inset 0 -24px 48px -24px rgba(28, 20, 16, 0.35);
 }
 
 .paper-act .section-headline { color: #241710; }
@@ -3685,11 +3684,12 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 .order-knicks .eyebrow { color: var(--knicks-orange); }
 
-/* Reviews: warm plaster community wall — paper texture fully retired */
+/* Reviews: warm plaster community wall — stitched into steel above and
+   the order sheet below */
 .reviews-cork {
   background:
-    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255, 226, 170, 0.45), transparent 60%),
-    linear-gradient(180deg, #ecdfc6 0%, #e3d2b2 100%);
+    radial-gradient(ellipse 70% 50% at 50% 10%, rgba(255, 226, 170, 0.45), transparent 60%),
+    linear-gradient(180deg, #d6ccb7 0%, #ecdfc6 16%, #e3d2b2 80%, #f0ebdd 100%);
 }
 
 .reviews-cork .eyebrow { color: #5e3a1a; }
@@ -3724,10 +3724,10 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   background: linear-gradient(
     180deg,
     #dde1e8 0%,
-    #97a2b5 14%,
-    #4d596e 34%,
-    #3a455a 62%,
-    #58637a 88%,
+    #9aa6ba 14%,
+    #57637b 34%,
+    #47536b 62%,
+    #5d6880 88%,
     #efe7d3 100%
   );
 }
@@ -3880,8 +3880,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
    ────────────────────────────────────────── */
 /* Signatures: clean white product gallery (texture-free) */
 .paper-act.product-gallery {
-  background: linear-gradient(180deg, #faf5e9 0%, #f1eada 100%);
-  box-shadow: none;
+  background: linear-gradient(180deg, #efe3cb 0%, #faf5e9 16%, #f1eada 100%);
 }
 
 .paper-act.product-gallery .signature-card {
@@ -3997,9 +3996,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Menu: glass deli case — soft sage light, white cards */
 .paper-act.menu-light {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(214, 228, 205, 0.7), transparent 62%),
-    linear-gradient(180deg, #eef0e6 0%, #e6e9db 100%);
-  box-shadow: none;
+    radial-gradient(ellipse 70% 55% at 50% 8%, rgba(214, 228, 205, 0.7), transparent 62%),
+    linear-gradient(180deg, #f1eada 0%, #eef0e6 14%, #e6e9db 100%);
 }
 
 .paper-act.menu-light .menu-item {
@@ -4024,8 +4022,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Photo wall: bright gallery wall instead of black void */
 .photo-world {
   background:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 214, 150, 0.4), transparent 60%),
-    linear-gradient(180deg, #ece1c8 0%, #e4d7ba 100%);
+    radial-gradient(ellipse 60% 40% at 50% 10%, rgba(255, 214, 150, 0.4), transparent 60%),
+    linear-gradient(180deg, #e6e9db 0%, #ece1c8 16%, #e4d7ba 100%);
 }
 
 .photo-world .section-headline { color: #241710; }
@@ -4053,8 +4051,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Saturday Order: warm counter stone — belongs to the same morning world */
 .build-section {
   background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255, 215, 150, 0.35), transparent 60%),
-    linear-gradient(180deg, #ece5d6 0%, #ded5c2 60%, #d6ccb7 100%);
+    radial-gradient(ellipse 60% 50% at 50% 8%, rgba(255, 215, 150, 0.35), transparent 60%),
+    linear-gradient(180deg, #e4d7ba 0%, #ece5d6 14%, #ded5c2 62%, #d6ccb7 100%);
 }
 
 .build-section::before {
@@ -4304,6 +4302,156 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   0% { transform: translateY(12px) scaleX(0.9); opacity: 0; }
   35% { opacity: 0.75; }
   100% { transform: translateY(-48px) scaleX(1.45); opacity: 0; }
+}
+
+/* ──────────────────────────────────────────
+   FINAL POLISH — segmented tabs, footer capsule, mobile build
+   ────────────────────────────────────────── */
+/* iOS-grade segmented control */
+.paper-act.menu-light .menu-tabs {
+  background: rgba(95, 115, 86, 0.1);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 6px;
+  box-shadow: inset 0 1px 3px rgba(70, 86, 62, 0.14);
+}
+
+.paper-act.menu-light .menu-tab-pill {
+  top: 6px;
+  height: calc(100% - 12px);
+  background: #ffffff;
+  border-radius: var(--radius-full);
+  box-shadow: 0 3px 10px rgba(70, 86, 62, 0.24);
+  transition: all 0.42s var(--ease-spring);
+}
+
+.paper-act.menu-light .menu-tab {
+  border-radius: var(--radius-full);
+  color: rgba(50, 62, 44, 0.6);
+}
+
+.paper-act.menu-light .menu-tab.active { color: #241710; }
+
+/* Footer signup: one seamless capsule */
+.footer-signup-row {
+  background: #ffffff;
+  border: 1px solid rgba(110, 84, 58, 0.28);
+  border-radius: var(--radius-full);
+  padding: 5px;
+  gap: 6px;
+}
+
+.footer-signup input {
+  background: transparent;
+  border: none;
+  height: 40px;
+  padding: 0 16px;
+}
+
+.footer-signup input:focus { border: none; }
+
+.footer-signup button {
+  border-radius: var(--radius-full);
+  height: 40px;
+  padding: 0 22px;
+}
+
+/* Nav links: a touch more presence */
+.nav .nav-link { font-size: 15px; font-weight: 500; }
+
+.footer-bottom a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover { color: var(--poppy-dark); }
+
+/* Legal pages */
+.legal-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 140px 5vw 90px;
+  color: var(--charcoal);
+}
+
+.legal-page h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(34px, 5vw, 52px);
+  color: #241710;
+  margin-bottom: 10px;
+}
+
+.legal-page .legal-updated {
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 36px;
+}
+
+.legal-page h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: #241710;
+  margin: 32px 0 10px;
+}
+
+.legal-page p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: rgba(40, 28, 18, 0.78);
+  margin-bottom: 14px;
+}
+
+.legal-page a { color: var(--poppy-dark); }
+
+.legal-body { background: #f6efdf; }
+
+/* Mobile build scene: simplified, readable, no overlap */
+@media (max-width: 900px) {
+  .build-ghost { display: none; }
+
+  .build-sticky { padding-top: 70px; justify-content: flex-start; gap: 14px; }
+
+  .build-spec {
+    position: static;
+    translate: 0 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    order: 2;
+    padding: 0 4vw;
+  }
+
+  .build-spec-chip {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-width: 1.5px;
+    gap: 6px;
+  }
+
+  .build-stack {
+    order: 3;
+    width: 76vw;
+    height: 64vw;
+    margin-top: 28px;
+  }
+
+  .build-stack .build-ticket {
+    font-size: 8.5px;
+    padding: 6px 12px;
+    top: -30px;
+  }
+
+  .build-stamp {
+    width: 92px;
+    height: 92px;
+    font-size: 15px;
+    bottom: -18px;
+  }
 }
 
 /* Reduced motion */

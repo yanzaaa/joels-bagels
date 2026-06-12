@@ -62,6 +62,9 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>© 2026 Joel&apos;s Bagels · Medford, NY</span>
+          <span>
+            <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>
+          </span>
           <span>Made with ♥ on Long Island</span>
         </div>
       </div>

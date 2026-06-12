@@ -60,10 +60,10 @@ export default function Story() {
                 — Jaime D. · Google review, 5 stars
               </p>
               <p className="story-body">
-                An Ecuadorian family recipe, two generations deep, rolled and
-                baked behind this counter every morning since day one. The crew
-                knows the regulars by their order — and on Knicks game days,
-                the blue-and-orange bagels go before nine.
+                An Ecuadorian family recipe, homemade behind this counter
+                every single morning. The crew knows the regulars by their
+                order, sandwiches are usually gone by noon — and on Knicks
+                game days, the blue-and-orange bagels go before nine.
               </p>
               <span className="story-motto">
                 Fast food isn’t good. Good food isn’t fast.

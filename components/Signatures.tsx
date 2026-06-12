@@ -50,12 +50,12 @@ const signatures = [
   },
   {
     num: '02',
-    name: 'Everything BEC',
-    desc: 'Bacon. Egg. Cheese. Everything bagel, hot from the oven. $6.50. The Saturday morning line tells you everything.',
-    tag: 'Most Ordered',
+    name: 'The Chicken BLT',
+    desc: 'Fresh-breaded cutlet, crispy bacon, lettuce, tomato, ranch — pressed hot. Get it before the lunch line does.',
+    tag: 'After 11 AM',
     tagColor: 'poppy',
-    photo: '/photos/bec-hand.jpg',
-    alt: 'Bacon egg and cheese on an everything bagel, held in hand',
+    photo: '/photos/chicken-cutlet.jpg',
+    alt: 'The Chicken BLT — breaded cutlet with bacon, pressed hot',
   },
   {
     num: '03',
@@ -68,7 +68,8 @@ const signatures = [
   },
 ]
 
-const stickers = ['$2.50', '$6.50', '$9.00']
+// null = no price sticker (call-it-at-the-counter items)
+const stickers: (string | null)[] = ['$2.50', null, '$9.00']
 const DOORDASH_URL = 'https://www.doordash.com/store/1144158'
 
 export default function Signatures() {
@@ -96,7 +97,7 @@ export default function Signatures() {
                   fill
                   sizes="(max-width: 800px) 90vw, 30vw"
                 />
-                <span className="sig-sticker">{stickers[i]}</span>
+                {stickers[i] && <span className="sig-sticker">{stickers[i]}</span>}
               </div>
               <span className={`signature-tag ${item.tagColor}`}>
                 {item.tag}
