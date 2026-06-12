@@ -3,7 +3,7 @@ import Reveal from '@/components/Reveal'
 
 // Real photos — Joel's Google Maps gallery + Instagram stills, self-hosted.
 const frames = [
-  { src: '/photos/hero-bagel.jpg', caption: 'Sesame, schmeared' },
+  { src: '/photos/sesame-schmear.jpg', caption: 'Sesame, schmeared' },
   { src: '/photos/bec-hand.jpg', caption: 'The Everything BEC' },
   { src: '/photos/melt.jpg', caption: 'Still warm' },
   { src: '/photos/deli-club.jpg', caption: 'Stacked proper' },
@@ -18,7 +18,7 @@ const frames = [
 // Second row drifts the opposite way at a different speed — two layers of
 // motion read as a wall, not a widget.
 const framesB = [
-  { src: '/photos/chicken-cutlet.jpg', caption: 'Cutlet, pressed hot' },
+  { src: '/photos/chicken-blt.jpg', caption: 'The Chicken BLT, pressed hot' },
   { src: '/photos/platter.jpg', caption: 'The full spread' },
   { src: '/photos/deli-club.jpg', caption: 'Triple decker' },
   { src: '/instagram/post2.jpg', caption: 'The Brunson 🏀' },

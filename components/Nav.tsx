@@ -21,7 +21,8 @@ function ScrollProgress() {
     const update = () => {
       const max = document.body.scrollHeight - window.innerHeight
       const pct = max > 0 ? (window.scrollY / max) * 100 : 0
-      if (barRef.current) barRef.current.style.width = `${pct}%`
+      // scaleX stays on the compositor; width would relayout every tick
+      if (barRef.current) barRef.current.style.transform = `scaleX(${pct / 100})`
       ticking = false
     }
 

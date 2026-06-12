@@ -54,8 +54,8 @@ const signatures = [
     desc: 'Fresh-breaded cutlet, crispy bacon, lettuce, tomato, ranch — pressed hot. Get it before the lunch line does.',
     tag: 'After 11 AM',
     tagColor: 'poppy',
-    photo: '/photos/chicken-cutlet.jpg',
-    alt: 'The Chicken BLT — breaded cutlet with bacon, pressed hot',
+    photo: '/photos/chicken-blt.jpg',
+    alt: 'The Chicken BLT — breaded cutlet, bacon, lettuce and tomato, pressed hot',
   },
   {
     num: '03',

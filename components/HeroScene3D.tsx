@@ -4,6 +4,7 @@ import {
   Suspense,
   useEffect,
   useRef,
+  useState,
   type ReactNode,
 } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
@@ -22,7 +23,7 @@ const CARDS: {
   rotation: [number, number, number]
 }[] = [
   {
-    url: '/photos/melt.jpg',
+    url: '/photos/sesame-schmear.jpg',
     scale: [2.3, 1.75],
     position: [0.35, 0.55, 0],
     rotation: [0, -0.16, -0.04],
@@ -87,11 +88,27 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
 }
 
 export default function HeroScene3D() {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(true)
+
+  // Park the GPU loop once the hero scrolls out of view — the rAF tick is
+  // a real battery cost if it runs for the whole page session.
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const io = new IntersectionObserver(([entry]) =>
+      setVisible(entry.isIntersecting)
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <SceneBoundary>
-      <div className="hero-3d" aria-hidden="true">
+      <div className="hero-3d" aria-hidden="true" ref={wrapRef}>
         <Canvas
           dpr={[1, 1.75]}
+          frameloop={visible ? 'always' : 'never'}
           camera={{ position: [0, 0, 9.2], fov: 32 }}
           gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
         >

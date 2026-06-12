@@ -177,7 +177,7 @@ export default function Hero() {
         >
           <div className="hc-photo">
             <Image
-              src="/photos/melt.jpg"
+              src="/photos/sesame-schmear.jpg"
               alt=""
               fill
               priority

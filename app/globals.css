@@ -165,7 +165,10 @@ section[id] {
   height: 2px;
   z-index: 9998;
   background: linear-gradient(90deg, #1c3252, #4a6c9b);
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
 }
 
 /* ──────────────────────────────────────────
@@ -182,7 +185,10 @@ section[id] {
   backdrop-filter: blur(16px) saturate(1.3);
   -webkit-backdrop-filter: blur(16px) saturate(1.3);
   border-bottom: 1px solid rgba(110, 84, 58, 0.16);
-  transition: all 300ms ease;
+  transition:
+    background 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
 }
 
 .nav.scrolled {
@@ -3729,8 +3735,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   position: relative;
   background: linear-gradient(
     180deg,
-    #dde1e8 0%,
-    #9aa6ba 14%,
+    #d2dbe9 0%,
+    #93a0b8 14%,
     #57637b 34%,
     #47536b 62%,
     #5d6880 88%,
@@ -4106,7 +4112,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Crowd intel: cool light board — blends in from the order sheet and hands
    off exactly into the Route 112 dusk gradient */
 .busy-section {
-  background: linear-gradient(180deg, #f0ebdd 0%, #e7eaef 22%, #dde1e8 100%);
+  /* The site's long turn toward evening — cream cools into real blue here */
+  background: linear-gradient(180deg, #f0ebdd 0%, #e2e7ef 34%, #d2dbe9 100%);
 }
 
 .busy-section .section-headline { color: #241710; }
@@ -4328,7 +4335,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   background: #ffffff;
   border-radius: var(--radius-full);
   box-shadow: 0 3px 10px rgba(70, 86, 62, 0.24);
-  transition: all 0.42s var(--ease-spring);
+  transition: left 0.42s var(--ease-spring), width 0.42s var(--ease-spring);
 }
 
 .paper-act.menu-light .menu-tab {
