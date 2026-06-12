@@ -177,14 +177,14 @@ export default function Hero() {
         >
           <div className="hc-photo">
             <Image
-              src="/photos/sesame-schmear.jpg"
+              src="/instagram/post4.jpg"
               alt=""
               fill
               priority
               sizes="(max-width: 900px) 0px, 36vw"
             />
           </div>
-          <span className="hc-label">Still warm — this morning</span>
+          <span className="hc-label">The Knicks bagel — back for the season</span>
         </motion.div>
 
         <motion.div
@@ -196,14 +196,13 @@ export default function Hero() {
         >
           <div className="hc-photo">
             <Image
-              src="/instagram/post4.jpg"
+              src="/photos/sausage-egg.jpg"
               alt=""
               fill
               sizes="(max-width: 900px) 0px, 19vw"
-              style={{ objectPosition: '50% 50%' }}
             />
           </div>
-          <span className="hc-label">The Knicks bagel 💙🧡</span>
+          <span className="hc-label">Still warm — this morning</span>
         </motion.div>
 
       </div>

@@ -73,8 +73,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background: var(--dark);
-  color: var(--cream);
+  /* Cream under everything — a dark body painted 1px "lines" through any
+     subpixel gap between section wrappers */
+  background: #f2e7d2;
+  color: var(--charcoal);
   overflow-x: hidden;
 }
 
@@ -3108,7 +3110,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   /* Flour-light morning table. No inset shadows — they read as dark seam
      lines at every section boundary. Gradient ends stitch into neighbors. */
   background:
-    radial-gradient(ellipse 64% 50% at 28% 0%, rgba(255, 215, 150, 0.55), transparent 62%),
+    radial-gradient(ellipse 64% 50% at 28% 14%, rgba(255, 215, 150, 0.5), transparent 62%),
     linear-gradient(180deg, #f8f0dd 0%, #f1e7d0 84%, #f6ecd8 100%);
   color: var(--charcoal);
 }
@@ -4104,7 +4106,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Story: daylight inside the shop — photos carry the warmth */
 .paper-act.story-room {
   background:
-    radial-gradient(ellipse 60% 50% at 70% 0%, rgba(255, 210, 140, 0.5), transparent 62%),
+    radial-gradient(ellipse 60% 50% at 70% 14%, rgba(255, 210, 140, 0.45), transparent 62%),
     linear-gradient(180deg, #f6ecd8 0%, #efe3cb 100%);
   box-shadow: none;
 }

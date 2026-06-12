@@ -23,13 +23,14 @@ const CARDS: {
   rotation: [number, number, number]
 }[] = [
   {
-    url: '/photos/sesame-schmear.jpg',
+    // Real shop photo — the Knicks cross-section, their most iconic shot
+    url: '/instagram/post4.jpg',
     scale: [2.3, 1.75],
     position: [0.35, 0.55, 0],
     rotation: [0, -0.16, -0.04],
   },
   {
-    url: '/instagram/post4.jpg',
+    url: '/photos/everything-bagel.jpg',
     scale: [1.3, 1.3],
     position: [-1.25, -0.95, 0.8],
     rotation: [0, 0.18, 0.06],
