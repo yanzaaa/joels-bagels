@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -141,29 +142,63 @@ export default function Reviews() {
           ))}
         </div>
 
-        <div className="reviews-grid">
-          {reviews.map((review, i) => (
-            <motion.div
-              key={review.name}
-              className="review-card"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-            >
-              <div className="review-head">
-                <div className="review-avatar">{review.initials}</div>
-                <div>
-                  <div className="review-name">{review.name}</div>
-                  <div className="review-ago">{review.ago}</div>
-                </div>
-              </div>
-              <Stars count={review.stars} />
-              <p className="review-text">{review.text}</p>
-            </motion.div>
-          ))}
-        </div>
+        {/* Three pinned slots; tapping a note swaps in the next review from
+            the board that isn't already showing */}
+        <ReviewBoard />
       </div>
     </section>
+  )
+}
+
+function ReviewBoard() {
+  const [slots, setSlots] = useState([0, 1, 2])
+
+  const advance = (slot: number) =>
+    setSlots((current) => {
+      let next = (current[slot] + 1) % reviews.length
+      while (current.includes(next)) next = (next + 1) % reviews.length
+      return current.map((v, i) => (i === slot ? next : v))
+    })
+
+  return (
+    <div className="reviews-grid">
+      {slots.map((reviewIdx, slot) => {
+        const review = reviews[reviewIdx]
+        return (
+          <motion.div
+            key={review.name}
+            className="review-card"
+            role="button"
+            tabIndex={0}
+            aria-label={`Review from ${review.name}. Activate to read another review.`}
+            onClick={() => advance(slot)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                advance(slot)
+              }
+            }}
+            initial={{ opacity: 0, y: 24, rotate: slot % 2 ? 1.5 : -1.5 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.45, ease: EASE }}
+          >
+            <div className="review-head">
+              <div className="review-avatar">{review.initials}</div>
+              <div>
+                <div className="review-name">{review.name}</div>
+                <div className="review-ago">{review.ago}</div>
+              </div>
+            </div>
+            <Stars count={review.stars} />
+            <p className="review-text">{review.text}</p>
+            <span className="review-flip" aria-hidden="true">
+              tap for another ↻
+            </span>
+          </motion.div>
+        )
+      })}
+    </div>
   )
 }

@@ -742,14 +742,20 @@ section[id] {
    ────────────────────────────────────────── */
 /* Electric ticker: navy glass scoreboard strip with a slow light sweep.
    The one controlled Knicks-energy moment between hero and prep table. */
+/* A navy ribbon floating in the cream — the band fades in from the hero
+   and out into the prep table, so there are no straight cut lines */
 .ticker {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #101e33 0%, #0b1626 100%);
-  padding: 12px 0;
-  border-top: 1px solid rgba(120, 170, 255, 0.18);
-  border-bottom: 1px solid rgba(120, 170, 255, 0.12);
-  box-shadow: inset 0 0 40px rgba(20, 60, 130, 0.25);
+  background: linear-gradient(
+    180deg,
+    #f0e4cc 0%,
+    #1a2a44 30%,
+    #0b1626 50%,
+    #16243c 72%,
+    #f8f0dd 100%
+  );
+  padding: 34px 0;
 }
 
 .ticker-glow {
@@ -4365,6 +4371,26 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 }
 
 .footer-bottom a:hover { color: var(--poppy-dark); }
+
+/* Review notes are tappable — cycle to the next note on the board */
+.review-card { cursor: pointer; }
+
+.review-flip {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(40, 28, 18, 0.4);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.review-card:hover .review-flip,
+.review-card:focus-visible .review-flip { opacity: 1; }
 
 /* Legal pages */
 .legal-page {

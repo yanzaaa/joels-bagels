@@ -63,7 +63,7 @@ export default function Story() {
                 An Ecuadorian family recipe, homemade behind this counter
                 every single morning. The crew knows the regulars by their
                 order, sandwiches are usually gone by noon — and on Knicks
-                game days, the blue-and-orange bagels go before nine.
+                game days, the blue-and-orange bagels are the move.
               </p>
               <span className="story-motto">
                 Fast food isn’t good. Good food isn’t fast.

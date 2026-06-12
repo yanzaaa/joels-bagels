@@ -45,8 +45,8 @@ const signatures = [
     desc: 'People drive from three towns over. Made in-house every morning with Kalamatas. Same recipe since day one.',
     tag: 'Fan Favorite',
     tagColor: 'olive',
-    photo: '/photos/melt.jpg',
-    alt: 'A toasted bagel split open, spread melting into both halves',
+    photo: '/photos/olive-cc.jpg',
+    alt: 'A toasted bagel half spread thick with olive cream cheese',
   },
   {
     num: '02',
@@ -63,8 +63,8 @@ const signatures = [
     desc: 'Cold-smoked salmon. Plain cream cheese. Toasted everything. Nine bucks — the same sandwich runs $22 in the city.',
     tag: 'Classic',
     tagColor: 'sesame',
-    photo: '/photos/everything-bagel.jpg',
-    alt: 'A toasted everything bagel on parchment paper',
+    photo: '/photos/lox.jpg',
+    alt: 'An everything bagel with smoked salmon lox and plain cream cheese',
   },
 ]
 
