@@ -3107,11 +3107,10 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
    dark drama, warm bakery morning, dark evening — instead of one long
    dark-mode template. */
 .paper-act {
-  /* Flour-light morning table. No inset shadows — they read as dark seam
-     lines at every section boundary. Gradient ends stitch into neighbors. */
-  background:
-    radial-gradient(ellipse 64% 50% at 28% 14%, rgba(255, 215, 150, 0.5), transparent 62%),
-    linear-gradient(180deg, #f8f0dd 0%, #f1e7d0 84%, #f6ecd8 100%);
+  /* ONE continuous cream→blue family across the whole site: every section
+     is a flat two-stop linear whose start equals the previous end. No
+     radials, no textures — those read as seams. */
+  background: linear-gradient(180deg, #f8f0dd 0%, #f5ecd8 100%);
   color: var(--charcoal);
 }
 
@@ -3701,9 +3700,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Reviews: warm plaster community wall — stitched into steel above and
    the order sheet below */
 .reviews-cork {
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 10%, rgba(255, 226, 170, 0.45), transparent 60%),
-    linear-gradient(180deg, #d6ccb7 0%, #ecdfc6 16%, #e3d2b2 80%, #f0ebdd 100%);
+  background: linear-gradient(180deg, #ddd2b8 0%, #d9cfba 100%);
 }
 
 .reviews-cork .eyebrow { color: #5e3a1a; }
@@ -3737,7 +3734,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   position: relative;
   background: linear-gradient(
     180deg,
-    #d2dbe9 0%,
+    #c9d2e0 0%,
     #93a0b8 14%,
     #57637b 34%,
     #47536b 62%,
@@ -3894,7 +3891,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
    ────────────────────────────────────────── */
 /* Signatures: clean white product gallery (texture-free) */
 .paper-act.product-gallery {
-  background: linear-gradient(180deg, #efe3cb 0%, #faf5e9 16%, #f1eada 100%);
+  background: linear-gradient(180deg, #f2e8d2 0%, #efe5cd 100%);
 }
 
 .paper-act.product-gallery .signature-card {
@@ -3904,7 +3901,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Catering: plain order-sheet white (texture-free) */
 .paper-act.order-sheet {
-  background: #f0ebdd;
+  background: linear-gradient(180deg, #d9cfba 0%, #d5cfc0 100%);
   box-shadow: none;
 }
 
@@ -4009,9 +4006,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Menu: glass deli case — soft sage light, white cards */
 .paper-act.menu-light {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 8%, rgba(214, 228, 205, 0.7), transparent 62%),
-    linear-gradient(180deg, #f1eada 0%, #eef0e6 14%, #e6e9db 100%);
+  background: linear-gradient(180deg, #efe5cd 0%, #ebe1c9 100%);
 }
 
 .paper-act.menu-light .menu-item {
@@ -4035,9 +4030,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Photo wall: bright gallery wall instead of black void */
 .photo-world {
-  background:
-    radial-gradient(ellipse 60% 40% at 50% 10%, rgba(255, 214, 150, 0.4), transparent 60%),
-    linear-gradient(180deg, #e6e9db 0%, #ece1c8 16%, #e4d7ba 100%);
+  background: linear-gradient(180deg, #ebe1c9 0%, #e6dabd 100%);
 }
 
 .photo-world .section-headline { color: #241710; }
@@ -4064,19 +4057,11 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Saturday Order: warm counter stone — belongs to the same morning world */
 .build-section {
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 8%, rgba(255, 215, 150, 0.35), transparent 60%),
-    linear-gradient(180deg, #e4d7ba 0%, #ece5d6 14%, #ded5c2 62%, #d6ccb7 100%);
+  background: linear-gradient(180deg, #e6dabd 0%, #ddd2b8 100%);
 }
 
-.build-section::before {
-  background: repeating-linear-gradient(
-    105deg,
-    rgba(255, 255, 255, 0.45) 0 2px,
-    transparent 2px 8px
-  );
-  opacity: 0.35;
-}
+/* The pinstripe sheen drew a visible texture edge at the section top */
+.build-section::before { display: none; }
 
 .build-section .section-headline { color: #241710; }
 .build-section .eyebrow { color: var(--poppy-dark); }
@@ -4105,9 +4090,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Story: daylight inside the shop — photos carry the warmth */
 .paper-act.story-room {
-  background:
-    radial-gradient(ellipse 60% 50% at 70% 14%, rgba(255, 210, 140, 0.45), transparent 62%),
-    linear-gradient(180deg, #f6ecd8 0%, #efe3cb 100%);
+  background: linear-gradient(180deg, #f5ecd8 0%, #f2e8d2 100%);
   box-shadow: none;
 }
 
@@ -4115,7 +4098,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
    off exactly into the Route 112 dusk gradient */
 .busy-section {
   /* The site's long turn toward evening — cream cools into real blue here */
-  background: linear-gradient(180deg, #f0ebdd 0%, #e2e7ef 34%, #d2dbe9 100%);
+  background: linear-gradient(180deg, #d5cfc0 0%, #cdd2dc 55%, #c9d2e0 100%);
 }
 
 .busy-section .section-headline { color: #241710; }
