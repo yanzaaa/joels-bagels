@@ -2990,6 +2990,24 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   z-index: 2;
 }
 
+.hc-third {
+  bottom: -6%;
+  right: -3%;
+  width: 38%;
+  rotate: -4deg;
+}
+
+.hc-third .hc-photo { aspect-ratio: 1; }
+
+.hc-fourth {
+  top: 14%;
+  left: -9%;
+  width: 34%;
+  rotate: 5deg;
+}
+
+.hc-fourth .hc-photo { aspect-ratio: 4 / 3; }
+
 /* ──────────────────────────────────────────
    SPINNING DELI STAMP
    ────────────────────────────────────────── */
@@ -3110,7 +3128,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   /* ONE continuous cream→blue family across the whole site: every section
      is a flat two-stop linear whose start equals the previous end. No
      radials, no textures — those read as seams. */
-  background: linear-gradient(180deg, #f8f0dd 0%, #f5ecd8 100%);
+  background: linear-gradient(180deg, #f8f0dd 0%, #f3ead4 100%);
   color: var(--charcoal);
 }
 
@@ -3700,7 +3718,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 /* Reviews: warm plaster community wall — stitched into steel above and
    the order sheet below */
 .reviews-cork {
-  background: linear-gradient(180deg, #ddd2b8 0%, #d9cfba 100%);
+  background: linear-gradient(180deg, #d2d3d6 0%, #c8ccd6 100%);
 }
 
 .reviews-cork .eyebrow { color: #5e3a1a; }
@@ -3734,8 +3752,8 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
   position: relative;
   background: linear-gradient(
     180deg,
-    #c9d2e0 0%,
-    #93a0b8 14%,
+    #a8b5cc 0%,
+    #8595b2 14%,
     #57637b 34%,
     #47536b 62%,
     #5d6880 88%,
@@ -3891,7 +3909,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
    ────────────────────────────────────────── */
 /* Signatures: clean white product gallery (texture-free) */
 .paper-act.product-gallery {
-  background: linear-gradient(180deg, #f2e8d2 0%, #efe5cd 100%);
+  background: linear-gradient(180deg, #eee5cf 0%, #e9e0cd 100%);
 }
 
 .paper-act.product-gallery .signature-card {
@@ -3901,7 +3919,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Catering: plain order-sheet white (texture-free) */
 .paper-act.order-sheet {
-  background: linear-gradient(180deg, #d9cfba 0%, #d5cfc0 100%);
+  background: linear-gradient(180deg, #c8ccd6 0%, #bcc4d4 100%);
   box-shadow: none;
 }
 
@@ -4006,7 +4024,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Menu: glass deli case — soft sage light, white cards */
 .paper-act.menu-light {
-  background: linear-gradient(180deg, #efe5cd 0%, #ebe1c9 100%);
+  background: linear-gradient(180deg, #e9e0cd 0%, #e2dccd 100%);
 }
 
 .paper-act.menu-light .menu-item {
@@ -4030,7 +4048,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Photo wall: bright gallery wall instead of black void */
 .photo-world {
-  background: linear-gradient(180deg, #ebe1c9 0%, #e6dabd 100%);
+  background: linear-gradient(180deg, #e2dccd 0%, #dbd7cf 100%);
 }
 
 .photo-world .section-headline { color: #241710; }
@@ -4057,7 +4075,7 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Saturday Order: warm counter stone — belongs to the same morning world */
 .build-section {
-  background: linear-gradient(180deg, #e6dabd 0%, #ddd2b8 100%);
+  background: linear-gradient(180deg, #dbd7cf 0%, #d2d3d6 100%);
 }
 
 /* The pinstripe sheen drew a visible texture edge at the section top */
@@ -4090,15 +4108,15 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
 
 /* Story: daylight inside the shop — photos carry the warmth */
 .paper-act.story-room {
-  background: linear-gradient(180deg, #f5ecd8 0%, #f2e8d2 100%);
+  background: linear-gradient(180deg, #f3ead4 0%, #eee5cf 100%);
   box-shadow: none;
 }
 
 /* Crowd intel: cool light board — blends in from the order sheet and hands
    off exactly into the Route 112 dusk gradient */
 .busy-section {
-  /* The site's long turn toward evening — cream cools into real blue here */
-  background: linear-gradient(180deg, #d5cfc0 0%, #cdd2dc 55%, #c9d2e0 100%);
+  /* The site's long turn toward evening — pale blue deepening */
+  background: linear-gradient(180deg, #bcc4d4 0%, #a8b5cc 100%);
 }
 
 .busy-section .section-headline { color: #241710; }
@@ -4470,6 +4488,55 @@ html:not([data-cursor='on']) .cursor-bagel { display: none; }
     font-size: 15px;
     bottom: -18px;
   }
+}
+
+/* ──────────────────────────────────────────
+   THREE STEPS — editorial pop
+   ────────────────────────────────────────── */
+.paper-act .process-step {
+  background: #fffdf6;
+  border-radius: 22px;
+  box-shadow:
+    0 2px 6px rgba(80, 56, 30, 0.06),
+    0 24px 48px rgba(80, 56, 30, 0.12);
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s;
+}
+
+.paper-act .process-step:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 4px 10px rgba(80, 56, 30, 0.08),
+    0 34px 64px rgba(80, 56, 30, 0.18);
+}
+
+.paper-act .process-step::after { border: none; }
+
+.paper-act .process-step-num {
+  position: absolute;
+  top: -38px;
+  left: 14px;
+  font-size: 96px;
+  -webkit-text-stroke-color: rgba(139, 94, 60, 0.3);
+}
+
+.paper-act .process-time {
+  border: 1.5px solid rgba(199, 51, 9, 0.45);
+  border-radius: var(--radius-full);
+  padding: 5px 14px;
+  margin-top: 34px;
+}
+
+.paper-act .process-step h3 { position: relative; padding-bottom: 12px; }
+
+.paper-act .process-step h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--poppy);
 }
 
 /* Reduced motion */

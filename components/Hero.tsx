@@ -205,6 +205,42 @@ export default function Hero() {
           <span className="hc-label">Still warm — this morning</span>
         </motion.div>
 
+        <motion.div
+          className="hc-frame hc-third"
+          style={{ y: mainY }}
+          initial={{ opacity: 0, y: 50, rotate: -7 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ delay: 0.9, duration: 0.9, ease: EASE }}
+        >
+          <div className="hc-photo">
+            <Image
+              src="/photos/deli-club.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 900px) 0px, 14vw"
+            />
+          </div>
+          <span className="hc-label">Stacked proper</span>
+        </motion.div>
+
+        <motion.div
+          className="hc-frame hc-fourth"
+          style={{ y: insetY }}
+          initial={{ opacity: 0, y: 50, rotate: 6 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ delay: 1.05, duration: 0.9, ease: EASE }}
+        >
+          <div className="hc-photo">
+            <Image
+              src="/photos/everything-bagel.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 900px) 0px, 13vw"
+            />
+          </div>
+          <span className="hc-label">Everything, toasted</span>
+        </motion.div>
+
       </div>
 
       <motion.div
