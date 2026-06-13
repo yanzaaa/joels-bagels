@@ -52,21 +52,14 @@ export const metadata: Metadata = {
     siteName: "Joel's Bagels",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "/photos/hero-bagel.jpg",
-        width: 1193,
-        height: 672,
-        alt: "A fresh sesame bagel with cream cheese at Joel's Bagels, Medford NY",
-      },
-    ],
+    // og:image comes from app/opengraph-image.tsx (branded build-time card)
   },
   twitter: {
     card: "summary_large_image",
     title: "Joel's Bagels | Fresh Bagels & Breakfast · Medford, NY",
     description:
       "Long Island's favorite bagel shop. Open daily at 6 AM — home of the Knicks Everything Bagel.",
-    images: ["/photos/hero-bagel.jpg"],
+    // twitter:image comes from app/twitter-image.tsx
   },
   robots: { index: true, follow: true },
 };
